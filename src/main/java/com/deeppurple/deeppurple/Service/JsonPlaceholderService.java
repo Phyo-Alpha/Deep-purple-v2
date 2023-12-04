@@ -2,13 +2,13 @@ package com.deeppurple.deeppurple.Service;
 
 import org.springframework.web.service.annotation.GetExchange;
 
-import com.deeppurple.deeppurple.Post.Post;
+import com.deeppurple.deeppurple.Post.Post_Lambda;
 
 import java.util.List;
 
 public interface JsonPlaceholderService {
 
     @GetExchange("/posts")
-    List<Post> loadPosts();
+    List<Post_Lambda> loadPosts();
 
 }

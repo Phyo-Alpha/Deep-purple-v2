@@ -1,68 +1,42 @@
 package com.deeppurple.deeppurple.Controller;
 
-import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.deeppurple.deeppurple.Post.Post;
-import com.deeppurple.deeppurple.Service.JsonPlaceholderService;
-import com.deeppurple.deeppurple.Service.PostNotFoundException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.deeppurple.deeppurple.Service.PostService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/v1/post")
 public class PostController {
 
-    private final JsonPlaceholderService jsonPlaceholderService;
-    private static final Logger log = LoggerFactory.getLogger(PostController.class);
-    private List<Post> posts = new ArrayList<>();
+    @Autowired
+    private PostService postService;
 
-    public PostController(JsonPlaceholderService jsonPlaceholderService) {
-        this.jsonPlaceholderService = jsonPlaceholderService;
-    }
+    @RequestMapping("/getEmotion")
+    public ResponseEntity<String> getEmotionFromText(@RequestBody String post) {
+        try {
 
-    @GetMapping
-    List<Post> findAll() {
-        return posts;
-    }
-
-    @GetMapping("/{id}")
-    Optional<Post> findById(@PathVariable Integer id) {
-        return Optional.ofNullable(posts
-                .stream()
-                .filter(post -> post.id().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new PostNotFoundException("Post with id: " + id + " not found.")));
-    }
-
-    @PostMapping
-    void create(@RequestBody Post post) {
-        posts.add(post);
-    }
-
-    @PutMapping("/{id}")
-    void update(@RequestBody Post post, @PathVariable Integer id) {
-        posts.stream()
-                .filter(p -> p.id().equals(id))
-                .findFirst()
-                .ifPresent(value -> posts.set(posts.indexOf(value), post));
-    }
-
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id) {
-        posts.removeIf(post -> post.id().equals(id));
-    }
-
-    @PostConstruct
-    private void init() {
-        if (posts.isEmpty()) {
-            log.info("Loading Posts using JsonPlaceHolderService");
-            posts = jsonPlaceholderService.loadPosts();
+            JsonParser springParser = JsonParserFactory.getJsonParser();
+            post = (String) springParser.parseMap(post).get("post");
+            if (post == null) {
+                System.out.println("Post is null");
+                return ResponseEntity.badRequest().body("Post is null");
+            } else {
+                System.out.println("Post: " + post);
+                String emotions = postService.getEmotionFromText(post);
+                return new ResponseEntity<String>(emotions, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return ResponseEntity.badRequest().body("Error");
     }
-
 }
