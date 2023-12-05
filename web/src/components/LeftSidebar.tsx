@@ -20,7 +20,7 @@ const LeftSidebar = () => {
                 <ul className='flex flex-col gap-3'>
                     {sidebarLinks?.map((link: MyNavLink) => {
                         return (
-                            <li key={link.label} className='rounded-lg base-medium hover:bg-primary-500 transition'>
+                            <li key={link.label} className='rounded-full base-medium hover:bg-primary-500 transition'>
                                 <NavLink to={link.route}
                                     className="flex gap-10
                                     items-center p-4"
