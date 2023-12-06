@@ -5,6 +5,7 @@ import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
 import RouteLayout from './pages/RouteLayout';
 import Home from './pages/Home';
+import AnalyticsPage from './pages/AnalyticsPage';
 Amplify.configure(awsExports);
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
               /* private routes */
             <Route element={<RouteLayout />}>
               <Route index element={<Home />} />
+              <Route path="/analytics" element={<AnalyticsPage />} />
             </Route>
 
           </Routes>

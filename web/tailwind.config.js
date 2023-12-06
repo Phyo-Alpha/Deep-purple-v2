@@ -21,7 +21,7 @@ export default {
       'light-4': '#5C5C7B',
       'purple-1': '#322952',
       'purple-2': '#3A3361',
-      'purple-3': "#27005D",
+      'purple-3': "#322952",
     },
     screens: {
       'xs': '480px',
