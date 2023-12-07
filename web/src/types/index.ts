@@ -4,8 +4,12 @@ export type MyNavLink = {
     label: string,
 }
 
+export type Tweet = {
+    tweet: string,
+}
+
 export type MyChartData = {
-    labels: number[],
+    labels: string[],
     datasets: MyChartDataset[],
 }
 
