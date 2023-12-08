@@ -8,6 +8,17 @@ export type Tweet = {
     tweet: string,
 }
 
+export type TweetData = {
+    tweet: string,
+    sentiment: string,
+    emotion: emotion[],
+}
+
+export type emotion = {
+    label: string,
+    value: number,
+}
+
 export type MyChartData = {
     labels: string[],
     datasets: MyChartDataset[],
@@ -20,3 +31,4 @@ export type MyChartDataset = {
     borderColor: string,
     borderWidth: number,
 }
+

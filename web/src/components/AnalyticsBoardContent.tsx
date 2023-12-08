@@ -1,10 +1,12 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
-import { Data, tweets } from "../data";
+import { tweets } from "../data";
 import DoughnutChart from "./DoughnutChart";
 import { BarChart } from "./BarChart";
 import { axiosInstance } from "../api/config";
+import { TweetData } from "../types";
+import { saveTweetData } from "../context";
 
 Chart.register(CategoryScale);
 
@@ -21,7 +23,7 @@ interface chartDataProps {
 
 export default function AnalyticsBoardContent() {
 
-    const [tweetData, setTweetData] = useState(tweets);
+    const [tweetSentiments, setTweetSentiments] = useState<TweetData[]>([]);
 
     const [chartData, setChartData] = useState<chartDataProps>({
         labels: [],
@@ -35,24 +37,43 @@ export default function AnalyticsBoardContent() {
 
     });
 
+
+
     useEffect(() => {
         const fetchSentiments = async () => {
             try {
-                const responses = await Promise.all(
-                    tweets.map((tweet) =>
-                        axiosInstance.post("/analysis/getSentiment", tweet)
-                    )
+                const sentiments = await Promise.all(
+                    tweets.map((tweet) => {
+                        // Check if the tweet is already in tweetSentiments
+                        const existingSentiment = tweetSentiments.find(
+                            (sentiment) => sentiment.tweet === tweet.tweet
+                        );
+
+                        if (existingSentiment) {
+                            // If the tweet is already in tweetSentiments, return the existing sentiment
+                            return existingSentiment.sentiment;
+                        } else {
+                            // If the tweet is not in tweetSentiments, make the API call
+                            return axiosInstance
+                                .post("/analysis/getSentiment", tweet)
+                                .then((response) => {
+                                    const scoreLabels = response.data.scored_labels;
+
+                                    if (!scoreLabels || scoreLabels.length === 0) {
+                                        return null;
+                                    }
+                                    const scoreLabel = scoreLabels[0];
+
+                                    // setTweetSentiments((prevSentiments) => [
+                                    //     ...prevSentiments,
+                                    //     { tweet: tweet.tweet, sentiment: scoreLabel.label },
+                                    // ]);
+
+                                    return scoreLabel.label;
+                                });
+                        }
+                    })
                 );
-
-                const sentiments = responses.map((response) => {
-                    const scoreLabels = response.data.scored_labels;
-
-                    if (!scoreLabels || scoreLabels.length === 0) {
-                        return null;
-                    }
-                    const scoreLabel = scoreLabels[0];
-                    return scoreLabel.label;
-                }).filter(Boolean);
 
                 const positiveCount = sentiments.filter(sentiment => sentiment === 'POSITIVE').length;
                 const negativeCount = sentiments.filter(sentiment => sentiment === 'NEGATIVE').length;
@@ -77,6 +98,7 @@ export default function AnalyticsBoardContent() {
             }
         };
 
+        saveTweetData(tweetSentiments);
         fetchSentiments();
     }, []);
 
