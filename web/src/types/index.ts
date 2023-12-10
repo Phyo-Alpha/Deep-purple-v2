@@ -12,6 +12,7 @@ export type TweetData = {
     tweet: string,
     sentiment: string,
     emotion: emotion[],
+    date: string,
 }
 
 export type emotion = {
