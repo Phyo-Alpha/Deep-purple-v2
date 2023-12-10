@@ -1,12 +1,60 @@
-
+import { useState, useEffect } from 'react';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Button } from '@mui/material';
+import { axiosInstance as axios } from '../api/config';
+import { userFeed } from '../types';
+import { Tweet } from 'react-tweet';
+import AddStreamDialog from './ui/AddStreamDialog';
+import Stream from './ui/Stream';
 
 const SocialListeningContent = () => {
+
+    const [userfeeds, setUserfeeds] = useState<userFeed | undefined>({
+        name: 'Phyo',
+        username: 'edwardphyoo',
+        tweets: [
+            {
+                tweet: 'Hello World',
+                tweet_id: '1733719493585543209',
+                replies: [],
+            },
+            {
+                tweet: 'Hello World',
+                tweet_id: '1733263530948751671',
+                replies: [],
+            },
+        ]
+    });
+    const [displayedfeeds, setDisplayedfeeds] = useState(false);
+    const [addedStream, setAddedStream] = useState(false);
+
+    useEffect(() => {
+        const fetchTweets = async () => {
+            try {
+                // const response = await axios.get('/streamRequest/Twitter/edwardphyoo');
+                // setUserfeeds(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchTweets();
+
+        if (userfeeds !== undefined) {
+            setDisplayedfeeds(true);
+        }
+    }, [])
+
+    console.log(displayedfeeds);
+
+    const handleValueReturn = (value: string) => {
+        if (value === 'edwardphyoo') {
+            setAddedStream(true);
+        }
+    };
+
     return (
         <div className="grid grid-cols-2 pt-6">
             <div className="flex flex-col px-5 py-2 ">
@@ -49,35 +97,47 @@ const SocialListeningContent = () => {
                     </ul>
 
                 </div>
-                <div className='flex flex-row justify-center bg-purple-3 mt-1'>
+                <div className='flex flex-row justify-center bg-purple-3 border-t-2'>
                     <Button>
                         <BarChartIcon />
                         <p className='text-xs'>View Insights</p>
                     </Button>
                 </div>
 
-                <div className='flex flex-col bg-light-1 mt-1 px-2 py-1 overflow-y-auto h-96'>
-                    <div>
-                        <img src={"/src/assets/images/dummypost.png"} alt="twitter-post-1" width={550} height={500} />
-                    </div>
-                    <div>
-                        <img src={"/src/assets/images/dummypost.png"} alt="twitter-post-2" width={550} height={500} />
-                    </div>
+                <div className='flex flex-col bg-light-1 overflow-y-auto px-2 h-128'>
+                    {displayedfeeds === true && userfeeds ? (
+                        userfeeds.tweets.map((tweet, index) => (
+                            <div key={index} className='flex flex-col h-fit light'>
+                                <Tweet id={tweet.tweet_id} />
+                            </div>
+                        ))
+
+                    ) : (
+                        <>
+                            <div>
+                                <img src={"/src/assets/images/dummypost.png"} alt="twitter-post-1" width={550} height={500} />
+                            </div>
+                            <div>
+                                <img src={"/src/assets/images/dummypost.png"} alt="twitter-post-2" width={550} height={500} />
+                            </div>
+                        </>
+                    )}
+
 
                 </div>
 
 
             </div>
 
-            <div className='bg-purple-1 mx-3 h-full rounded-3xl border-dashed border-2'>
-                <div className='flex flex-col gap-2 items-center justify-center h-full'>
-                    <Button>
-                        <AddCircleIcon />
-                    </Button>
-                    <p>Add Stream</p>
+            {addedStream ? (
+                <Stream />
+            ) : (
+                <div className='bg-purple-1 mx-3 h-full rounded-3xl border-dashed border-2'>
+                    <div className='flex flex-col gap-2 items-center justify-center h-128'>
+                        <AddStreamDialog onValueReturn={handleValueReturn} />
+                    </div>
                 </div>
-            </div>
-
+            )}
         </div>
     )
 }

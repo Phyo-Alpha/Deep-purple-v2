@@ -1,6 +1,5 @@
 import SocialListeningContent from "../components/SocialListeningContent"
 import SocialListeningLeftBar from "../components/SocialListeningLeftBar"
-import TopSidebar from "../components/TopSidebar"
 
 const Home = () => {
 
@@ -8,7 +7,6 @@ const Home = () => {
         <div className="flex flex-row">
             <SocialListeningLeftBar />
             <div className="flex-grow flex-col">
-                <TopSidebar />
                 <SocialListeningContent />
             </div>
 

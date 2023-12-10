@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deeppurple.deeppurple.Service.UserPostsRequestService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -17,8 +18,9 @@ public class UserPostsRequestController {
     private UserPostsRequestService userPostsRequestService;
 
     @GetMapping("/Twitter/{username}")
-    public void getTweets(@PathVariable String username) {
-        userPostsRequestService.getTweets(username);
+    public ResponseEntity<?> getTweets(@PathVariable String username) {
+        String twitterfeeds = userPostsRequestService.getTweets(username);
+        return ResponseEntity.ok(twitterfeeds);
     }
 
 }

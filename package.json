@@ -5,5 +5,8 @@
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.20",
     "react-router-dom": "^6.20.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4"
   }
 }

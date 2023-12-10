@@ -33,3 +33,15 @@ export type MyChartDataset = {
     borderWidth: number,
 }
 
+export type userFeed = {
+    name : string,
+    username : string,
+    tweets : userFeedData[],
+}
+
+export type userFeedData = {
+    replies : string[],
+    tweet : string,
+    tweet_id : string,
+}
+
