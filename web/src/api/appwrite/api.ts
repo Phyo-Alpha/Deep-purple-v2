@@ -96,6 +96,7 @@ export async function saveStreamToDB (stream : {
 }
 
 export async function getStreamFromDB(streamName? : string) {
+    console.log(streamName);
     if (!streamName) return;
 
     try {

@@ -5,13 +5,9 @@ import { saveStreamDashboardToDB, getUserStreamDashboards, deleteStreamDashboard
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Button } from '@mui/material';
 import { socialMediaStream } from '../types';
+import { NavLink } from 'react-router-dom';
 
-interface SocialListeningLeftBarProps {
-    returnFunction: (stream: socialMediaStream) => void;
-}
-
-
-export default function SocialListeningLeftBar({ returnFunction }: SocialListeningLeftBarProps) {
+export default function SocialListeningLeftBar() {
 
     const [userEmail, setUserEmail] = useState<string>();
     const [boards, setBoards] = useState<string[]>([]);
@@ -44,8 +40,6 @@ export default function SocialListeningLeftBar({ returnFunction }: SocialListeni
                 socialmedia_username: "",
                 streamName: stream,
             }
-
-            returnFunction(socialMediaStream);
         }
     }
 
@@ -89,14 +83,16 @@ export default function SocialListeningLeftBar({ returnFunction }: SocialListeni
                     <ul className='py-5 flex flex-col gap-3'>
                         {boards.map((board, index) => (
                             <li key={index} className='flex flex-row items-center justify-between'>
-                                <Button>
-                                    <p className='text-sm font-bold'>{board}</p>
-                                </Button>
-                                <Button key={index} onClick={() => {
-                                    deleteDashboard(board);
-                                }}>
-                                    <DeleteForeverIcon />
-                                </Button>
+                                <NavLink to={"/" + board}>
+                                    <Button>
+                                        <p className='text-sm font-bold'>{board}</p>
+                                    </Button>
+                                    <Button key={index} onClick={() => {
+                                        deleteDashboard(board);
+                                    }}>
+                                        <DeleteForeverIcon />
+                                    </Button>
+                                </NavLink>
                             </li>
                         ))}
                     </ul>

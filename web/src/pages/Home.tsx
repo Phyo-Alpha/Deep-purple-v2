@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SocialListeningContent from "../components/SocialListeningContent"
 import SocialListeningLeftBar from "../components/SocialListeningLeftBar"
 import { socialMediaStream } from "../types"
+import { useParams } from "react-router-dom";
+import { getStreamFromDB } from "../api/appwrite/api";
 
-const Home = () => {
+export default function Home() {
 
     const [stream, setStream] = useState<socialMediaStream>({
         socialMedia: "",
@@ -11,16 +13,46 @@ const Home = () => {
         streamName: "",
     });
 
-    function handleFetchStreamFromLeftBar(stream: socialMediaStream) {
-        if (stream === undefined) {
+    const { dashboardname } = useParams<{ dashboardname: string }>();
+
+    useEffect(() => {
+        if (dashboardname === undefined) {
             return;
-        } else {
-            setStream(stream);
         }
-    }
+        console.log(dashboardname);
+        const streamName = dashboardname + " - " + "streamfeeds";
+
+        const fetchStream = async () => {
+            const stream = await getStreamFromDB(streamName);
+
+            if (stream === undefined || stream.total === 0) {
+                console.log("Stream not found");
+
+                const socialMediaStream: socialMediaStream = {
+                    socialMedia: "Twitter",
+                    socialmedia_username: "",
+                    streamName: streamName,
+                };
+                setStream(socialMediaStream);
+
+                return;
+            } else {
+                console.log(stream);
+                const socialMediaStream: socialMediaStream = {
+                    socialMedia: stream.documents[0].socialMedia,
+                    socialmedia_username: stream.documents[0].socialmedia_username,
+                    streamName: stream.documents[0].streamName,
+                }
+                setStream(socialMediaStream);
+            }
+        }
+        fetchStream();
+    }, [dashboardname]);
+
+
     return (
         <div className="flex flex-row">
-            <SocialListeningLeftBar returnFunction={handleFetchStreamFromLeftBar} />
+            <SocialListeningLeftBar />
             <div className="flex-grow flex-col">
                 <SocialListeningContent stream={stream} />
             </div>
@@ -29,5 +61,3 @@ const Home = () => {
         </div>
     )
 }
-
-export default Home

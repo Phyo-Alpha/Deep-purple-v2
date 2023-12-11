@@ -19,6 +19,7 @@ export default function App() {
               /* private routes */
             <Route element={<RouteLayout />}>
               <Route index element={<Home />} />
+              <Route path="/:dashboardname" element={<Home />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
             </Route>
 
