@@ -17,13 +17,14 @@ interface AddDashboardDialogProps {
 export default function AddDashboardDialog({ returnFunction }: AddDashboardDialogProps) {
 
     const [open, setOpen] = React.useState(false);
-    const [twitterUsername, settwitterUsername] = React.useState('');
+    const [dashboardName, setdashboardName] = React.useState('');
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
-        returnFunction(twitterUsername);
+        console.log(dashboardName);
+        returnFunction(dashboardName);
         setOpen(false);
     };
 
@@ -38,19 +39,19 @@ export default function AddDashboardDialog({ returnFunction }: AddDashboardDialo
                 <DialogContent>
                     <DialogContentText>
 
-                        The App is only support twitter for now. Please enter your twitter username.
+                        The App is only support twitter for now. Please enter name for dashboardNames.
 
                     </DialogContentText>
                     <TextField
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="twitterUsername"
+                        label="Dashboard Name"
                         type="text"
                         fullWidth
                         variant="standard"
-                        value={twitterUsername}
-                        onChange={(e) => settwitterUsername(e.target.value)}
+                        value={dashboardName}
+                        onChange={(e) => setdashboardName(e.target.value)}
                     />
                 </DialogContent>
                 <DialogActions>

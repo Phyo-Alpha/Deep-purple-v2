@@ -20,15 +20,15 @@ export default function SocialListeningLeftBar({ returnFunction }: SocialListeni
         setUserEmail(res);
     });
 
-    function createNewBoard(username: string) {
+    function createNewBoard(dashboardName: string) {
 
-        setBoards([...boards, "Twitter : " + username]);
+        setBoards([...boards, "Twitter : " + dashboardName]);
 
         if (userEmail === undefined) {
             return;
         } else {
             const email = userEmail;
-            const dashboardName = "Twitter : " + username;
+            dashboardName = "Twitter : " + dashboardName;
             const stream = dashboardName + " - " + "streamfeeds";
 
             const dashboard = {
@@ -41,7 +41,7 @@ export default function SocialListeningLeftBar({ returnFunction }: SocialListeni
 
             const socialMediaStream: socialMediaStream = {
                 socialMedia: "twitter",
-                socialmedia_username: username,
+                socialmedia_username: "",
                 streamName: stream,
             }
 

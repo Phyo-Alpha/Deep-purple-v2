@@ -11,10 +11,11 @@ import { axiosInstance as axios } from '../../api/axios/config';
 
 
 interface StreamProps {
+    username: string;
     onValueReturn: (value: string) => void;
 }
 
-export default function Stream({ onValueReturn }: StreamProps) {
+export default function Stream({ username, onValueReturn }: StreamProps) {
     const [userfeeds, setUserfeeds] = useState<userFeed | null>(null);
 
     const [refreshStream, setRefreshStream] = useState(true);
@@ -25,12 +26,17 @@ export default function Stream({ onValueReturn }: StreamProps) {
     };
 
     useEffect(() => {
+        console.log(username);
+        if (username === '' || username === undefined) {
+            return;
+        }
+
 
 
         if (refreshStream === true) {
             const fetchTweets = async () => {
                 try {
-                    const response = await axios.get('/streamRequest/Twitter/edwardphyoo');
+                    const response = await axios.get('/streamRequest/Twitter/' + username);
                     setUserfeeds(response.data);
                 } catch (error) {
                     console.log(error);
