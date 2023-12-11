@@ -42,6 +42,6 @@ export type userFeed = {
 export type userFeedData = {
     replies : string[],
     tweet : string,
-    tweet_id : string,
+    "tweet-id" : string,
 }
 
