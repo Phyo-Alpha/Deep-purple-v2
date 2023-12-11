@@ -45,3 +45,9 @@ export type userFeedData = {
     "tweet-id" : string,
 }
 
+export type socialMediaStream = {
+    socialMedia: string,
+    socialmedia_username: string,
+    streamName: string,
+}
+

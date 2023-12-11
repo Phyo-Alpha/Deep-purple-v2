@@ -8,21 +8,22 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+
 interface AddDashboardDialogProps {
     returnFunction: (value: string) => void;
 }
 
 
 export default function AddDashboardDialog({ returnFunction }: AddDashboardDialogProps) {
-    const [open, setOpen] = React.useState(false);
-    const [username, setUsername] = React.useState('');
 
+    const [open, setOpen] = React.useState(false);
+    const [twitterUsername, settwitterUsername] = React.useState('');
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
-        returnFunction(username);
+        returnFunction(twitterUsername);
         setOpen(false);
     };
 
@@ -44,12 +45,12 @@ export default function AddDashboardDialog({ returnFunction }: AddDashboardDialo
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Username"
+                        label="twitterUsername"
                         type="text"
                         fullWidth
                         variant="standard"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={twitterUsername}
+                        onChange={(e) => settwitterUsername(e.target.value)}
                     />
                 </DialogContent>
                 <DialogActions>

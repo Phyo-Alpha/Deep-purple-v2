@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Button } from '@mui/material';
 import { userFeed } from '../../types';
 import { Tweet } from 'react-tweet';
-import { axiosInstance as axios } from '../../api/config';
+import { axiosInstance as axios } from '../../api/axios/config';
 
 
 interface StreamProps {

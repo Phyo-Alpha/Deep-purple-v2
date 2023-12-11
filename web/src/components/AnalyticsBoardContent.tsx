@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { tweets } from "../data";
 import DoughnutChart from "./DoughnutChart";
 import { BarChart } from "./BarChart";
-import { axiosInstance } from "../api/config";
+import { axiosInstance } from "../api/axios/config";
 import { TweetData } from "../types";
 import { saveTweetData } from "../context";
 
