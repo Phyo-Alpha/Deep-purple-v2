@@ -39,7 +39,7 @@ export const analyticsBoardLinks = [
     },
     {
         imgURL: "src/assets/icons/feedback.png",
-        route: "/analytics",
+        route: "/analytics/negativeposts",
         label: "negative sentiment filter",
     },
     {

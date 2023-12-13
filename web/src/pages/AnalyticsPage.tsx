@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import AnalyticsBoardWelcome from "../components/AnalyticsBoardWelcome";
 import MetadataAnalysisBoard from "../components/MetadataAnalysisBoard";
 import TopSidebar from "../components/TopSidebar";
-import { useEffect, useState } from "react";
+import NegativeSentimentBoard from "../components/NegativeSentimentBoard";
 
 const AnalyticsPage = () => {
     const { analyticsType } = useParams<{ analyticsType: string }>();
@@ -21,8 +21,8 @@ const AnalyticsPage = () => {
                                 return <MetadataAnalysisBoard />;
                             case 'sentiment':
                                 return <SentimentAnalyisBoard />;
-                            case 'type3':
-                                return <SentimentAnalyisBoard />;
+                            case 'negativeposts':
+                                return <NegativeSentimentBoard />;
                             default:
                                 return <AnalyticsBoardWelcome />;
                         }
