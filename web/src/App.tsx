@@ -21,6 +21,7 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="/:dashboardname" element={<Home />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/analytics/:analyticsType" element={<AnalyticsPage />} />
             </Route>
 
           </Routes>

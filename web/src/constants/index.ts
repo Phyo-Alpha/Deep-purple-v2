@@ -25,3 +25,26 @@ export const sidebarLinks = [
         label: "Route 5",
     }
 ]
+
+export const analyticsBoardLinks = [
+    {
+        imgURL: "src/assets/icons/feedback.png",
+        route: "/analytics/sentiment",
+        label: "sentiment analysis",
+    },
+    {
+        imgURL: "src/assets/icons/feedback.png",
+        route: "/analytics/metadata",
+        label: "metadata analysis",
+    },
+    {
+        imgURL: "src/assets/icons/feedback.png",
+        route: "/analytics",
+        label: "negative sentiment filter",
+    },
+    {
+        imgURL: "src/assets/icons/feedback.png",
+        route: "/analytics",
+        label: "user data analysis",
+    },
+]

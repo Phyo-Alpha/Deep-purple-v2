@@ -22,6 +22,7 @@ export default {
       'purple-1': '#322952',
       'purple-2': '#3A3361',
       'purple-3': "#322952",
+      'positive-green': "#ABD15E",
     },
     screens: {
       'xs': '480px',

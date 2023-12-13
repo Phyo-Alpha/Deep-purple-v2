@@ -1,16 +1,32 @@
-import AnalyticsBoardContent from "../components/AnalyticsBoardContent"
-import AnalyticsBoardContentAlt from "../components/AnalyticsBoardContentAlt"
-import SocialListeningLeftBar from "../components/SocialListeningLeftBar"
-import TopSidebar from "../components/TopSidebar"
+import SentimentAnalyisBoard from "../components/sentimentAnalysis";
+import AnalyticsBoardLeftBar from "../components/AnalyticsBoardLeftBar"
+import { useParams } from "react-router-dom";
+import AnalyticsBoardWelcome from "../components/AnalyticsBoardWelcome";
+import MetadataAnalysisBoard from "../components/MetadataAnalysisBoard";
+import TopSidebar from "../components/TopSidebar";
+import { useEffect, useState } from "react";
 
 const AnalyticsPage = () => {
+    const { analyticsType } = useParams<{ analyticsType: string }>();
     return (
-        <div className="flex flex-row">
-            <SocialListeningLeftBar />
-            <div className="flex-grow flex-col px-5 py-5">
-                <p className="font-bold text-xl">Social Media Analysis</p>
+        <div className="flex flex-row min-h-screen">
+            <AnalyticsBoardLeftBar />
+            <div className="flex-grow flex-col px-5">
                 <div className="flex-grow flex-col items-center">
-                    <AnalyticsBoardContentAlt />
+
+                    <TopSidebar title={analyticsType || "Analytics"} />
+                    {(() => {
+                        switch (analyticsType) {
+                            case 'metadata':
+                                return <MetadataAnalysisBoard />;
+                            case 'sentiment':
+                                return <SentimentAnalyisBoard />;
+                            case 'type3':
+                                return <SentimentAnalyisBoard />;
+                            default:
+                                return <AnalyticsBoardWelcome />;
+                        }
+                    })()}
                 </div>
             </div>
         </div>

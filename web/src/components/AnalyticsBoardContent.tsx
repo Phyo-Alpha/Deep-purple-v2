@@ -104,10 +104,14 @@ export default function AnalyticsBoardContent() {
 
     return (
 
-        <div className="flex flex-col justify-center items-center">
-            <DoughnutChart chartData={chartData} />
+        <div className="grid grid-cols-2 justify-center items-center">
+            <div className="flex flex-row gap-10 justify-center items-center">
+                <DoughnutChart chartData={chartData} />
+                <DoughnutChart chartData={chartData} />
+            </div>
             <BarChart chartData={chartData} />
         </div>
+
 
 
     );

@@ -1,17 +1,17 @@
 import { Line } from "react-chartjs-2";
 import { MyChartData } from "../types";
 
-interface LineChartProps {
+interface MetadataLineChartProps {
     chartData: MyChartData;
 }
 
-function LineChart({ chartData }: LineChartProps) {
+function MetadataLineChart({ chartData }: MetadataLineChartProps) {
 
     return (
-        <div className="chart-container bg-light-1 px-10 py-4 rounded-md" style={{ width: '50%', height: '30%' }}>
-            <h2 style={{ textAlign: "center" }} className="text-dark-1">Sentiment Trend Analysis</h2>
+        <div className="chart-container bg-light-1 px-10 py-4 rounded-md max-h-96">
             <Line
                 data={chartData}
+
                 options={{
                     plugins: {
                         title: {
@@ -19,14 +19,16 @@ function LineChart({ chartData }: LineChartProps) {
                             text: "Customer sentiment"
                         },
                         legend: {
-                            display: false,
+                            display: true,
+                            position: "bottom"
                         }
                     },
-                    responsive: true,
                     maintainAspectRatio: true,
+                    responsive: true,
+
                 }}
             />
         </div>
     );
 }
-export default LineChart;
+export default MetadataLineChart;

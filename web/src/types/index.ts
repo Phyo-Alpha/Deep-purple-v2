@@ -28,6 +28,7 @@ export type MyChartData = {
 export type MyChartDataset = {
     label: string,
     data: number[],
+    fill?: boolean,
     backgroundColor: string[],
     borderColor: string,
     borderWidth: number,
