@@ -5,7 +5,7 @@ import { MyNavLink } from '../types';
 
 const LeftSidebar = () => {
     return (
-        <nav className="px-6 py-10 flex-col justify-between min-w-[50px] bg-purple-1 h-screen">
+        <nav className="px-6 py-10 flex-col justify-between max-w-[100px] min-w-[100px] bg-purple-1 h-screen">
             <div className="flex flex-col gap-8 items-center">
                 <Link to="/" className="flex gap-3 items-center">
                     <img src="" alt="logo" width={50} height={36} />

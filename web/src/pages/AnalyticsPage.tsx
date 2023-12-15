@@ -3,10 +3,10 @@ import AnalyticsBoardLeftBar from "../components/AnalyticsBoardLeftBar"
 import { useParams } from "react-router-dom";
 import AnalyticsBoardWelcome from "../components/AnalyticsBoardWelcome";
 import MetadataAnalysisBoard from "../components/MetadataAnalysisBoard";
-import TopSidebar from "../components/TopSidebar";
 import NegativeSentimentBoard from "../components/NegativeSentimentBoard";
 import { useEffect, useState } from "react";
 import NegativePostDetails from "../components/NegativePostDetails";
+import AnalyticsTopSidebar from "../components/AnalyticsTopSideBar";
 
 const AnalyticsPage = () => {
 
@@ -24,29 +24,34 @@ const AnalyticsPage = () => {
     return (
         <div className="flex flex-row min-h-screen">
             <AnalyticsBoardLeftBar />
-            <div className="flex-grow flex-col px-5">
+            <div className="flex-grow flex-col">
                 <div className="flex-grow flex-col items-center">
                     {displayPostDetail ? (
                         <>
-                            <TopSidebar title={"post #" + postId} />
-                            <NegativePostDetails />
+                            <AnalyticsTopSidebar title={"POST# " + postId?.toUpperCase()} />
+                            <div className="px-6">
+                                <NegativePostDetails />
+                            </div>
                         </>
 
                     ) : (
                         <>
-                            <TopSidebar title={analyticsType || "Analytics"} />
-                            {(() => {
-                                switch (analyticsType) {
-                                    case 'metadata':
-                                        return <MetadataAnalysisBoard />;
-                                    case 'sentiment':
-                                        return <SentimentAnalyisBoard />;
-                                    case 'negativeposts':
-                                        return <NegativeSentimentBoard />;
-                                    default:
-                                        return <AnalyticsBoardWelcome />;
-                                }
-                            })()}
+                            <AnalyticsTopSidebar title={analyticsType?.toUpperCase() || "ANALYTICS"} />
+                            <div className="px-6">
+                                {(() => {
+                                    switch (analyticsType) {
+                                        case 'metadata':
+                                            return <MetadataAnalysisBoard />;
+                                        case 'sentiment':
+                                            return <SentimentAnalyisBoard />;
+                                        case 'negativeposts':
+                                            return <NegativeSentimentBoard />;
+                                        default:
+                                            return <AnalyticsBoardWelcome />;
+                                    }
+                                })()}
+                            </div>
+
                         </>
                     )}
 

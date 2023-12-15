@@ -56,12 +56,6 @@ export default function MetadataAnalysisBoard() {
 
     return (
         <div>
-            {/* <section className="px-1 pb-5 border-b-2">
-                <div className="flex flex-row justify-between">
-                    <p className="font-bold text-3xl text-light-1">Meta-data Metrics</p>
-                </div>
-            </section> */}
-
             <section className="flex flex-row gap-32 mt-5 justify-start items-center">
                 <div className="flex flex-col pl-3 gap-3 justify-start">
                     <p className="text-lg">Total likes</p>

@@ -9,7 +9,7 @@ function EmotionsDoughnutChart({ chartData }: DoughnutChartProps) {
 
     return (
 
-        <div className="chart-container bg-light-1 px-10 py-4  rounded-md" style={{ width: '35%' }}>
+        <div className="chart-container px-10 py-4  rounded-md" style={{ width: '35%' }}>
             <h2 style={{ textAlign: "center" }} className="text-dark-1">Emotions Distribution</h2>
             <Doughnut
                 data={chartData}

@@ -8,7 +8,7 @@ interface LineChartProps {
 function LineChart({ chartData }: LineChartProps) {
 
     return (
-        <div className="chart-container bg-light-1 px-10 py-4 rounded-md" style={{ width: '50%', height: '30%' }}>
+        <div className="chart-container px-10 py-4 rounded-md" style={{ width: '60%' }}>
             <h2 style={{ textAlign: "center" }} className="text-dark-1">Sentiment Trend Analysis</h2>
             <Line
                 data={chartData}

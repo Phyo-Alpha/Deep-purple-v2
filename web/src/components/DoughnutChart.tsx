@@ -9,7 +9,7 @@ function DoughnutChart({ chartData }: DoughnutChartProps) {
 
     return (
 
-        <div className="chart-container bg-light-1 px-10 py-4 rounded-md" style={{ width: '30%', height: '30%' }}>
+        <div className="chart-container px-10 py-4 rounded-md" style={{ width: '40%' }}>
             <h2 style={{ textAlign: "center" }} className="text-dark-1">Customer Sentiment</h2>
             <Doughnut
                 data={chartData}
@@ -20,14 +20,13 @@ function DoughnutChart({ chartData }: DoughnutChartProps) {
                             text: "Customer sentiment"
                         },
                         legend: {
-                            display: false,
+                            position: 'left',
+                            display: true,
                         }
                     },
                     responsive: true,
                     maintainAspectRatio: true,
                     cutout: '60%',
-                    rotation: 270,
-                    circumference: 180,
                 }}
             />
         </div>
