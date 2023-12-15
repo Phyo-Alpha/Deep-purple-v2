@@ -10,8 +10,8 @@ export const sidebarLinks = [
         label: "Route 2",
     },
     {
-        imgURL: "src/assets/icons/home.svg",
-        route: "/",
+        imgURL: "src/assets/icons/report.svg",
+        route: "/report",
         label: "Route 3",
     },
     {

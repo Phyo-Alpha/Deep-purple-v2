@@ -6,6 +6,7 @@ import awsExports from './aws-exports';
 import RouteLayout from './pages/RouteLayout';
 import Home from './pages/Home';
 import AnalyticsPage from './pages/AnalyticsPage';
+import ReportsBoard from './pages/ReportPage';
 Amplify.configure(awsExports);
 
 export default function App() {
@@ -22,6 +23,8 @@ export default function App() {
               <Route path="/:dashboardname" element={<Home />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/analytics/:analyticsType" element={<AnalyticsPage />} />
+              <Route path="/analytics/negativeposts/:postId" element={<AnalyticsPage />} />
+              <Route path="/report" element={<ReportsBoard />} />
             </Route>
 
           </Routes>

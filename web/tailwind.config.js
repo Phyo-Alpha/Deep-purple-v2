@@ -26,16 +26,19 @@ export default {
     },
     screens: {
       'xs': '480px',
-
+      'screen-2xl': '1440px',
+      'screen': '1024px',
     },
     height: {
       '128': '32rem',
       '160': '45.5rem',
+      'full': '65%',
     },
     width: {
       '300': '300px',
       '420': '420px',
       '465': '465px',
+      'full': '100%',
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'],
