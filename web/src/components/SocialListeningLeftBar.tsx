@@ -72,32 +72,34 @@ export default function SocialListeningLeftBar() {
     }
 
     return (
-        <nav className="py-5 flex-col justify-between min-w-[300px] bg-purple-2 h-screen border-r border-gray-300">
-            <div className="px-6 flex flex-col gap-5 ">
+        <nav className="py-5 flex-col justify-between min-w-[200px] bg-purple-2 h-screen border-r border-gray-300">
+            <div className="pb-5 px-5  flex flex-col gap-5 border-b-2">
                 <p className=" text-2xl font-bold">Streams</p>
-                <div className='justify-start pl-5 py-3 border-b-2 '>
+                <div className='justify-start items-start'>
                     <AddDashboardDialog returnFunction={createNewBoard} />
                 </div>
-                <div className='flex flex-col items-left'>
-                    <p className='text-md font-bold'>MY BOARDS</p>
-                    <ul className='py-5 flex flex-col gap-3'>
-                        {boards.map((board, index) => (
-                            <li key={index} className='flex flex-row items-center justify-between'>
-                                <NavLink to={"/" + board}>
-                                    <Button>
-                                        <p className='text-sm font-bold'>{board}</p>
-                                    </Button>
-                                    <Button key={index} onClick={() => {
-                                        deleteDashboard(board);
-                                    }}>
-                                        <DeleteForeverIcon />
-                                    </Button>
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
+            </div>
+            <div className='px-5 py-5 border-b-2'>
+                <p>Saved Items</p>
+            </div>
+            <div className='flex flex-col items-left py-5 px-5'>
+                <p className='text-md font-bold'>MY BOARDS</p>
+                <ul className='py-5 flex flex-col gap-3'>
+                    {boards.map((board, index) => (
+                        <li key={index} className='flex flex-row items-center justify-between'>
+                            <NavLink to={"/" + board}>
+                                <Button>
+                                    <p className='text-sm font-bold'>{board}</p>
+                                </Button>
+                                <Button key={index} onClick={() => {
+                                    deleteDashboard(board);
+                                }}>
+                                    <DeleteForeverIcon />
+                                </Button>
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
         </nav>

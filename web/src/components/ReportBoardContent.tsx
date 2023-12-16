@@ -6,7 +6,7 @@ export default function ReportBoardContent() {
                     className="invert-white" />
             </div>
             <div className="flex flex-col gap-5 items-center justify-center">
-                <p className="font-bold text-md">Please choose the account you want to compare</p>
+                <p className="font-bold text-md">Please select the reports you want to compare</p>
                 <p className="ml-5 px-5 text-sm max-w-sm">
                     Compare the reports to get insight on your content performance and new ideas for your content strategy.
                 </p>

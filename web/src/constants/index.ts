@@ -1,50 +1,41 @@
+import home from "../assets/icons/home.svg";
+import analytics from "../assets/icons/analytics.svg";
+import report from "../assets/icons/report.svg";
+import feedback from "../assets/icons/feedback.png";
+
+
 export const sidebarLinks = [
     {
-        imgURL: "src/assets/icons/home.svg",
+        imgURL: home,
         route: "/",
         label: "Route 1",
     },
     {
-        imgURL: "src/assets/icons/analytics.svg",
-        route: "/analytics",
+        imgURL: analytics,
+        route: "/analytics/sentiment",
         label: "Route 2",
     },
     {
-        imgURL: "src/assets/icons/report.svg",
-        route: "/report",
+        imgURL: report,
+        route: "/report/all-report",
         label: "Route 3",
     },
-    {
-        imgURL: "src/assets/icons/home.svg",
-        route: "/",
-        label: "Route 4",
-    },
-    {
-        imgURL: "src/assets/icons/home.svg",
-        route: "/",
-        label: "Route 5",
-    }
 ]
 
 export const analyticsBoardLinks = [
     {
-        imgURL: "src/assets/icons/feedback.png",
+        imgURL: feedback,
         route: "/analytics/sentiment",
         label: "sentiment analysis",
     },
     {
-        imgURL: "src/assets/icons/feedback.png",
+        imgURL: feedback,
         route: "/analytics/metadata",
         label: "metadata analysis",
     },
     {
-        imgURL: "src/assets/icons/feedback.png",
+        imgURL: feedback,
         route: "/analytics/negativeposts",
         label: "negative sentiment filter",
-    },
-    {
-        imgURL: "src/assets/icons/feedback.png",
-        route: "/analytics",
-        label: "user data analysis",
     },
 ]

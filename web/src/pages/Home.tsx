@@ -4,6 +4,7 @@ import SocialListeningLeftBar from "../components/SocialListeningLeftBar"
 import { socialMediaStream } from "../types"
 import { useParams } from "react-router-dom";
 import { getStreamFromDB } from "../api/appwrite/api";
+import StreamTopSideBar from "../components/StreamTopSideBar";
 
 export default function Home() {
 
@@ -54,6 +55,7 @@ export default function Home() {
         <div className="flex flex-row">
             <SocialListeningLeftBar />
             <div className="flex-grow flex-col">
+                <StreamTopSideBar />
                 <SocialListeningContent stream={stream} />
             </div>
 

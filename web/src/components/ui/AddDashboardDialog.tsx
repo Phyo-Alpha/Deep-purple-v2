@@ -30,9 +30,9 @@ export default function AddDashboardDialog({ returnFunction }: AddDashboardDialo
 
     return (
         <React.Fragment>
-            <Button className='flex flex-row gap-2' onClick={handleClickOpen}>
+            <Button variant="contained" style={{ backgroundColor: "#877EFF" }} onClick={handleClickOpen}>
                 <AddCircleIcon />
-                <p className="text-sm font-bold">New Board</p>
+                <p className='px-2'>New Board</p>
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Add Dashboard</DialogTitle>

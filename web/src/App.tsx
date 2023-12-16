@@ -24,7 +24,8 @@ export default function App() {
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/analytics/:analyticsType" element={<AnalyticsPage />} />
               <Route path="/analytics/negativeposts/:postId" element={<AnalyticsPage />} />
-              <Route path="/report" element={<ReportsBoard />} />
+              <Route path="/analytics/sentiment/:displayType" element={<AnalyticsPage />} />
+              <Route path="/report/:sub_page" element={<ReportsBoard />} />
             </Route>
 
           </Routes>

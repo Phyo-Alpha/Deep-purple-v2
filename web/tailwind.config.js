@@ -10,6 +10,7 @@ export default {
       'primary-600': '#5D5FEF',
       'secondary-500': '#FFB620',
       'off-white': '#D0DFFF',
+      'gray': '#F4F1EF',
       'red': '#FF5A5A',
       'dark-1': '#000000',
       'dark-2': '#09090A',

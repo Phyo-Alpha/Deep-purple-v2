@@ -6,7 +6,7 @@ import { analyticsBoardLinks } from "../constants"
 export default function AnalyticsBoardLeftBar() {
     return (
         <nav className="py-5 flex-col justify-between min-w-[250px] max-w-[250px] bg-purple-2 h-screen border-r border-gray-300">
-            <div className="py-10 flex flex-col mb-10 justify-center items-center">
+            <div className="flex flex-col justify-center items-center mb-5">
                 <p className=" text-2xl font-bold">Analytics</p>
             </div>
 
