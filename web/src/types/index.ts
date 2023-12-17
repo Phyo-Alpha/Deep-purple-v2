@@ -34,6 +34,13 @@ export type MyChartDataset = {
     borderWidth: number,
 }
 
+export type socialMediaAccount = {
+    account_username : string,
+    platform : string,
+    useremail : string,
+    socialmedia_feeds : string[],
+}
+
 export type userFeed = {
     name : string,
     username : string,

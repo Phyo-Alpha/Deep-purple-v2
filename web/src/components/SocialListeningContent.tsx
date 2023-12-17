@@ -3,65 +3,61 @@ import AddStreamDialog from './ui/AddStreamDialog';
 import Stream from './ui/Stream';
 import { socialMediaStream } from '../types';
 import { saveStreamToDB, getStreamFromDB } from '../api/appwrite/api';
+import StreamContentRightBar from './StreamContentRightBar';
 
 interface SocialListeningContentProps {
     stream: socialMediaStream;
+    displayAddStream: boolean;
+    onToggleDisplayRightBar: () => void;
 }
 
-export default function SocialListeningContent({ stream }: SocialListeningContentProps) {
+export default function SocialListeningContent({ stream, displayAddStream, onToggleDisplayRightBar }: SocialListeningContentProps) {
 
     const [accountName, setAccountName] = useState<string>('');
     const [displayStream, setdisplayStream] = useState(false);
 
-    useEffect(() => {
-        checkStreamAlrCreated(stream).then((res) => {
-            if (res === true) {
-                setdisplayStream(true);
-            }
-        });
-    }, [stream]);
-
-    async function checkStreamAlrCreated(stream: socialMediaStream) {
-        const streamFromDB = await getStreamFromDB(stream.streamName);
-        if (streamFromDB === undefined || streamFromDB.total === 0) {
-            return false;
-        } else {
-            console.log(streamFromDB);
-            setAccountName(streamFromDB.documents[0].socialmedia_username);
-            return true;
-        }
+    function addStream(username: string) {
+        setAccountName(username);
     }
 
-    const handleValueReturn = (value: string) => {
-        if (value === '' || value === undefined) {
-            return;
-        } else {
-            stream.socialmedia_username = value;
-            saveStreamToDB(stream);
-            setAccountName(value);
+    useEffect(() => {
+        if (accountName !== '') {
             setdisplayStream(true);
         }
-    };
+    }, [stream, accountName]);
 
     const handleStream = (value: string) => {
         if (value === 'delete') {
             setdisplayStream(false);
+            setAccountName('');
         }
     };
 
     return (
-        <div className="grid grid-cols-2 pt-6">
 
-            {displayStream ? (
-                <Stream username={accountName} onValueReturn={handleStream} />
-            ) : (
-                <div className='bg-purple-1 mx-3 h-160 rounded-3xl border-dashed border-2'>
-                    <div className='flex flex-col gap-2 items-center justify-center h-160'>
-                        <AddStreamDialog onValueReturn={handleValueReturn} />
+        <section className="flex ">
+            <div className='flex-grow border-r-2 max-w-[600px]'>
+                {displayStream ? (
+                    <Stream username={accountName} onValueReturn={handleStream} />
+                ) : (
+                    <div className="flex flex-col justify-center items-center min-h-[650px] w-full">
+                        <div className="py-5">
+                            <img src="/src/assets/icons/EmptyReportBoardIcon.svg" alt="emptyPage"
+                                className="invert-white" />
+                        </div>
+                        <div className="flex flex-col gap-5 items-center justify-center">
+                            <p className="font-bold text-md">Add a stream to get live feeds from your account</p>
+
+                        </div>
                     </div>
-                </div>
+                )}
+            </div>
+            {displayAddStream && (
+                <StreamContentRightBar addStream={addStream} onToggleDisplayRightBar={onToggleDisplayRightBar} />
             )}
-        </div>
+        </section>
+
+
     )
 }
 

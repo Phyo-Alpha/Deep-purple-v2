@@ -113,3 +113,22 @@ export async function getStreamFromDB(streamName? : string) {
         console.log(error);
     }
 }
+
+export async function getSocialMediaAccounts(useremail? : string) {
+    if (!useremail) return;
+
+    try {
+        const accounts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userSocialMediaCollectionId,
+            [Query.equal("useremail", useremail)]
+        );
+
+        if (!accounts) throw Error;
+
+        return accounts;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}

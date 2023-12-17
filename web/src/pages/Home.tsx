@@ -14,9 +14,17 @@ export default function Home() {
         streamName: "",
     });
 
+    const [displayAddStreamBar, setDisplayAddStreamBar] = useState(true);
+
+    function onToggleDisplayRightBar() {
+        console.log("Toggle add stream : ", displayAddStreamBar);
+        setDisplayAddStreamBar(!displayAddStreamBar);
+    }
+
     const { dashboardname } = useParams<{ dashboardname: string }>();
 
     useEffect(() => {
+
         if (dashboardname === undefined) {
             return;
         }
@@ -55,8 +63,9 @@ export default function Home() {
         <div className="flex flex-row">
             <SocialListeningLeftBar />
             <div className="flex-grow flex-col">
-                <StreamTopSideBar />
-                <SocialListeningContent stream={stream} />
+                <StreamTopSideBar onToggleDisplayRightBar={onToggleDisplayRightBar} />
+                <SocialListeningContent stream={stream} displayAddStream={displayAddStreamBar}
+                    onToggleDisplayRightBar={onToggleDisplayRightBar} />
             </div>
 
 
