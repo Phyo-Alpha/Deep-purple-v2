@@ -7,6 +7,7 @@ import RouteLayout from './pages/RouteLayout';
 import Home from './pages/Home';
 import AnalyticsPage from './pages/AnalyticsPage';
 import ReportsBoard from './pages/ReportPage';
+
 Amplify.configure(awsExports);
 
 export default function App() {

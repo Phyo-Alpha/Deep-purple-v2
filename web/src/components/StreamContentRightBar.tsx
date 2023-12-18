@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { getSocialMediaAccounts } from '../api/appwrite/api';
 import { socialMediaAccount } from "../types";
+import { handleFetchUserAttributes } from "../context/AuthContext";
 
 interface StreamContentRightBarProps {
     onToggleDisplayRightBar: () => void,
@@ -47,13 +48,21 @@ export default function StreamContentRightBar({ addStream, onToggleDisplayRightB
             }));
 
             setSocialMediaAccounts(accounts);
-            console.log(socialMediaAccounts);
         }
 
     }
 
     useEffect(() => {
-        getAccounts("theodorerooseveltenlil@gmail.com");
+        const fetchAttributes = async () => {
+            const useremail = await handleFetchUserAttributes();
+
+            if (useremail !== undefined) {
+                getAccounts(useremail);
+            }
+        }
+
+        fetchAttributes();
+
     }, [])
     return (
         <section className="flex-grow flex-col">

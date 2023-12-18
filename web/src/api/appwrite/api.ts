@@ -1,6 +1,8 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, databases } from "./config";
+import { MySocialMediaFeed, MyUserReplies, userFeedReplies} from "../../types";
+import { get } from "http";
 
 export async function saveStreamDashboardToDB (dashboard : {
     useremail : string,
@@ -114,6 +116,26 @@ export async function getStreamFromDB(streamName? : string) {
     }
 }
 
+export async function saveSocialMediaAccounts(account:{
+    account_username : string,
+    platform : string,
+    useremail : string,
+    socialmedia_feeds : string [],
+}) {
+    try {
+        const newAccount = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userSocialMediaCollectionId,
+            ID.unique(),
+            account
+        );
+
+        return newAccount;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export async function getSocialMediaAccounts(useremail? : string) {
     if (!useremail) return;
 
@@ -127,6 +149,133 @@ export async function getSocialMediaAccounts(useremail? : string) {
         if (!accounts) throw Error;
 
         return accounts;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function saveSocialMediaFeed(feed : MySocialMediaFeed) {
+
+    const response = await getSocialMediaFeedById(feed.post_id);
+
+    if (response === undefined || response.documents.length > 0) return;
+   
+    try {
+        const newFeed = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsCollectionId,
+            ID.unique(),
+            feed
+        );
+
+        return newFeed;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getSocialMediaFeedById (id?: string){
+    if (!id) return;
+    try {
+        const feed = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsCollectionId,
+            [Query.equal("post_id", id)]
+        );
+
+        if (!feed) throw Error;
+
+        return feed;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getSocialMediaFeedsByPlatformAndUsername (platform? : string, username? : string) {
+    if (!platform || !username) return;
+    try {
+        const feeds = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsCollectionId,
+            [Query.equal("platform", platform), Query.equal("account_username", username)]
+        );
+
+        if (!feeds) throw Error;
+
+        return feeds;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+export async function saveSocialMediaFeedReply(feedReply : MyUserReplies) {
+    try {
+        const newFeedReply = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsRepliesCollectionId,
+            ID.unique(),
+            feedReply
+        );
+
+        return newFeedReply;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getPostsMadeByThatAccount(account_username? : string) {
+    if (!account_username) return;
+
+    try {
+        const feeds = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsCollectionId,
+            [Query.equal("account_username", account_username)]
+        );
+
+        if (!feeds) throw Error;
+       
+        return feeds;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+export async function getRepliesOfThatPost(postId? : string){
+
+    if (!postId) return;
+
+    try {
+        const replies = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsRepliesCollectionId,
+            [Query.equal("replied_to", postId)]
+        );
+
+        if (!replies) throw Error;
+
+        return replies;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+export async function getAllReportCharts() {
+    try {
+        const charts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.reportChartCollectionId,
+        );
+
+        if (!charts) throw Error;
+
+        return charts;
     }
     catch (error) {
         console.log(error);

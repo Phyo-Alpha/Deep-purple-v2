@@ -5,10 +5,11 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Button } from '@mui/material';
-import { userFeed } from '../../types';
+import { MyMetaData, MySocialMediaFeed, MyUserReplies, userFeed, userFeedData, userFeedReplies } from '../../types';
 import { Tweet } from 'react-tweet';
 import { axiosInstance as axios } from '../../api/axios/config';
-
+import { getSocialMediaFeedById, getSocialMediaFeedsByPlatformAndUsername, saveSocialMediaFeed, saveSocialMediaFeedReply } from '../../api/appwrite/api';
+import { getMetaDataOfThatAccount } from '../../services';
 
 interface StreamProps {
     username: string;
@@ -17,6 +18,11 @@ interface StreamProps {
 
 export default function Stream({ username, onValueReturn }: StreamProps) {
     const [userfeeds, setUserfeeds] = useState<userFeed | null>(null);
+    const [streamMetaData, setStreamMetaData] = useState<MyMetaData>({
+        'Likes': 0,
+        'Replies': 0,
+        'Views': 0,
+    });
 
     const [refreshStream, setRefreshStream] = useState(true);
     const [displayedfeeds, setDisplayedfeeds] = useState(false);
@@ -25,30 +31,111 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
         onValueReturn(value);
     };
 
-    useEffect(() => {
-        console.log(username);
-        if (username === '' || username === undefined) {
+    function saveFeedsToDB(data: userFeed) {
+        const responseData = data;
+
+        if (responseData === null || responseData === undefined) {
             return;
         }
 
 
+        responseData?.tweets.map(async (tweet) => {
+            const feed = await getSocialMediaFeedById(tweet['tweet-id']);
 
-        if (refreshStream === true) {
-            const fetchTweets = async () => {
-                try {
-                    const response = await axios.get('/streamRequest/Twitter/' + username);
-                    setUserfeeds(response.data);
-                } catch (error) {
-                    console.log(error);
+            if (feed?.total === 0) {
+                saveRepliesToDB(tweet['replies'], tweet['tweet-id'], responseData.username);
+                const socialMediaFeed: MySocialMediaFeed = {
+                    platform: 'Twitter',
+                    account_username: responseData.username,
+                    post_id: tweet['tweet-id'],
+                    post_text: tweet.tweet,
+                    date: tweet.date,
+                    views: tweet.views === "Unavailable" ? 0 : parseInt(tweet['views'], 10),
+                    reply_count: parseInt(tweet['reply_count'], 10),
+                    replies: tweet['replies'].map(reply => reply.comment),
+                    likes: parseInt(tweet['likes'], 10),
                 }
+
+                saveSocialMediaFeed(socialMediaFeed);
             }
-            fetchTweets();
+        });
+    }
+
+    function saveRepliesToDB(replies: userFeedReplies[], replied_to: string, author_being_reply_to: string) {
+        replies.map((reply) => {
+            const reply_data: MyUserReplies = {
+                author: reply.author,
+                reply_text: reply.comment,
+                replied_to: replied_to,
+                author_replied_to: author_being_reply_to,
+                sentiment: '',
+                emotion: '',
+            }
+            console.log(reply_data);
+            saveSocialMediaFeedReply(reply_data);
+        })
+    }
+
+    useEffect(() => {
+
+        if (username === '' || username === undefined) {
+            return;
+        }
+        if (refreshStream === true) {
+
+            const fetchTweets = async () => {
+
+                const tweets = await getSocialMediaFeedsByPlatformAndUsername('Twitter', username);
+
+                if (tweets && tweets.total > 0) {
+                    const transformedData: userFeedData[] = tweets.documents.map(doc => ({
+                        date: doc.date,
+                        likes: doc.likes, // Assuming 'likes' exists in your document
+                        views: doc.views, // Assuming 'views' exists in your document
+                        reply_count: doc.reply_count, // Assuming 'reply_count' exists in your document
+                        replies: doc.replies, // Assuming 'replies' exists in your document
+                        tweet: doc.post_text,
+                        "tweet-id": doc.post_id,
+                    }));
+
+                    setUserfeeds({
+                        name: "Phyo",
+                        username: username,
+                        tweets: transformedData,
+                    });
+                } else {
+                    try {
+                        const response = await axios.get('/streamRequest/Twitter/' + username);
+                        setUserfeeds(response.data);
+                        saveFeedsToDB(response.data);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+
+                const metaData = await getMetaDataOfThatAccount(username);
+
+                if (metaData === undefined) return;
+
+                setStreamMetaData(
+                    {
+                        'Likes': metaData.Likes,
+                        'Replies': metaData.Replies,
+                        'Views': metaData.Views,
+                    }
+                )
+
+                console.log(streamMetaData);
+            }
+
 
             if (userfeeds !== undefined) {
                 setDisplayedfeeds(true);
             }
 
             setRefreshStream(false);
+
+            fetchTweets();
         }
 
     }, [refreshStream])
@@ -66,7 +153,7 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
                         <ul className="flex  justify-between items-center gap-5">
                             <li className="flex flex-row gap-3">
                                 <TwitterIcon />
-                                <h2>username</h2>
+                                <h2>{username}</h2>
                             </li>
 
                             <li>
@@ -92,16 +179,16 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
                         <hr />
                         <ul className='flex flex-row gap-10 justify-evenly'>
                             <li className='flex flex-col items-center'>
-                                <p className='text-4xl font-bold'>0</p>
-                                <p className='text-sm'>posts</p>
+                                <p className='text-3xl font-bold'>{streamMetaData.Likes}</p>
+                                <p className='text-sm'>likes</p>
                             </li>
                             <li className='flex flex-col items-center'>
-                                <p className='text-4xl font-bold'>0</p>
+                                <p className='text-3xl font-bold'>{streamMetaData.Views}</p>
+                                <p className='text-sm'>views</p>
+                            </li>
+                            <li className='flex flex-col items-center'>
+                                <p className='text-3xl font-bold'>{streamMetaData.Replies}</p>
                                 <p className='text-sm'>comments</p>
-                            </li>
-                            <li className='flex flex-col items-center'>
-                                <p className='text-4xl font-bold'>0</p>
-                                <p className='text-sm'>reaction</p>
                             </li>
                         </ul>
 

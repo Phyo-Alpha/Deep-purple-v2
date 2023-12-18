@@ -1,40 +1,56 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogContent, List, ListItem, ListItemIcon, ListItemText } from '@mui/material/';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterAddAccount from './TwitterAddAccount';
+import { saveSocialMediaAccounts } from '../../api/appwrite/api';
+import { handleFetchUserAttributes } from '../../context/AuthContext';
+
 
 function SocialMediaPopUp() {
     const [open, setOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState('');
+    const [userEmail, setUserEmail] = useState<string>();
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    const handleClose = (value: string) => {
+    handleFetchUserAttributes().then((res) => {
+        setUserEmail(res);
+    });
+
+    const handleClose = (platform: string, username: string) => {
         setOpen(false);
-        setSelectedValue(value);
+        setSelectedValue(platform);
+        console.log(platform, username);
+
+        const socialMediaAccounts = {
+            account_username: username,
+            platform: platform,
+            useremail: userEmail || '',
+            socialmedia_feeds: [],
+        };
+
+        saveSocialMediaAccounts(socialMediaAccounts);
     };
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open Social Media Popup
+            <Button variant="contained" style={{ backgroundColor: "#877EFF" }} onClick={handleClickOpen}>
+                Add Social Account
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogContent>
                     <List>
-                        <ListItem button selected={selectedValue === 'Facebook'} onClick={() => handleClose('Facebook')}>
+                        {/* <ListItem button selected={selectedValue === 'Facebook'} onClick={() => handleClose('Facebook')}>
                             <ListItemIcon>
                                 <FacebookIcon />
                             </ListItemIcon>
                             <ListItemText primary="Facebook" />
-                        </ListItem>
-                        <ListItem button selected={selectedValue === 'Twitter'} onClick={() => handleClose('Twitter')}>
+                        </ListItem> */}
+                        <ListItem button selected={selectedValue === 'Twitter'}>
                             <ListItemIcon>
-                                <TwitterIcon />
+                                <TwitterAddAccount closeTheLogInList={handleClose} />
                             </ListItemIcon>
-                            <ListItemText primary="Twitter" />
                         </ListItem>
                         {/* Add other social media icons as needed */}
                     </List>
