@@ -24,6 +24,7 @@ export default {
       'purple-2': '#3A3361',
       'purple-3': "#322952",
       'positive-green': "#ABD15E",
+      'twitter-blue': '#1DA1F3',
     },
     screens: {
       'xs': '480px',

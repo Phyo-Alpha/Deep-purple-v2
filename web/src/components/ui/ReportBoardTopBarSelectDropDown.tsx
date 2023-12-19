@@ -3,12 +3,26 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { MyReportChartGroups } from '../../types';
 
-export default function ReportBoardTopBarSelectDropDown() {
-    const [age, setAge] = React.useState('');
+interface ReportBoardTopBarSelectDropDownProps {
+    Menuitems: MyReportChartGroups[] | undefined,
+    HandleSelectChangeFunction: (groupname: string) => void,
+}
+
+export default function ReportBoardTopBarSelectDropDown({ Menuitems, HandleSelectChangeFunction }: ReportBoardTopBarSelectDropDownProps) {
+
+    const [selectedGroup, setSelectedGroup] = React.useState<string>('');
+    const [reportGroups, setReportGroups] = React.useState<MyReportChartGroups[]>();
+
+    React.useEffect(() => {
+        setReportGroups(Menuitems);
+    }, [Menuitems, selectedGroup])
 
     const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value);
+        const newValue = event.target.value as string;
+        setSelectedGroup(newValue);
+        HandleSelectChangeFunction(newValue);
     };
     return (
         <div>
@@ -20,16 +34,18 @@ export default function ReportBoardTopBarSelectDropDown() {
                 <Select
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
-                    value={age}
-                    onChange={handleChange}
+                    value={selectedGroup}
+                    onChange={(event) => handleChange(event)}
                     label="Age"
                 >
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {reportGroups?.map((reportGroup, index) => {
+                        return (
+                            <MenuItem key={index} value={reportGroup.accountName + " : " + reportGroup.report_group}>{reportGroup.accountName + " : " + reportGroup.report_group}</MenuItem>
+                        )
+                    })}
                 </Select>
             </FormControl>
         </div>

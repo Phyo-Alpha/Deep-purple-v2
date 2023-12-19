@@ -1,5 +1,8 @@
-import { fetchUserAttributes } from 'aws-amplify/auth';
-
+import { fetchUserAttributes, signOut, getCurrentUser, updateUserAttributes  } from 'aws-amplify/auth';
+import {
+  Theme,
+  useTheme,
+} from '@aws-amplify/ui-react';
 
 export async function handleFetchUserAttributes() {
   try {
@@ -9,4 +12,96 @@ export async function handleFetchUserAttributes() {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getUsername() {
+  try {
+    const userAttributes = await getCurrentUser();
+    const username = await userAttributes.username;
+    return username;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function handleUpdateEmailAndNameAttributes(
+  updatedEmail: string,
+  updatedName: string
+) {
+  try {
+    const attributes = await updateUserAttributes({
+      userAttributes: {
+        email: updatedEmail,
+        name: updatedName
+      }
+    });
+    // handle next steps
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function handleSignOut() {
+  try {
+    await signOut();
+  } catch (error) {
+    console.log('error signing out: ', error);
+  }
+}
+
+
+export function AuthStyle() { 
+  const { tokens } = useTheme();
+  const theme: Theme = {
+    name: 'Auth Example Theme',
+    tokens: {
+      colors: {
+        background: {
+          primary: {
+            value: tokens.colors.black.value,
+          },
+          secondary: {
+            value: tokens.colors.neutral['100'].value,
+          },
+        },
+        font: {
+          interactive: {
+            value: tokens.colors.white.value,
+          },
+          primary: {
+            value: tokens.colors.white.value,
+          },
+          secondary: {
+            value: tokens.colors.white.value,
+          },
+        },
+        brand: {
+          
+        },
+      },
+      components: {
+        tabs: {
+          item: {
+            _focus: {
+              color: {
+                value: tokens.colors.white.value,
+              },
+            },
+            _hover: {
+              color: {
+                value: tokens.colors.purple['80'].value,
+              },
+            },
+            _active: {
+              color: {
+                value: tokens.colors.white.value,
+              },
+            },
+          },
+        },
+        
+      },
+    },
+  };
+  return theme;
 }

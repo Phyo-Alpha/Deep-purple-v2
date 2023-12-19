@@ -2,8 +2,14 @@ import ReportDoughnut from "./ui/ReportDoughnut";
 import { useEffect, useState } from "react";
 import { getAllReportCharts } from "../api/appwrite/api";
 import { MyReportChart } from "../types";
+import TwitterIcon from '@mui/icons-material/Twitter';
 
-export default function ReportBoardContent() {
+interface ReportBoardContentProps {
+    comparison_reports: MyReportChart[];
+}
+
+
+export default function ReportBoardContent({ comparison_reports }: ReportBoardContentProps) {
 
     const [reports, setReports] = useState<MyReportChart[]>();
 
@@ -17,28 +23,35 @@ export default function ReportBoardContent() {
     }
 
     useEffect(() => {
-
         const fetchReports = async () => {
-            const reports = await AllReports();
+            if (comparison_reports === undefined || comparison_reports.length === 0) {
 
-            if (reports !== undefined) {
-                const chartsdata: MyReportChart[] = reports.map((report) => {
-                    const data: MyReportChart = {
-                        platform: report.platform,
-                        charttype: report.charttype,
-                        charttitle: report.charttitle,
-                        labels: report.labels,
-                        values: report.values,
-                    }
-                    return data;
-                });
-                setReports(chartsdata);
+
+                const reports = await AllReports();
+                console.log(reports);
+                if (reports !== undefined) {
+                    const chartsdata: MyReportChart[] = reports.map((report) => {
+                        const data: MyReportChart = {
+                            platform: report.platform,
+                            charttype: report.charttype,
+                            charttitle: report.charttitle,
+                            accountName: report.accountName,
+                            report_group: report.report_group,
+                            labels: report.labels,
+                            values: report.values,
+                        }
+                        return data;
+                    });
+                    setReports(chartsdata);
+
+
+                }
+            } else {
+                setReports(comparison_reports);
             }
         }
-        console.log(reports);
-
         fetchReports();
-    }, []);
+    }, [comparison_reports]);
     return (
         <section className="my-10 flex flex-col items-center h-full">
             {/* <div className="py-5">
@@ -57,21 +70,20 @@ export default function ReportBoardContent() {
                     return (
                         <div className="flex flex-col bg-light-1 py-3 px-3 rounded-md
                         justify-center" key={index}>
-                            <p className="font-bold text-dark-1 text-xl">{report.charttitle}</p>
-                            <ReportDoughnut values={report.values} labels={report.labels} />
-                        </div>
-                    )
-                })}
-                {reports?.map((report, index) => {
-                    return (
-                        <div className="flex flex-col bg-light-1 py-3 px-3 rounded-md
-                        justify-center" key={index}>
-                            <p className="font-bold text-dark-1 text-xl">{report.charttitle}</p>
-                            <ReportDoughnut values={report.values} labels={report.labels} />
-                        </div>
-                    )
-                })}
+                            <div className="flex flex-row gap-2">
+                                <div className="bg-twitter-blue p-3 rounded-full text-light-1">
+                                    <TwitterIcon />
+                                </div>
+                                <div>
 
+                                    <p className="font-bold text-dark-1 text-xl">{report.charttitle}</p>
+                                    <p className="text-sm text-dark-1">@{report.accountName}</p>
+                                </div>
+                            </div>
+                            <ReportDoughnut values={report.values} labels={report.labels} />
+                        </div>
+                    )
+                })}
             </div>
         </section>
     )

@@ -2,40 +2,50 @@ import home from "../assets/icons/home.svg";
 import analytics from "../assets/icons/analytics.svg";
 import report from "../assets/icons/report.svg";
 import feedback from "../assets/icons/feedback.png";
-
+import inbox from "../assets/icons/inbox.svg";
 
 export const sidebarLinks = [
     {
         imgURL: home,
         route: "/",
-        label: "Route 1",
+        label: "Stream",
     },
     {
         imgURL: analytics,
         route: "/analytics/sentiment",
-        label: "Route 2",
+        label: "Analytics",
     },
     {
         imgURL: report,
         route: "/report/all-report",
-        label: "Route 3",
+        label: "Report",
     },
+    {
+        imgURL : inbox,
+        route: "/inbox",
+        label : "Inbox"
+    }
 ]
 
 export const analyticsBoardLinks = [
     {
         imgURL: feedback,
         route: "/analytics/sentiment",
-        label: "sentiment analysis",
+        label: "Sentiment analysis",
+    },
+    {
+        imgURL: feedback,
+        route: "/analytics/emotion",
+        label: "Emotion Analysis",
     },
     {
         imgURL: feedback,
         route: "/analytics/metadata",
-        label: "metadata analysis",
+        label: "Metadata analysis",
     },
     {
         imgURL: feedback,
         route: "/analytics/negativeposts",
-        label: "negative sentiment filter",
+        label: "Negative sentiment filter",
     },
 ]

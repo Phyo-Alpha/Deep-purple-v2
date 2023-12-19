@@ -21,6 +21,7 @@ public class AnalysisController {
     public ResponseEntity<String> getSentimentFromText(@RequestBody String post) {
         try {
 
+            System.out.println(post);
             ObjectMapper mapper = new ObjectMapper();
             String postText = mapper.readTree(post).get("tweet").asText();
 

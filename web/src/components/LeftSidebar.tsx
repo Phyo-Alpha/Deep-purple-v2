@@ -11,7 +11,7 @@ const LeftSidebar = () => {
                     <img src="" alt="logo" width={50} height={36} />
                 </Link>
 
-                <Link to={'/'} className="flex gap-3 items-center">
+                <Link to={'/profile'} className="flex gap-3 items-center">
                     <img src={'/src/assets/images/profile-placeholder.svg'} alt="profile"
                         className="h-14 w-14 rounded-full" />
 

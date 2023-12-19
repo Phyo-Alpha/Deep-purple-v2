@@ -8,31 +8,43 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { MySentimentTableData } from '../types';
 
-function createData(
-    postId: string,
-    platform: string,
-    postlink: string,
-    date: string,
-    overall_sentiment: string,
-    negative_emotions: number,
-    positive_emotions: number,
-) {
-    return { postId, postlink, date, platform, overall_sentiment, negative_emotions, positive_emotions };
+interface SentimentTableData {
+    sentimentTableData: MySentimentTableData[],
 }
 
-const rows = [
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
-    createData('123456', 'twitter', 'https://twitter.com/Ogo4200/status/1735541172435669001', '17/7/2022', 'very negative', 2, 3),
+export default function SentimentIndividualPostTable({ sentimentTableData }: SentimentTableData) {
+    function createData(
+        postId: string,
+        platform: string,
+        postlink: string,
+        date: string,
+        overall_sentiment: string,
+        negative_count: number,
+        positive_count: number,
+    ) {
+        return { postId, postlink, date, platform, overall_sentiment, negative_count, positive_count };
+    }
 
-];
+    const [rows, setRows] = React.useState<MySentimentTableData[]>([]);
 
-export default function SentimentIndividualPostTable() {
+    React.useEffect(() => {
+
+        const tempRows = sentimentTableData.map((data: MySentimentTableData) => {
+            return createData(
+                data.postId,
+                data.platform,
+                data.postlink,
+                data.date,
+                data.overall_sentiment,
+                data.negative_count,
+                data.positive_count,
+            );
+        });
+        setRows(tempRows);
+    }, [sentimentTableData]);
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -56,9 +68,9 @@ export default function SentimentIndividualPostTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {rows.map((row, index) => (
                         <TableRow
-                            key={row.postId}
+                            key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
@@ -70,8 +82,8 @@ export default function SentimentIndividualPostTable() {
                             </TableCell>
                             <TableCell align="right">{row.date}</TableCell>
                             <TableCell align="right">{row.overall_sentiment}</TableCell>
-                            <TableCell align="right">{row.positive_emotions}</TableCell>
-                            <TableCell align="right">{row.negative_emotions}</TableCell>
+                            <TableCell align="right">{row.positive_count}</TableCell>
+                            <TableCell align="right">{row.negative_count}</TableCell>
                             <TableCell align="right">
                                 <Button>
                                     <NavLink to={`/analytics/negativeposts/${row.postId}`}>

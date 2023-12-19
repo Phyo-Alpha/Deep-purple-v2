@@ -37,6 +37,7 @@ export type MyChartDataset = {
     backgroundColor: string[],
     borderColor: string,
     borderWidth: number,
+    yAxisID?: string,
 }
 
 export type socialMediaAccount = {
@@ -86,10 +87,16 @@ export type MyReportChart = {
     platform: string,
     charttype: string,
     charttitle: string,
+    accountName : string,
+    report_group: string,
     labels: string[],
     values: number[],
 }
 
+export type MyReportChartGroups = {
+    accountName : string,
+    report_group: string,
+}
 export type MySocialMediaFeed = {
     platform : string,
     account_username : string,
@@ -106,5 +113,39 @@ export type MyMetaData = {
     Likes : number,
     Views : number,
     Replies : number,
+    latestLikes : number,
+    dailyAverageLikes : number,
+    likesAverage : number,
+    viewsAverage : number,
+    repliesAverage : number,
+}
+
+export type MySentimentData = {
+    positivePercentage: number,
+    negativePercentage: number,
+    positiveCount: number,
+    negativeCount: number,
+    totalSentiment: number,
+}
+
+export type MyEmotionData = {
+    anger: number,
+    fear: number,
+    joy: number,
+    sadness: number,
+    love: number,
+    surprise: number,
+    positiveCount: number,
+    negativeCount: number,
+}
+
+export type MySentimentTableData = {
+    postId: string,
+    platform: string,
+    postlink: string,
+    date: string,
+    overall_sentiment: string,
+    negative_count: number,
+    positive_count: number,
 }
 

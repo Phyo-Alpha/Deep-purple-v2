@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, databases } from "./config";
-import { MySocialMediaFeed, MyUserReplies, userFeedReplies} from "../../types";
+import { MyReportChartGroups, MySocialMediaFeed, MyUserReplies, userFeedReplies} from "../../types";
 import { get } from "http";
 
 export async function saveStreamDashboardToDB (dashboard : {
@@ -227,14 +227,14 @@ export async function saveSocialMediaFeedReply(feedReply : MyUserReplies) {
     }
 }
 
-export async function getPostsMadeByThatAccount(account_username? : string) {
+export async function getPostsMadeByThatAccount(account_username? : string, limit: number = 25) {
     if (!account_username) return;
 
     try {
         const feeds = await databases.listDocuments(
             appwriteConfig.databaseId,
             appwriteConfig.socialMediaFeedsCollectionId,
-            [Query.equal("account_username", account_username)]
+            [Query.equal("account_username", account_username), Query.limit(limit)]
         );
 
         if (!feeds) throw Error;
@@ -266,11 +266,131 @@ export async function getRepliesOfThatPost(postId? : string){
         console.log(error);
     }
 }
+
+export async function getRepliesToThatAuthor(author? : string, limit : number = 25) {
+    if (!author) return;
+
+    try {
+        const replies = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsRepliesCollectionId,
+            [Query.equal("author_replied_to", author), Query.limit(limit)],
+            
+        );
+
+        if (!replies) throw Error;
+        
+        
+        return replies;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function updateSentiment (id? : string, sentiment? : string) {
+    if (!id || !sentiment) return;
+
+    try {
+        const response = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsRepliesCollectionId,
+            id,
+            {
+                sentiment : sentiment
+            }
+        );
+
+        if (!response) throw Error;
+
+        return response;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function updateEmotion (id? : string, emotion? : string) {
+    if (!id || !emotion) return;
+
+    try {
+        const response = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.socialMediaFeedsRepliesCollectionId,
+            id,
+            {
+                emotion : emotion
+            }
+        );
+
+        if (!response) throw Error;
+
+        return response;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
 export async function getAllReportCharts() {
     try {
         const charts = await databases.listDocuments(
             appwriteConfig.databaseId,
             appwriteConfig.reportChartCollectionId,
+        );
+
+        if (!charts) throw Error;
+
+        return charts;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getUserReportsChartsGroup () {
+    try {
+        const response = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.reportChartCollectionId,
+        );
+
+        if (!response) throw Error;
+
+        const result: MyReportChartGroups[] = [];
+        const tempResult: { [key: string]: Set<string> } = {};
+
+        response.documents.forEach((doc) => {
+            const accountName = doc.accountName;
+            const reportGroup = doc.report_group;
+
+            if (!tempResult[accountName]) {
+                tempResult[accountName] = new Set();
+            }
+
+            tempResult[accountName].add(reportGroup);
+        });
+
+        for (const accountName in tempResult) {
+            tempResult[accountName].forEach((reportGroup) => {
+                result.push({ accountName, report_group: reportGroup });
+            });
+        }
+        return result;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getReportChartsByAccountNameAndReportGroup (accountName? : string, reportGroup? : string) {
+    if (!accountName || !reportGroup) return;
+
+    try {
+        const charts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.reportChartCollectionId,
+            [Query.equal("accountName", accountName), Query.equal("report_group", reportGroup)]
         );
 
         if (!charts) throw Error;

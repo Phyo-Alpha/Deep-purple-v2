@@ -3,8 +3,29 @@ import { NavLink } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from "@mui/icons-material/Search";
 import SentimentIndividualPostTable from "./SentimentIndividualPostTable";
+import { useEffect, useState } from "react";
+import { getSentimentTableDataOfThatAccount } from "../services";
+import { MySentimentTableData } from "../types";
 
-export default function SentimentIndividualPost() {
+interface SentimentIndividualPostProps {
+    username: string,
+}
+
+export default function SentimentIndividualPost({ username }: SentimentIndividualPostProps) {
+
+    const [accountName, setAccountName] = useState(username);
+    const [sentimentTableData, setSentimentTableData] = useState<MySentimentTableData[]>([]);
+    async function getTableData() {
+        const tabledata: MySentimentTableData[] = await getSentimentTableDataOfThatAccount(username) || [];
+        setSentimentTableData(tabledata);
+    }
+
+    useEffect(() => {
+        setAccountName(username);
+        console.log(accountName);
+        getTableData();
+    }, [username])
+
     return (
         <section className="flex flex-col gap-5 pt-10 px-5">
             <div className="flex flex-row justify-between items-center">
@@ -32,7 +53,7 @@ export default function SentimentIndividualPost() {
                 </form>
             </section>
             <div>
-                <SentimentIndividualPostTable />
+                <SentimentIndividualPostTable sentimentTableData={sentimentTableData} />
             </div>
         </section>
     )
