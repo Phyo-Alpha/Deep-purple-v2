@@ -151,8 +151,8 @@ export type MySentimentTableData = {
 
 export type MyUserProfile = {
     username: string,
-    Firstname: string,
-    Lastname: string,
+    FirstName: string,
+    LastName: string,
     Age: number,
     Role: string,
     Occupation: string,

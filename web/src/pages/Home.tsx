@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
 import SocialListeningContent from "../components/SocialListeningContent"
 import SocialListeningLeftBar from "../components/SocialListeningLeftBar"
-import { socialMediaStream } from "../types"
 import { useParams } from "react-router-dom";
-import { getStreamFromDB } from "../api/appwrite/api";
+import { getStreamFromDBUsingUseremailAndDashBoadName } from "../api/appwrite/api";
 import StreamTopSideBar from "../components/StreamTopSideBar";
+import { handleFetchUserAttributes } from "../context/AuthContext";
 
 export default function Home() {
 
-    const [stream, setStream] = useState<socialMediaStream>({
-        socialMedia: "",
-        socialmedia_username: "",
-        streamName: "",
-    });
 
     const [displayAddStreamBar, setDisplayAddStreamBar] = useState(true);
+    const [thisDashboardStream, setThisDashboardStream] = useState<string>('');
 
     function onToggleDisplayRightBar() {
         console.log("Toggle add stream : ", displayAddStreamBar);
@@ -27,35 +23,17 @@ export default function Home() {
 
         if (dashboardname === undefined) {
             return;
-        }
-        console.log(dashboardname);
-        const streamName = dashboardname + " - " + "streamfeeds";
+        } else {
+            const fetchStream = async () => {
+                const email = await handleFetchUserAttributes();
+                const streamName = await getStreamFromDBUsingUseremailAndDashBoadName(email, dashboardname);
+                if (streamName === undefined) return;
 
-        const fetchStream = async () => {
-            const stream = await getStreamFromDB(streamName);
-
-            if (stream === undefined || stream.total === 0) {
-                console.log("Stream not found");
-
-                const socialMediaStream: socialMediaStream = {
-                    socialMedia: "Twitter",
-                    socialmedia_username: "",
-                    streamName: streamName,
-                };
-                setStream(socialMediaStream);
-
-                return;
-            } else {
-                console.log(stream);
-                const socialMediaStream: socialMediaStream = {
-                    socialMedia: stream.documents[0].socialMedia,
-                    socialmedia_username: stream.documents[0].socialmedia_username,
-                    streamName: stream.documents[0].streamName,
-                }
-                setStream(socialMediaStream);
             }
+            fetchStream();
         }
-        fetchStream();
+
+
     }, [dashboardname]);
 
 
@@ -64,7 +42,7 @@ export default function Home() {
             <SocialListeningLeftBar />
             <div className="flex-grow flex-col">
                 <StreamTopSideBar onToggleDisplayRightBar={onToggleDisplayRightBar} />
-                <SocialListeningContent stream={stream} displayAddStream={displayAddStreamBar}
+                <SocialListeningContent dashboardname={dashboardname ?? ""} displayAddStream={displayAddStreamBar}
                     onToggleDisplayRightBar={onToggleDisplayRightBar} />
             </div>
 

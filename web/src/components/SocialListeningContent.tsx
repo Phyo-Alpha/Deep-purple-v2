@@ -1,30 +1,49 @@
 import { useEffect, useState } from 'react';
-import AddStreamDialog from './ui/AddStreamDialog';
 import Stream from './ui/Stream';
-import { socialMediaStream } from '../types';
-import { saveStreamToDB, getStreamFromDB } from '../api/appwrite/api';
 import StreamContentRightBar from './StreamContentRightBar';
+import { getStreamFromDBUsingUseremailAndDashBoadName, updateDashboardStream } from '../api/appwrite/api';
+import { handleFetchUserAttributes } from '../context/AuthContext';
 
 interface SocialListeningContentProps {
-    stream: socialMediaStream;
+    dashboardname: string;
     displayAddStream: boolean;
     onToggleDisplayRightBar: () => void;
 }
 
-export default function SocialListeningContent({ stream, displayAddStream, onToggleDisplayRightBar }: SocialListeningContentProps) {
+export default function SocialListeningContent({ dashboardname, displayAddStream, onToggleDisplayRightBar }: SocialListeningContentProps) {
+
 
     const [accountName, setAccountName] = useState<string>('');
     const [displayStream, setdisplayStream] = useState(false);
 
-    function addStream(username: string) {
+    async function addStream(username: string) {
+        const email = await handleFetchUserAttributes();
+        const stream = username;
+
+        updateDashboardStream(email, dashboardname, stream);
         setAccountName(username);
     }
 
     useEffect(() => {
+
+        const fetchStream = async () => {
+            const email = await handleFetchUserAttributes();
+            const stream = await getStreamFromDBUsingUseremailAndDashBoadName(email, dashboardname);
+            if (stream === undefined || stream.documents[0].stream === '') {
+                setAccountName('');
+                setdisplayStream(false);
+            } else {
+                setAccountName(stream.documents[0].stream);
+            };
+
+        };
+        fetchStream();
+
         if (accountName !== '') {
+
             setdisplayStream(true);
         }
-    }, [stream, accountName]);
+    }, [dashboardname, accountName]);
 
     const handleStream = (value: string) => {
         if (value === 'delete') {

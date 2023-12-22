@@ -6,12 +6,14 @@ import { useParams } from "react-router-dom";
 import { CreateProfileForm } from "../components/CreateProfileform";
 import ProfileTable from "../components/ProfileTable";
 import { ProfileEdit } from "../components/ProfileEdit";
+import { UserProfile } from "../components/UserProfile";
 
 export default function ProfilePage() {
 
     const { displayOptions } = useParams<{ displayOptions: string }>();
 
     const { editUsername } = useParams<{ editUsername: string }>();
+
 
     const [username, setUsername] = useState<string>("");
 
@@ -20,7 +22,6 @@ export default function ProfilePage() {
             const username = await getUsername();
             if (username === undefined) return;
             setUsername(username);
-            console.log(username);
         }
         fetchUsername();
     }, [username]);
@@ -43,7 +44,7 @@ export default function ProfilePage() {
                             case 'searchProfile':
                                 return <ProfileTable />;
                             default:
-                                return <></>;
+                                return <UserProfile ProfileUsername={username} />;
                         }
                     })()}
                 </div>

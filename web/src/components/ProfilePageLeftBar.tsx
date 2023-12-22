@@ -8,13 +8,7 @@ export default function ProfilePageLeftBar() {
                 <p className="text-2xl font-bold">User Account</p>
             </div>
 
-            <div className="py-5 flex flex-col justify-center items-baseline">
-                <div className="py-5 px-5 hover:bg-primary-500">
-                    <NavLink to="/ManageAccount">
-                        <p className="text-md font-bold">Manage Accounts</p>
-                    </NavLink>
-                </div>
-            </div>
+
 
             <div className="py-5 flex flex-col justify-center items-center">
                 <div className="py-5 hover:bg-primary-500">

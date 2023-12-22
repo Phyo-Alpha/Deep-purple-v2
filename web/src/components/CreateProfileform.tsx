@@ -16,8 +16,8 @@ export function CreateProfileForm() {
     async function handleSubmit() {
         const profile: MyUserProfile = {
             username: username,
-            Firstname: firstName,
-            Lastname: lastName,
+            FirstName: firstName,
+            LastName: lastName,
             Email: email,
             Age: age,
             Role: role,

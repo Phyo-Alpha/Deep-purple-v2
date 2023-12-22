@@ -25,7 +25,7 @@ export default function SocialListeningLeftBar() {
         } else {
             const email = userEmail;
             dashboardName = "Twitter : " + dashboardName;
-            const stream = dashboardName + " - " + "streamfeeds";
+            const stream = "";
 
             const dashboard = {
                 useremail: email,
@@ -44,8 +44,7 @@ export default function SocialListeningLeftBar() {
     }
 
     function deleteDashboard(dashboardName: string) {
-        console.log(dashboardName);
-        console.log(deleteStreamDashboardFromDB(dashboardName));
+        deleteStreamDashboardFromDB(dashboardName);
         setBoards(boards.filter((boardName) => boardName !== dashboardName));
     }
 
@@ -72,7 +71,7 @@ export default function SocialListeningLeftBar() {
     }
 
     return (
-        <nav className="py-5 flex-col justify-between min-w-[200px] bg-purple-2 h-screen border-r border-gray-300">
+        <nav className="py-5 mt-1 flex-col justify-between min-w-[200px] max-w-[400px] bg-purple-2 h-screen border-r border-gray-300">
             <div className="pb-5 px-5  flex flex-col gap-5 border-b-2">
                 <p className=" text-2xl font-bold">Streams</p>
                 <div className='justify-start items-start'>
@@ -88,13 +87,15 @@ export default function SocialListeningLeftBar() {
                     {boards.map((board, index) => (
                         <li key={index} className='flex flex-row items-center justify-between'>
                             <NavLink to={"/" + board}>
-                                <Button>
-                                    <p className='text-sm font-bold'>{board}</p>
-                                </Button>
-                                <Button key={index} onClick={() => {
-                                    deleteDashboard(board);
-                                }}>
-                                    <DeleteForeverIcon />
+                                <Button key={index} variant="contained" style={{ backgroundColor: "#877EFF" }} >
+                                    <div className='flex flex-row gap-2'>
+                                        <p className='text-md font-bold'>{board}</p>
+                                        <div onClick={() => {
+                                            deleteDashboard(board);
+                                        }}>
+                                            <DeleteForeverIcon />
+                                        </div>
+                                    </div>
                                 </Button>
                             </NavLink>
                         </li>

@@ -27,8 +27,8 @@ export default function ProfileTable() {
         const profiles: MyUserProfile[] = userprofiles.documents.map((profile: any) => {
             const tempProfile: MyUserProfile = {
                 username: profile.username,
-                Firstname: profile.FirstName,
-                Lastname: profile.LastName,
+                FirstName: profile.FirstName,
+                LastName: profile.LastName,
                 Email: profile.Email,
                 Age: profile.Age,
                 Role: profile.Role,
@@ -96,8 +96,8 @@ export default function ProfileTable() {
                             <TableCell align='left' sx={{ color: 'white', fontSize: '14px' }} >
                                 {row.username}
                             </TableCell>
-                            <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.Firstname}</TableCell>
-                            <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.Lastname}</TableCell>
+                            <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.FirstName}</TableCell>
+                            <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.LastName}</TableCell>
                             <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.Email}</TableCell>
                             <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.Age}</TableCell>
                             <TableCell align="left" sx={{ color: 'white', fontSize: '14px' }} >{row.Occupation}</TableCell>

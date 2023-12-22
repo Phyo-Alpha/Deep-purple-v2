@@ -8,7 +8,7 @@ interface ProfileEditProps {
 }
 
 
-export function ProfileEdit({ ProfileUsername }: ProfileEditProps) {
+export function UserProfile({ ProfileUsername }: ProfileEditProps) {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [username, setUsername] = useState<string>("");
@@ -19,10 +19,30 @@ export function ProfileEdit({ ProfileUsername }: ProfileEditProps) {
 
     const [open, setOpen] = useState(false);
 
+    async function handleSubmit() {
+        const profiledata = await getProfileByUsername(ProfileUsername);
+
+        if (profiledata === undefined || profiledata.total === 0) {
+            const profile: MyUserProfile = {
+                username: username,
+                FirstName: firstName,
+                LastName: lastName,
+                Email: email,
+                Age: age,
+                Role: role,
+                Occupation: occupation,
+            }
+
+            await saveProfile(profile);
+        } else {
+            return;
+        }
+    }
+
     async function getUserProfile() {
         const userprofile = await getProfileByUsername(ProfileUsername);
-
-        if (userprofile === undefined) return;
+        console.log(userprofile);
+        if (userprofile === undefined || userprofile.total === 0) return;
 
         const profile: MyUserProfile = {
             username: userprofile.documents[0].username,
@@ -75,13 +95,20 @@ export function ProfileEdit({ ProfileUsername }: ProfileEditProps) {
                 Role: '',
                 Occupation: '',
             };
-            setFirstName(profile.FirstName);
-            setLastName(profile.LastName);
-            setUsername(profile.username);
-            setEmail(profile.Email);
-            setAge(profile.Age);
-            setRole(profile.Role);
-            setOccupation(profile.Occupation);
+
+            if (profile.username === '') {
+                setUsername(ProfileUsername);
+                await handleSubmit();
+            } else {
+                setFirstName(profile.FirstName);
+                setLastName(profile.LastName);
+                setUsername(profile.username);
+                setEmail(profile.Email);
+                setAge(profile.Age);
+                setRole(profile.Role);
+                setOccupation(profile.Occupation);
+            }
+
         }
         fetchProfileData();
     }, [username, ProfileUsername]);

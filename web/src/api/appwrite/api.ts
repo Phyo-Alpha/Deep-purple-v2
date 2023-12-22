@@ -116,6 +116,69 @@ export async function getStreamFromDB(streamName? : string) {
     }
 }
 
+export async function getStreamFromDBUsingUseremailAndDashBoadName (useremail? : string, dashboardName? : string) {
+    if (!useremail || !dashboardName) return;
+
+    try {
+        const dashboard = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.dashboardCollectionId,
+            [Query.equal("useremail", useremail), Query.equal("dashboard", dashboardName)]
+        );
+
+        if (!dashboard) throw Error;
+        
+
+        const stream = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.dashboardCollectionId,
+            [Query.equal("stream", dashboard.documents[0].stream)]
+        );
+
+        if (!stream) throw Error;
+        console.log(stream);
+        return stream;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function updateDashboardStream (useremail? : string, dashboardname? : string, stream? : string) {
+    if (!useremail || !dashboardname || !stream) return;
+
+    try {
+        const dashboard = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.dashboardCollectionId,
+            [Query.equal("useremail", useremail), Query.equal("dashboard", dashboardname)]
+        );
+        
+        if (!dashboard) throw Error;
+
+        const dashboard_id = dashboard.documents[0].$id;
+
+        if (!dashboard_id) throw Error;
+
+        const response = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.dashboardCollectionId,
+            dashboard_id,
+            {
+                stream : stream
+            }
+        );
+
+        if (!response) throw Error;
+
+        return response;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
 export async function saveSocialMediaAccounts(account:{
     account_username : string,
     platform : string,
@@ -453,7 +516,7 @@ export async function deleteReportFromDatabase (accoutName? : string , charttitl
 }
 
 export async function saveProfile(profile : MyUserProfile){
-    if (!profile) return;
+    if (!profile || !profile.username) return;
 
     try {
         const newProfile = await databases.createDocument(
@@ -497,7 +560,7 @@ export async function getProfileByUsername(username? : string) {
         );
 
         if (!profile) throw Error;
-        console.log(profile);
+        
         return profile;
     }
     catch (error) {
@@ -526,6 +589,38 @@ export async function deleteProfileByUsername(username? : string) {
             appwriteConfig.databaseId,
             appwriteConfig.userProfilesCollectionId,
             documentId
+        );
+
+        if (!response) throw Error;
+
+        return response;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function updateProfileByUsername(username? : string, profile? : MyUserProfile) {
+    if (!username || !profile) return;
+    console.log(profile);
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+            [Query.equal("username", username)]
+        );
+
+        if (documents.total === 0) {
+            throw new Error('No document found');
+        }
+
+        const documentId = documents.documents[0].$id;
+
+        const response = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+            documentId,
+            profile
         );
 
         if (!response) throw Error;

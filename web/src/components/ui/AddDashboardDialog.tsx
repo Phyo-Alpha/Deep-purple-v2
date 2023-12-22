@@ -22,11 +22,14 @@ export default function AddDashboardDialog({ returnFunction }: AddDashboardDialo
         setOpen(true);
     };
 
-    const handleClose = () => {
-        console.log(dashboardName);
+    function handleClose() {
         returnFunction(dashboardName);
         setOpen(false);
     };
+
+    const handleCancel = () => {
+        setOpen(false);
+    }
 
     return (
         <React.Fragment>
@@ -55,8 +58,8 @@ export default function AddDashboardDialog({ returnFunction }: AddDashboardDialo
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleClose}>Confirm</Button>
+                    <Button onClick={handleCancel}>Cancel</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>

@@ -1,13 +1,12 @@
-import home from "../assets/icons/home.svg";
 import analytics from "../assets/icons/analytics.svg";
 import report from "../assets/icons/report.svg";
 import feedback from "../assets/icons/feedback.png";
 import inbox from "../assets/icons/inbox.svg";
-import account from "../assets/icons/account.svg";
+import stream from "../assets/icons/stream.svg";
 
 export const sidebarLinks = [
     {
-        imgURL: home,
+        imgURL: stream,
         route: "/",
         label: "Stream",
     },
