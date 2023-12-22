@@ -1,4 +1,4 @@
-import { fetchUserAttributes, signOut, getCurrentUser, updateUserAttributes  } from 'aws-amplify/auth';
+import { fetchUserAttributes, signOut, getCurrentUser, updateUserAttributes, signUp, signIn, ConfirmSignUpInput, confirmSignUp  } from 'aws-amplify/auth';
 import {
   Theme,
   useTheme,
@@ -105,3 +105,21 @@ export function AuthStyle() {
   };
   return theme;
 }
+
+export async function addUser() {
+  try {
+    await signUp({
+      username: 'phyo',
+      password: 'mysecurerandompassword#123',
+      options: {
+        userAttributes: {
+          email: 'phyyyopyaesome@gmail.com',
+        }
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+

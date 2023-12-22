@@ -3,6 +3,7 @@ import analytics from "../assets/icons/analytics.svg";
 import report from "../assets/icons/report.svg";
 import feedback from "../assets/icons/feedback.png";
 import inbox from "../assets/icons/inbox.svg";
+import account from "../assets/icons/account.svg";
 
 export const sidebarLinks = [
     {
@@ -24,7 +25,8 @@ export const sidebarLinks = [
         imgURL : inbox,
         route: "/inbox",
         label : "Inbox"
-    }
+    },
+    
 ]
 
 export const analyticsBoardLinks = [

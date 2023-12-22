@@ -11,6 +11,7 @@ export const appwriteConfig = {
     reportChartCollectionId: import.meta.env.VITE_APPWRITE_REPORT_CHART_COLLECTION_ID,
     socialMediaFeedsCollectionId: import.meta.env.VITE_APPWRITE_SOCIALMEDIA_FEEDS_COLLECTION_ID,
     socialMediaFeedsRepliesCollectionId: import.meta.env.VITE_APPWRITE_POSTS_REPLIES_COLLECTION_ID,
+    userProfilesCollectionId: import.meta.env.VITE_APPWRITE_USER_PROFILE_COLLECTION_ID,
 }
 
 export const client = new Client();

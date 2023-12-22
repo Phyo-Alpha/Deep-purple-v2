@@ -149,3 +149,12 @@ export type MySentimentTableData = {
     positive_count: number,
 }
 
+export type MyUserProfile = {
+    username: string,
+    Firstname: string,
+    Lastname: string,
+    Age: number,
+    Role: string,
+    Occupation: string,
+    Email: string,
+}

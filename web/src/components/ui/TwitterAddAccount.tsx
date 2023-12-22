@@ -53,8 +53,8 @@ export default function TwitterAddAccount({ closeTheLogInList }: TwitterAddAccou
                         autoFocus
                         margin="dense"
                         id="password"
-                        label="Username"
-                        type="password"
+                        label="password"
+                        type="Password"
                         fullWidth
                         variant="standard"
                         value={password}
@@ -63,7 +63,7 @@ export default function TwitterAddAccount({ closeTheLogInList }: TwitterAddAccou
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
+                    <Button onClick={handleClose}>Add</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>

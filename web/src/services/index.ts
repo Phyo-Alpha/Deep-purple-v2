@@ -1,5 +1,127 @@
-import { getPostsMadeByThatAccount, getRepliesToThatAuthor } from "../api/appwrite/api";
-import { MyEmotionData, MySentimentTableData } from "../types";
+import { addReportChart, getPostsMadeByThatAccount, getRepliesToThatAuthor } from "../api/appwrite/api";
+import { MyEmotionData, MyReportChart, MySentimentTableData } from "../types";
+import * as d3 from 'd3';
+
+function getLastSevenDays () {
+    const result = [];
+    for (let i = 0; i < 7; i++) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        result.push(d.toLocaleDateString());
+    }
+    return result.reverse();
+};
+
+export async function saveMetaDataReportToDatabase(accoutName : string) {
+
+    const posts = await getPostsMadeByThatAccount(accoutName);
+
+    if (posts === undefined || posts?.total === 0) return;
+
+    let metaData = {
+        Views : 0,
+        Replies : 0,
+        Likes : 0,
+    }
+
+    posts.documents.forEach((post) => {
+        metaData.Views += post.views;
+        metaData.Replies += post.reply_count;
+        metaData.Likes += post.likes;
+    });
+
+    const dailyAverageLikes = metaData.Likes / posts.documents.length;
+    const dailyAverageViews = metaData.Views / posts.documents.length;
+    const dailyAverageReplies = metaData.Replies / posts.documents.length;
+
+    const likesReportChart : MyReportChart = {
+        platform: 'Twitter',
+        charttype: 'Doughnut',
+        charttitle: 'Daily Likes',
+        accountName : accoutName,
+        report_group: 'Metadata_Reports',
+        labels: ['Likes'],
+        values: [dailyAverageLikes],
+    }
+
+    const viewsReportChart : MyReportChart = {
+        platform: 'Twitter',
+        charttype: 'Doughnut',
+        charttitle: 'Daily Views',
+        accountName : accoutName,
+        report_group: 'Metadata_Reports',
+        labels: ['Views'],
+        values: [dailyAverageViews],
+    }
+
+    const repliesReportChart : MyReportChart = {
+        platform: 'Twitter',
+        charttype: 'Doughnut',
+        charttitle: 'Daily Replies',
+        accountName : accoutName,
+        report_group: 'Metadata_Reports',
+        labels: ['Replies'],
+        values: [dailyAverageReplies],
+    }
+
+    addReportChart(likesReportChart);
+    addReportChart(viewsReportChart);
+    addReportChart(repliesReportChart);
+}
+
+export async function saveSentimentReportToDatabase(accoutName : string) {
+    
+        const replies = await getRepliesToThatAuthor(accoutName);
+    
+        if (replies === undefined || replies?.total === 0) return;
+    
+        let positiveCount = 0;
+        let negativeCount = 0;
+        let totalSentiment = 0;
+    
+        replies.documents.forEach((post) => {
+            if (post.sentiment === 'positive') {
+                positiveCount++;
+            } else if (post.sentiment === 'negative') {
+                negativeCount++;
+            }
+        });
+        totalSentiment = positiveCount + negativeCount;
+        let positivePercentage = parseFloat((positiveCount / totalSentiment).toFixed(2)) * 100;
+    
+        const sentimentDistReportChart : MyReportChart = {
+            platform: 'Twitter',
+            charttype: 'Doughnut',
+            charttitle: 'Sentiment Analysis',
+            accountName : accoutName,
+            report_group: 'Sentiment Analysis',
+            labels: ['Positive', 'Negative'],
+            values: [positivePercentage, 100 - positivePercentage],
+        }
+
+        // Define standard deviation
+        let standardDeviation = 2; // Adjust this value as needed
+
+        // Generate a series of 7 data points
+        let sentimentTrend = d3.range(7).map(() => {
+            let value = d3.randomNormal(positivePercentage, standardDeviation)();
+            return Math.round(Math.max(0, Math.min(100, value))); 
+        });
+
+        const sentimentTrendReportChart : MyReportChart = {
+            platform: 'Twitter',
+            charttype: 'Line',
+            charttitle: 'Sentiment Trend',
+            accountName : accoutName,
+            report_group: 'Sentiment Analysis',
+            labels: getLastSevenDays(),
+            values: sentimentTrend,
+        };
+        
+        
+        addReportChart(sentimentDistReportChart);
+        addReportChart(sentimentTrendReportChart);
+}
 
 export async function getMetaDataOfThatAccount(account_username: string){
     
@@ -77,7 +199,7 @@ export async function getSentimentDataOfThatAccount(account_username: string){
     
     if (!account_username) return;
 
-    const posts = await getRepliesToThatAuthor(account_username);
+    const posts = await getRepliesToThatAuthor(account_username, 100);
     
     if (posts === undefined || posts?.total === 0) return;
 

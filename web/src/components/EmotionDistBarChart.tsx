@@ -40,6 +40,7 @@ export default function EmotionDistBarChart({ emotiondata }: EmotionDistBarChart
                 show: false
             }
         },
+
     }
     return (
 

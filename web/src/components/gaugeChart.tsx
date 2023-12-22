@@ -12,10 +12,11 @@ export default function MyGaugheChart({ positivePercentage }: ChartData) {
     const chartStyle = {
         textColor: 'black',
     }
+    const colors = ["#008000", "#ADFF2F", "#FFFF00", "#FFA500", "#FF4500", "#FF0000"].reverse();
 
     useEffect(() => {
         if (positivePercentageState !== undefined) {
-            setPositivePercentageState(50);
+            setPositivePercentageState(0);
         }
         else {
             setPositivePercentageState(positivePercentage);
@@ -24,11 +25,12 @@ export default function MyGaugheChart({ positivePercentage }: ChartData) {
     return (
         <div style={{ width: '100%' }}>
             <GaugeChart id="gauge-chart4"
-                nrOfLevels={10}
+                nrOfLevels={7}
                 arcPadding={0.1}
                 cornerRadius={3}
                 percent={positivePercentage}
                 textColor='black'
+                colors={colors}
             />
         </div>
 

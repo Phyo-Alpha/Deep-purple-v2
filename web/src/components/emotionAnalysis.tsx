@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { tweets } from '../data';
 import MyGaugheChart from "./gaugeChart";
 import ApexD from "./ApexChart_Doughnut";
-import ApexChartStackedBar from "./ApexChartStackedBar";
+import ApexChartStackedBar from "./SentimentStackedBar";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { NavLink } from "react-router-dom";
@@ -12,6 +12,7 @@ import { getEmotionDataOfThatAccont, getSentimentDataOfThatAccount } from "../se
 import { MyEmotionData, MySentimentData } from "../types";
 import Sentiment_Doughnut from "./Sentiment_Doughnut";
 import EmotionDistBarChart from "./EmotionDistBarChart";
+import EmotionStackedBar from "./EmotionStackedBar";
 
 Chart.register(CategoryScale);
 
@@ -47,7 +48,7 @@ export default function EmotionAnalysisBoard({ username }: EmotionAnalysisBoardP
 
     return (
         <div className="flex flex-col gap-10 py-10 px-5">
-            <div className="pb-10 flex flex-row justify-between items-center">
+            <div className="flex flex-row justify-between items-center">
                 <p className="font-bold text-5xl ">Last 7 days</p>
                 <NavLink to={"/analytics/sentiment/individualAnalysis"}>
                     {/* <Button variant="contained" style={{ backgroundColor: "#877EFF" }}>
@@ -71,7 +72,7 @@ export default function EmotionAnalysisBoard({ username }: EmotionAnalysisBoardP
 
             <div>
                 <div className="bg-light-1 rounded-md py-16 px-16">
-                    <ApexChartStackedBar />
+                    <EmotionStackedBar />
                 </div>
             </div>
         </div>

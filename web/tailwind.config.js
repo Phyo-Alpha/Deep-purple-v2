@@ -25,6 +25,11 @@ export default {
       'purple-3': "#322952",
       'positive-green': "#ABD15E",
       'twitter-blue': '#1DA1F3',
+      'very-negative-red': '#FF0000',
+      'negative-red': '#EA4E00',
+      'neutral': '#C0C000',
+      'positive-green': '#00E396',
+      'very-positive-green': '#008000',
     },
     screens: {
       'xs': '480px',

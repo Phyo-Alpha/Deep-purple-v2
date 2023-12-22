@@ -19,6 +19,7 @@ export default function Sentiment_Doughnut({ positivePercentage, negativePercent
     }, [positivePercentage, negativePercentage])
     const options: ApexOptions = {
         labels: ['Postive', 'Negative'],
+        colors: ['#00E396', '#F44336'],
         plotOptions: {
             pie: {
                 donut: {

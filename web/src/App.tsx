@@ -1,6 +1,6 @@
 import { Amplify } from 'aws-amplify';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Authenticator, Button, Heading, Image, Text, View, useAuthenticator, useTheme, ThemeProvider, Flex } from '@aws-amplify/ui-react';
+import { Authenticator, Button, Heading, Image, Text, View, useAuthenticator, useTheme, ThemeProvider } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
 import RouteLayout from './pages/RouteLayout';
@@ -9,9 +9,9 @@ import AnalyticsPage from './pages/AnalyticsPage';
 import ReportsBoard from './pages/ReportPage';
 import InboxPage from './pages/InboxPage';
 import { AuthStyle } from './context/AuthContext';
-import React from 'react';
-import ApexChartStackedBar from './components/ApexChartStackedBar';
+import AccountManagementPage from './pages/ProfilePage';
 import ProfilePage from './pages/ProfilePage';
+import { ProfileEdit } from './components/ProfileEdit';
 Amplify.configure(awsExports);
 
 const components = {
@@ -270,7 +270,9 @@ export default function App() {
                 <Route path="/analytics/sentiment/:displayType" element={<AnalyticsPage />} />
                 <Route path="/report/:sub_page" element={<ReportsBoard />} />
                 <Route path='/inbox' element={<InboxPage />} />
-                <Route path='/profile' element={<ProfilePage />} />
+                <Route path='/Profile' element={<ProfilePage />} />
+                <Route path='/Profile/:displayOptions' element={<ProfilePage />} />
+                <Route path='/Profile/editProfile/:editUsername' element={<ProfilePage />} />
               </Route>
 
             </Routes>

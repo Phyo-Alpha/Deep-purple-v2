@@ -1,23 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
+import { MySentimentData } from '../types';
 
-const ApexChartStackedBar: React.FC = () => {
+interface SentimentStackedBarProps {
+    sentimentData: MySentimentData;
+}
+
+export default function SentimentStackedBar({ sentimentData }: SentimentStackedBarProps) {
+    const getLastSevenDays = () => {
+        const result = [];
+        for (let i = 0; i < 7; i++) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            result.push(d.toLocaleDateString());
+        }
+        return result.reverse();
+    };
+
+    const generateSeries = (count: number, days: number) => {
+        const min = Math.floor(count * 0.7);
+        const max = Math.ceil(count * 1.3);
+        const series = Array.from({ length: days }, () => Math.floor(Math.random() * (max - min + 1) + min));
+        return series;
+    };
+
     const series = [
         {
             name: 'Positive Comments',
             type: 'column',
-            data: [44, 55, 41, 17, 15] // Replace with your data
+            data: generateSeries(sentimentData.positiveCount, 7)
         },
         {
             name: 'Negative Comments',
             type: 'column',
-            data: [30, 40, 35, 50, 49] // Replace with your data
+            data: generateSeries(sentimentData.negativeCount, 7)
         },
         {
             name: 'Overall Sentiment',
             type: 'line',
-            data: [3, 4, 3.5, 5, 4.9] // Replace with your data
+            data: generateSeries(sentimentData.positivePercentage * 100, 7)
         }
     ];
     const options: ApexOptions = {
@@ -29,7 +51,8 @@ const ApexChartStackedBar: React.FC = () => {
             stackType: "normal",
         },
         stroke: {
-            width: [0, 0, 4]
+            width: [0, 0, 4],
+            curve: 'smooth'
         },
         plotOptions: {
             bar: {
@@ -37,7 +60,8 @@ const ApexChartStackedBar: React.FC = () => {
             },
         },
         xaxis: {
-            categories: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'], // Replace with your data
+            categories: getLastSevenDays(),
+
         },
         yaxis: [
             {
@@ -45,21 +69,10 @@ const ApexChartStackedBar: React.FC = () => {
 
                 show: true,
                 title: {
-                    text: 'Percentage of Total Comments',
+                    text: 'Total Comments',
                 },
-                min: 0,
-                max: 100,
+
             },
-            {
-                seriesName: 'Sentiment',
-                show: true,
-                opposite: true,
-                title: {
-                    text: 'Overall Sentiment',
-                },
-                min: 0,
-                max: 5,
-            }
         ],
         colors: ['#008FFB', '#FF4560', '#775DD0'], // Colors for Positive, Negative, and Overall sentiment respectively
         legend: {
@@ -75,10 +88,13 @@ const ApexChartStackedBar: React.FC = () => {
         }]
     };
 
+    useEffect(() => {
+        console.log(sentimentData);
+    }, [sentimentData]);
+
     return (
         <Chart options={options} series={series} type="line"
             height={'250%'} />
     );
 };
 
-export default ApexChartStackedBar;

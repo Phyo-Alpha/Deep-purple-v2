@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, databases } from "./config";
-import { MyReportChartGroups, MySocialMediaFeed, MyUserReplies, userFeedReplies} from "../../types";
+import { MyReportChart, MyReportChartGroups, MySocialMediaFeed, MyUserProfile, MyUserReplies, userFeedReplies} from "../../types";
 import { get } from "http";
 
 export async function saveStreamDashboardToDB (dashboard : {
@@ -332,6 +332,24 @@ export async function updateEmotion (id? : string, emotion? : string) {
     }
 
 }
+
+export async function addReportChart(chart : MyReportChart) {
+    try {
+        const newChart = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.reportChartCollectionId,
+            ID.unique(),
+            chart
+        );
+
+        return newChart;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
 export async function getAllReportCharts() {
     try {
         const charts = await databases.listDocuments(
@@ -396,6 +414,123 @@ export async function getReportChartsByAccountNameAndReportGroup (accountName? :
         if (!charts) throw Error;
 
         return charts;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function deleteReportFromDatabase (accoutName? : string , charttitle? : string) {
+    if (!accoutName || !charttitle) return;
+
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.reportChartCollectionId,
+            [Query.equal("accountName", accoutName), Query.equal("charttitle", charttitle)]
+        );
+
+        if (documents.total === 0) {
+            throw new Error('No document found');
+        }
+
+        const documentId = documents.documents[0].$id;
+
+        const response = await databases.deleteDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.reportChartCollectionId,
+            documentId
+        );
+
+        if (!response) throw Error;
+
+        return response;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+export async function saveProfile(profile : MyUserProfile){
+    if (!profile) return;
+
+    try {
+        const newProfile = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+            ID.unique(),
+            profile
+        );
+
+        return newProfile;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getAllProfile() {
+    try {
+        const profiles = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+        );
+
+        if (!profiles) throw Error;
+        
+        return profiles;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getProfileByUsername(username? : string) {
+    if (!username) return;
+
+    try {
+        const profile = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+            [Query.equal("username", username)]
+        );
+
+        if (!profile) throw Error;
+        console.log(profile);
+        return profile;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+export async function deleteProfileByUsername(username? : string) {
+    if (!username) return;
+
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+            [Query.equal("username", username)]
+        );
+
+        if (documents.total === 0) {
+            throw new Error('No document found');
+        }
+
+        const documentId = documents.documents[0].$id;
+
+        const response = await databases.deleteDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userProfilesCollectionId,
+            documentId
+        );
+
+        if (!response) throw Error;
+
+        return response;
     }
     catch (error) {
         console.log(error);

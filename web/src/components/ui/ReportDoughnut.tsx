@@ -32,7 +32,7 @@ export default function ReportDoughnut({ values, labels }: ReportDoughnutProps) 
                             color: '#000',
                             offsetY: 16,
                             formatter: function (val: string) {
-                                return val.toString();
+                                return Math.round(Number(val)).toString();
                             }
                         }
                     }

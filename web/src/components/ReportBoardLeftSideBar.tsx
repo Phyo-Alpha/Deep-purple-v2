@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import AddReportDialog from "./ui/AddReportDialog";
 
 
 export default function ReportBoardLeftSideBar() {
@@ -6,8 +7,8 @@ export default function ReportBoardLeftSideBar() {
         <nav className="py-9 flex-col justify-between min-w-[200px] bg-purple-2 h-screen border-r border-gray-300">
             <div className="px-6 flex flex-col gap-5 border-b-2 justify-center items-center">
                 <p className=" text-2xl font-bold">My Reports</p>
-                <div className='justify-start  py-3  '>
-
+                <div className='justify-start pb-3  '>
+                    <AddReportDialog />
                 </div>
 
 
