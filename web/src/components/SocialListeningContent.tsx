@@ -16,12 +16,16 @@ export default function SocialListeningContent({ dashboardname, displayAddStream
     const [accountName, setAccountName] = useState<string>('');
     const [displayStream, setdisplayStream] = useState(false);
 
+
     async function addStream(username: string) {
+
         const email = await handleFetchUserAttributes();
         const stream = username;
 
         updateDashboardStream(email, dashboardname, stream);
         setAccountName(username);
+
+
     }
 
     useEffect(() => {

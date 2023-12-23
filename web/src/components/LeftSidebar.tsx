@@ -1,11 +1,12 @@
 import { Link, NavLink } from 'react-router-dom';
 import { sidebarLinks } from "../constants";
 import { MyNavLink } from '../types';
+import SignOutButton from './ui/SignOutButton';
 
 
 const LeftSidebar = () => {
     return (
-        <nav className="px-6 py-10 flex-col justify-between max-w-[100px] min-w-[100px] bg-purple-1 h-screen">
+        <nav className="px-6 py-10 flex flex-col justify-between max-w-[100px] min-w-[100px] bg-purple-1 ">
             <div className="flex flex-col gap-8 items-center">
                 <Link to="/" className="flex gap-3 items-center">
                     <img src="" alt="logo" width={50} height={36} />
@@ -35,7 +36,10 @@ const LeftSidebar = () => {
                     })}
                 </ul>
 
+
+
             </div>
+            <SignOutButton />
         </nav>
     )
 }

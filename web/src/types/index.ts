@@ -109,6 +109,12 @@ export type MySocialMediaFeed = {
     replies : string[],
 }
 
+export type MyStreamMetaData = {
+    Likes : number,
+    Views : number,
+    Replies : number,
+}
+
 export type MyMetaData = {
     Likes : number,
     Views : number,

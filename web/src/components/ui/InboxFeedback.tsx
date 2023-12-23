@@ -11,10 +11,6 @@ export default function InboxFeedback({ reply }: InboxFeedbackProps) {
                 <p>From user: @{reply.author}</p>
                 <p>Date: 11/12/2022</p>
             </div>
-            <div className="flex flex-col mt-2">
-                <p>Sentiment : {reply.sentiment}</p>
-                <p>Emotion : {reply.emotion}</p>
-            </div>
             <p>Content : </p>
             <p>{reply.reply_text}</p>
         </div>

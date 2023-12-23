@@ -22,9 +22,9 @@ export default function AnalyticsTopSidebar({ title, onUsernameChange }: TopSide
                     </div>
 
 
-                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded">
+                    <div className="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded">
                         <SignOutButton />
-                    </button>
+                    </div>
 
                 </div>
             </div>

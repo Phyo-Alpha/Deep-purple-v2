@@ -20,14 +20,8 @@ function createData(
 
 const rows = [
     createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
-    createData('123456', 'very negative', 'Twitter', '2021-10-10'),
+    createData('123456', 'very negative', 'Twitter', '2021-10-13'),
+    createData('123456', 'negative', 'Twitter', '2021-10-11'),
 
 ];
 
@@ -41,8 +35,6 @@ export default function NegativeSentimentPostsTable() {
                         <TableCell align="right">Negative Scale</TableCell>
                         <TableCell align="right">Platform</TableCell>
                         <TableCell align="right">Date</TableCell>
-                        <TableCell align="right"></TableCell>
-                        <TableCell align="right"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -57,18 +49,6 @@ export default function NegativeSentimentPostsTable() {
                             <TableCell align="right">{row.negative_scale}</TableCell>
                             <TableCell align="right">{row.platform}</TableCell>
                             <TableCell align="right">{row.date}</TableCell>
-                            <TableCell align="right">
-                                <Button>
-                                    <NavLink to={`/analytics/negativeposts/${row.postId}`}>
-                                        View
-                                    </NavLink>
-                                </Button>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Button>
-                                    Suspend
-                                </Button>
-                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

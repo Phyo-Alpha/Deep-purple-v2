@@ -12,6 +12,7 @@ import { AuthStyle } from './context/AuthContext';
 import AccountManagementPage from './pages/ProfilePage';
 import ProfilePage from './pages/ProfilePage';
 import { ProfileEdit } from './components/ProfileEdit';
+import AIplayground from './components/AIplayground';
 Amplify.configure(awsExports);
 
 const components = {
@@ -273,6 +274,7 @@ export default function App() {
                 <Route path='/Profile' element={<ProfilePage />} />
                 <Route path='/Profile/:displayOptions' element={<ProfilePage />} />
                 <Route path='/Profile/editProfile/:editUsername' element={<ProfilePage />} />
+                <Route path='aiplay' element={<AIplayground />} />
               </Route>
 
             </Routes>

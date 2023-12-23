@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { getStreamFromDBUsingUseremailAndDashBoadName } from "../api/appwrite/api";
 import StreamTopSideBar from "../components/StreamTopSideBar";
 import { handleFetchUserAttributes } from "../context/AuthContext";
+import EmptyStreamPage from "../components/EmptyStreamPage";
 
 export default function Home() {
 
@@ -20,7 +21,7 @@ export default function Home() {
     const { dashboardname } = useParams<{ dashboardname: string }>();
 
     useEffect(() => {
-
+        console.log("Dashboard name : ", dashboardname);
         if (dashboardname === undefined) {
             return;
         } else {
@@ -38,12 +39,20 @@ export default function Home() {
 
 
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row min-h-160">
             <SocialListeningLeftBar />
             <div className="flex-grow flex-col">
-                <StreamTopSideBar onToggleDisplayRightBar={onToggleDisplayRightBar} />
-                <SocialListeningContent dashboardname={dashboardname ?? ""} displayAddStream={displayAddStreamBar}
-                    onToggleDisplayRightBar={onToggleDisplayRightBar} />
+
+                {dashboardname !== undefined ? (
+                    <>
+                        <StreamTopSideBar onToggleDisplayRightBar={onToggleDisplayRightBar} />
+                        <SocialListeningContent dashboardname={dashboardname ?? ""} displayAddStream={displayAddStreamBar}
+                            onToggleDisplayRightBar={onToggleDisplayRightBar} />
+                    </>
+                )
+
+
+                    : <EmptyStreamPage />}
             </div>
 
 

@@ -12,11 +12,6 @@ export default function InboxLeftSideBar() {
                         <p className="text-md font-bold ">Customer Feedbacks</p>
                     </NavLink>
                 </div>
-                <div className="py-5 px-5 hover:bg-primary-500">
-                    <NavLink to="/inbox">
-                        <p className="text-md font-bold">Incident Reports</p>
-                    </NavLink>
-                </div>
             </div>
 
         </nav>

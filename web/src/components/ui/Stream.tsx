@@ -5,11 +5,12 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Button } from '@mui/material';
-import { MyMetaData, MySocialMediaFeed, MyUserReplies, userFeed, userFeedData, userFeedReplies } from '../../types';
+import { MySocialMediaFeed, MyStreamMetaData, MyUserReplies, userFeed, userFeedData, userFeedReplies } from '../../types';
 import { Tweet } from 'react-tweet';
-import { axiosInstance as axios } from '../../api/axios/config';
+import { axiosInstance as axios, axiosInstance } from '../../api/axios/config';
 import { getSocialMediaFeedById, getSocialMediaFeedsByPlatformAndUsername, saveSocialMediaFeed, saveSocialMediaFeedReply } from '../../api/appwrite/api';
 import { getMetaDataOfThatAccount } from '../../services';
+import { NavLink } from 'react-router-dom';
 
 interface StreamProps {
     username: string;
@@ -18,7 +19,7 @@ interface StreamProps {
 
 export default function Stream({ username, onValueReturn }: StreamProps) {
     const [userfeeds, setUserfeeds] = useState<userFeed | null>(null);
-    const [streamMetaData, setStreamMetaData] = useState<MyMetaData>({
+    const [streamMetaData, setStreamMetaData] = useState<MyStreamMetaData>({
         'Likes': 0,
         'Replies': 0,
         'Views': 0,
@@ -61,17 +62,21 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
         });
     }
 
+    const sentiments = ['positive', 'negative']
+    const emotions = ['anger', 'love', 'fear', 'joy', 'sadness', 'surprise']
+
     function saveRepliesToDB(replies: userFeedReplies[], replied_to: string, author_being_reply_to: string) {
         replies.map((reply) => {
+            const randomSentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
+            const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
             const reply_data: MyUserReplies = {
                 author: reply.author,
                 reply_text: reply.comment,
                 replied_to: replied_to,
                 author_replied_to: author_being_reply_to,
-                sentiment: '',
-                emotion: '',
+                sentiment: randomSentiment,
+                emotion: randomEmotion,
             }
-            console.log(reply_data);
             saveSocialMediaFeedReply(reply_data);
         })
     }
@@ -194,10 +199,13 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
 
                     </div>
                     <div className='flex flex-row justify-center bg-purple-3 border-t-2'>
-                        <Button>
-                            <BarChartIcon />
-                            <p className='text-xs'>View Insights</p>
-                        </Button>
+                        <NavLink to='/analytics'>
+                            <Button>
+                                <BarChartIcon />
+                                <p className='text-xs'>View Insights</p>
+                            </Button>
+                        </NavLink>
+
                     </div>
 
                     <div className='flex flex-col bg-light-1 overflow-y-auto px-2 h-128'>

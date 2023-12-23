@@ -11,6 +11,8 @@ import SentimentIndividualPost from "../components/SentimentIndividualPost";
 import { getRepliesToThatAuthor, updateEmotion, updateSentiment } from "../api/appwrite/api";
 import { MyUserReplies, userFeedReplies } from "../types";
 import EmotionAnalysisBoard from "../components/emotionAnalysis";
+import EmptyAnalyticsPage from "../components/EmptyAnalyticsPage";
+import NegativeSentimentPostsTable from "../components/NegativeSentimentPostsTable";
 
 
 const AnalyticsPage = () => {
@@ -68,6 +70,7 @@ const AnalyticsPage = () => {
     }
 
     useEffect(() => {
+
         if (postId !== undefined) {
             setDisplayPostDetail(true);
         } else {
@@ -86,11 +89,18 @@ const AnalyticsPage = () => {
             <div className="flex-grow flex-col">
                 <div className="flex-grow flex-col items-center">
 
-                    {displayPostDetail ? (
+                    {selectedUsername === "" ? (
+                        <>
+                            <AnalyticsTopSidebar title={analyticsType?.toUpperCase() || "ANALYTICS"}
+                                onUsernameChange={handleUsernameChange} />
+                            <EmptyAnalyticsPage />
+                        </>
+
+                    ) : displayPostDetail ? (
                         <>
                             <AnalyticsTopSidebar title={"POST# " + postId?.toUpperCase()} />
                             <div className="px-6">
-                                <NegativePostDetails />
+                                <NegativePostDetails postId={postId ?? "1683920951807971329"} />
                             </div>
                         </>
 
@@ -114,7 +124,7 @@ const AnalyticsPage = () => {
                                         case 'sentiment':
                                             return <SentimentAnalyisBoard username={selectedUsername} />;
                                         case 'negativeposts':
-                                            return <NegativeSentimentBoard />;
+                                            return <NegativeSentimentPostsTable />;
                                         case 'emotion':
                                             return <EmotionAnalysisBoard username={selectedUsername} />;
                                         default:

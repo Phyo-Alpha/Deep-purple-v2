@@ -15,32 +15,32 @@ export default function EmotionStackedBar() {
         {
             name: 'Joy',
             type: 'column',
-            data: [30, 30, 30, 30, 30, 30, 30] // Replace with your data
+            data: [40, 30, 20, 50, 30, 30, 0] // Replace with your data
         },
         {
             name: 'Suprise',
             type: 'column',
-            data: [10, 10, 10, 10, 10, 10, 10] // Replace with your data
+            data: [20, 10, 30, 10, 10, 10, 15] // Replace with your data
         },
         {
             name: 'Anger',
             type: 'column',
-            data: [10, 10, 10, 10, 10, 10, 10] // Replace with your data
+            data: [10, 10, 10, 10, 10, 10, 15] // Replace with your data
         },
         {
             name: 'Love',
             type: 'column',
-            data: [20, 20, 20, 20, 20, 20, 20] // Replace with your data
+            data: [20, 20, 20, 0, 20, 20, 30] // Replace with your data
         },
         {
             name: 'Fear',
             type: 'column',
-            data: [10, 10, 10, 10, 10, 10, 10] // Replace with your data
+            data: [5, 10, 10, 10, 0, 10, 20] // Replace with your data
         },
         {
             name: 'Sadness',
             type: 'column',
-            data: [20, 20, 20, 20, 20, 20, 20] // Replace with your data
+            data: [5, 20, 10, 20, 30, 20, 20] // Replace with your data
         },
         // {
         //     name: 'Overall Sentiment',

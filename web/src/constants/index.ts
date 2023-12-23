@@ -48,5 +48,5 @@ export const analyticsBoardLinks = [
         imgURL: feedback,
         route: "/analytics/negativeposts",
         label: "Negative sentiment filter",
-    },
+    }
 ]

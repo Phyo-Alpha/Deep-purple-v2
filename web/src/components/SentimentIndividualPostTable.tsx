@@ -63,8 +63,7 @@ export default function SentimentIndividualPostTable({ sentimentTableData }: Sen
                             <p>Negative</p>
                             <p>Emotions</p>
                         </TableCell>
-                        <TableCell align="right"></TableCell>
-                        <TableCell align="right"></TableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -84,18 +83,6 @@ export default function SentimentIndividualPostTable({ sentimentTableData }: Sen
                             <TableCell align="right">{row.overall_sentiment}</TableCell>
                             <TableCell align="right">{row.positive_count}</TableCell>
                             <TableCell align="right">{row.negative_count}</TableCell>
-                            <TableCell align="right">
-                                <Button>
-                                    <NavLink to={`/analytics/negativeposts/${row.postId}`}>
-                                        View
-                                    </NavLink>
-                                </Button>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Button>
-                                    Suspend
-                                </Button>
-                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

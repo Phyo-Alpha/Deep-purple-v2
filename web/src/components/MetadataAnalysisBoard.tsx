@@ -1,6 +1,5 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import { tweets } from '../data';
 import MetadataLineChart from "./MetadataLineChart";
 import { useEffect, useState } from "react";
 import { MyChartDataset, MyMetaData } from "../types";
@@ -26,8 +25,7 @@ export default function MetadataAnalysisBoard({ username }: MetadataAnalysisBoar
 
     async function getMetadataMetrics() {
         const metadata = await getMetaDataOfThatAccount(username);
-        setMetaData(metadata);
-        console.log(metaData);
+        return metadata;
     }
 
     function generateRandomData(average: number): number[] {
@@ -41,13 +39,22 @@ export default function MetadataAnalysisBoard({ username }: MetadataAnalysisBoar
     }
 
 
+
     useEffect(() => {
-        getMetadataMetrics();
+        const fetchMetaData = async () => {
+            const metadata = await getMetadataMetrics();
+            setMetaData(metadata);
+        }
+        fetchMetaData();
+    }, [username]);
+
+    useEffect(() => {
         const labels = Array.from({ length: 7 }, (_, i) => {
             const d = new Date();
             d.setDate(d.getDate() - i);
             return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         }).reverse();
+        console.log(metaData?.likesAverage);
         const data: chartDataProps = {
             labels: labels,
             datasets: [
@@ -78,7 +85,7 @@ export default function MetadataAnalysisBoard({ username }: MetadataAnalysisBoar
             ]
         };
         setchartDataMetrics(data);
-    }, [username]);
+    }, [metaData]);
 
 
     return (
@@ -87,7 +94,7 @@ export default function MetadataAnalysisBoard({ username }: MetadataAnalysisBoar
                 <div className="flex flex-col pl-3 gap-3 justify-start">
                     <p className="text-2xl">Total likes</p>
                     <p className="text-5xl font-bold text-primary-500">{metaData?.Likes}</p>
-                    <p className="text-xl text-positive-green">0.8%</p>
+                    <p className="text-xl text-positive-green"></p>
                 </div>
                 <div className="flex flex-col pl-3 gap-3 justify-start">
                     <p className="text-2xl">New likes</p>
@@ -97,7 +104,7 @@ export default function MetadataAnalysisBoard({ username }: MetadataAnalysisBoar
                 <div className="flex flex-col pl-3 gap-3 justify-start">
                     <p className="text-2xl">Views</p>
                     <p className="text-5xl font-bold text-primary-500">{metaData?.Views}</p>
-                    <p className="text-xl text-positive-green">4.8%</p>
+                    <p className="text-xl text-positive-green"></p>
                 </div>
             </section>
 

@@ -263,9 +263,40 @@ export async function getSentimentTableDataOfThatAccount(account_username: strin
         };
     });
 
-    console.log(sentimentTableData);
     return sentimentTableData;
 } 
+
+export async function getSentimentTableOfThatPost(postId: string) {
+    if (!postId) return;
+
+    const replies = await getRepliesToThatAuthor(postId, 100);
+    
+    if (replies === undefined || replies?.total === 0) return;
+
+    const sentimentTableData: MySentimentTableData[] = replies.documents.map(doc => {
+        const positiveCount = doc.sentiment === 'positive' ? 1 : 0;
+        const overallSentiment = parseFloat(positiveCount / 1 * 100 + '');
+        
+        const qualitativeSentiment = overallSentiment >= 80 ? 'very positive' :
+                                overallSentiment >= 60 ? 'positive' :
+                                overallSentiment >= 40 ? 'neutral' :
+                                overallSentiment >= 20 ? 'negative' :
+                                                         'very negative';
+      
+        return {
+          postId: doc.post_id,
+          platform: doc.platform,
+          postlink: "https://twitter.com/Ogo4200/status/" + doc.post_id, 
+          date: doc.date,
+          overall_sentiment: qualitativeSentiment,
+          negative_count: doc.sentiment === 'positive' ? 0 : 1,
+          positive_count: positiveCount,
+        };
+    });
+
+    return sentimentTableData;
+
+}
 
 export async function getEmotionDataOfThatAccont(account_username: string){
     if (!account_username) return;
@@ -287,14 +318,14 @@ export async function getEmotionDataOfThatAccont(account_username: string){
     }, {});
     
     const emotionData : MyEmotionData = {
-        anger: emotionCounts.anger,
-        fear: emotionCounts.fear,
-        joy: emotionCounts.joy,
-        sadness: emotionCounts.sadness,
-        love: emotionCounts.love,
-        surprise: emotionCounts.surprise,
-        positiveCount: sentimentCounts.positive,
-        negativeCount: sentimentCounts.negative,
+        anger: emotionCounts.anger ?? 0,
+        fear: emotionCounts.fear ?? 0,
+        joy: emotionCounts.joy ?? 0,
+        sadness: emotionCounts.sadness ?? 0,
+        love: emotionCounts.love ?? 0,
+        surprise: emotionCounts.surprise ?? 0,
+        positiveCount: sentimentCounts.positive ?? 0,
+        negativeCount: sentimentCounts.negative ?? 0,
     }
 
     return emotionData;
