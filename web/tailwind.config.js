@@ -22,7 +22,7 @@ export default {
       'light-4': '#5C5C7B',
       'purple-1': '#322952',
       'purple-2': '#3A3361',
-      'purple-3': "#322952",
+      'purple-3': "#3b3160",
       'positive-green': "#ABD15E",
       'twitter-blue': '#1DA1F3',
       'very-negative-red': '#FF0000',
@@ -41,7 +41,7 @@ export default {
       '140': '35rem',
       '150': '37.5rem',
       '160': '42.5rem',
-      '180': '50rem',
+      '180': '48rem',
       'full': '65%',
 
     },

@@ -4,14 +4,14 @@ import { Authenticator, Button, Heading, Image, Text, View, useAuthenticator, us
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from './aws-exports';
 import RouteLayout from './pages/RouteLayout';
-import Home from './pages/Home';
+import Home from './pages/StreamPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import ReportsBoard from './pages/ReportPage';
 import InboxPage from './pages/InboxPage';
 import { AuthStyle } from './context/AuthContext';
 import AccountManagementPage from './pages/ProfilePage';
 import ProfilePage from './pages/ProfilePage';
-import { ProfileEdit } from './components/ProfileEdit';
+import { ProfileEdit } from './components/profile/ProfileEdit';
 import AIplayground from './components/AIplayground';
 Amplify.configure(awsExports);
 

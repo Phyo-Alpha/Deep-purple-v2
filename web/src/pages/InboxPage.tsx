@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import InboxContent from "../components/InboxContent";
-import InboxLeftSideBar from "../components/InboxLeftSideBar";
-import InboxTopBar from "../components/InboxTopBar";
+import InboxContent from "../components/inbox/InboxContent";
+import InboxLeftSideBar from "../components/inbox/InboxLeftSideBar";
+import InboxTopBar from "../components/inbox/InboxTopBar";
 import { MyUserReplies } from "../types";
 import { getRepliesToThatAuthor } from "../api/appwrite/api";
 

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import ReportBoardContent from "../components/ReportBoardContent"
-import ReportBoardLeftSideBar from "../components/ReportBoardLeftSideBar"
-import ReportBoardTopSideBar from "../components/ReportBoardTopSideBar"
+import ReportBoardContent from "../components/report/ReportBoardContent"
+import ReportBoardLeftSideBar from "../components/report/ReportBoardLeftSideBar"
+import ReportBoardTopSideBar from "../components/report/ReportBoardTopSideBar"
 import { useEffect, useState } from "react";
 import { MyReportChart } from "../types";
 import { getReportChartsByAccountNameAndReportGroup } from "../api/appwrite/api";

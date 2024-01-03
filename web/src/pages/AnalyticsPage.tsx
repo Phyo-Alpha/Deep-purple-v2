@@ -1,18 +1,18 @@
-import SentimentAnalyisBoard from "../components/sentimentAnalysis";
-import AnalyticsBoardLeftBar from "../components/AnalyticsBoardLeftBar"
+import SentimentAnalyisBoard from "../components/analytics/sentimentAnalysis";
+import AnalyticsBoardLeftBar from "../components/analytics/AnalyticsBoardLeftBar"
 import { useParams } from "react-router-dom";
-import AnalyticsBoardWelcome from "../components/AnalyticsBoardWelcome";
-import MetadataAnalysisBoard from "../components/MetadataAnalysisBoard";
-import NegativeSentimentBoard from "../components/NegativeSentimentBoard";
+import AnalyticsBoardWelcome from "../components/analytics/AnalyticsBoardWelcome";
+import MetadataAnalysisBoard from "../components/analytics/MetadataAnalysisBoard";
+import NegativeSentimentBoard from "../components/analytics/NegativeSentimentBoard";
 import { useEffect, useState } from "react";
-import NegativePostDetails from "../components/NegativePostDetails";
-import AnalyticsTopSidebar from "../components/AnalyticsTopSideBar";
-import SentimentIndividualPost from "../components/SentimentIndividualPost";
+import NegativePostDetails from "../components/analytics/NegativePostDetails";
+import AnalyticsTopSidebar from "../components/analytics/AnalyticsTopSideBar";
+import SentimentIndividualPost from "../components/analytics/SentimentIndividualPost";
 import { getRepliesToThatAuthor, updateEmotion, updateSentiment } from "../api/appwrite/api";
 import { MyUserReplies, userFeedReplies } from "../types";
-import EmotionAnalysisBoard from "../components/emotionAnalysis";
-import EmptyAnalyticsPage from "../components/EmptyAnalyticsPage";
-import NegativeSentimentPostsTable from "../components/NegativeSentimentPostsTable";
+import EmotionAnalysisBoard from "../components/analytics/emotionAnalysis";
+import EmptyAnalyticsPage from "../components/analytics/EmptyAnalyticsPage";
+import NegativeSentimentPostsTable from "../components/analytics/NegativeSentimentPostsTable";
 
 
 const AnalyticsPage = () => {

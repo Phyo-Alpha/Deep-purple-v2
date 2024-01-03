@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import ProfilePageLeftBar from "../components/ProfilePageLeftBar";
-import ProfileTopBar from "../components/ProfileTopBar";
+import ProfilePageLeftBar from "../components/profile/ProfilePageLeftBar";
+import ProfileTopBar from "../components/profile/ProfileTopBar";
 import { getUsername } from "../context/AuthContext";
 import { useParams } from "react-router-dom";
-import { CreateProfileForm } from "../components/CreateProfileform";
-import ProfileTable from "../components/ProfileTable";
-import { ProfileEdit } from "../components/ProfileEdit";
-import { UserProfile } from "../components/UserProfile";
+import { CreateProfileForm } from "../components/profile/CreateProfileform";
+import ProfileTable from "../components/profile/ProfileTable";
+import { ProfileEdit } from "../components/profile/ProfileEdit";
+import { UserProfile } from "../components/profile/UserProfile";
 
 export default function ProfilePage() {
 
