@@ -21,7 +21,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -51,7 +50,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
@@ -60,11 +59,24 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
             <version>8.0.33</version>
+        </dependency> -->
+          <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>24.12.0</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.deeppurple.deeppurple.DeeppurpleApplication</mainClass>
+                    <layout>JAR</layout>
+                 </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -80,9 +92,9 @@
                         </goals>
                         <configuration>
                             <artifactSet>
-                                <excludes>
+                                <!-- <excludes>
                                     <exclude>org.apache.tomcat.embed:*</exclude>
-                                </excludes>
+                                </excludes> -->
                             </artifactSet>
                         </configuration>
                     </execution>

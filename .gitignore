@@ -37,3 +37,6 @@ node_modules/
 
 ### Access_Keys ###
 Enlil_accessKeys.csv
+
+### scraper ###
+ntscraper.py

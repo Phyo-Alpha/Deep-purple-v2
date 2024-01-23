@@ -40,7 +40,7 @@ def get_tweets(username):
                     }
                     user_tweet.get("replies").append(user_comment)
 
-                    if len(user_tweet.get("replies")) >= 5:
+                    if len(user_tweet.get("replies")) >= 2:
                         stop = True
                         break
             user_tweets.get("tweets").append(user_tweet)

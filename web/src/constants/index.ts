@@ -25,7 +25,11 @@ export const sidebarLinks = [
         route: "/inbox",
         label : "Inbox"
     },
-    
+    {
+        imgURL : inbox,
+        route: "/subscription",
+        label : "Subscription"
+    },    
 ]
 
 export const analyticsBoardLinks = [
@@ -48,5 +52,11 @@ export const analyticsBoardLinks = [
         imgURL: feedback,
         route: "/analytics/negativeposts",
         label: "Negative sentiment filter",
+    },
+    {
+        imgURL: feedback,
+        route: "/analytics/negativeposts",
+        label: "Negative sentiment filter 2",
     }
+
 ]

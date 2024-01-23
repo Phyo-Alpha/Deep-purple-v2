@@ -43,6 +43,7 @@ export default {
       '160': '42.5rem',
       '180': '48rem',
       'full': '65%',
+      'screen': '100vh',
 
     },
     width: {

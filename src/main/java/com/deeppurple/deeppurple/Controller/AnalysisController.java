@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.deeppurple.deeppurple.Service.AnalysisService;
@@ -23,7 +22,7 @@ public class AnalysisController {
 
             System.out.println(post);
             ObjectMapper mapper = new ObjectMapper();
-            String postText = mapper.readTree(post).get("tweet").asText();
+            String postText = mapper.readTree(post).get("text").asText();
 
             String responseBody = analysisService.textToSentiment(postText);
 
@@ -39,7 +38,7 @@ public class AnalysisController {
         try {
 
             ObjectMapper mapper = new ObjectMapper();
-            String postText = mapper.readTree(post).get("tweet").asText();
+            String postText = mapper.readTree(post).get("text").asText();
 
             String responseBody = analysisService.textToEmotion(postText);
 

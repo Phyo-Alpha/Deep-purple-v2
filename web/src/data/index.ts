@@ -1,5 +1,42 @@
-import { TweetData } from "../types";
+import { SubscriptionData, TweetData } from "../types";
 
+
+export const prices : SubscriptionData[] = [
+    {
+        id: "Basic",
+        name: "Basic",
+        description: "Basic Plan",
+        price: 0,
+        popular: false,
+        features: [
+            "Access to 1 social media account",
+            "Access to 1 sentiment analysis model",
+            "Access to 1 emotion analysis model",
+        ]
+    },
+    {
+        id: "Pro",
+        name: "Pro",
+        price: 10,
+        popular: true,
+        features: [
+            "Access to 5 social media accounts",
+            "Access to 5 sentiment analysis models",
+            "Access to 5 emotion analysis models",
+        ]
+    },
+    {
+        id : "Enterprise",
+        name: "Enterprise",
+        price: 20,
+        popular: false,
+        features: [
+            "Access to 10 social media accounts",
+            "Access to 10 sentiment analysis models",
+            "Access to 10 emotion analysis models",
+        ]
+    }
+]
 
 export const tweets : TweetData[] = [
 {

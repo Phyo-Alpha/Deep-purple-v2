@@ -164,3 +164,13 @@ export type MyUserProfile = {
     Occupation: string,
     Email: string,
 }
+
+export type SubscriptionData = {
+    id: string,
+    popular: boolean, 
+    description?: string,
+    name: string, 
+    price: number, 
+    info?: string, 
+    features?: string[]  
+}

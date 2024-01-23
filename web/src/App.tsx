@@ -13,6 +13,8 @@ import AccountManagementPage from './pages/ProfilePage';
 import ProfilePage from './pages/ProfilePage';
 import { ProfileEdit } from './components/profile/ProfileEdit';
 import AIplayground from './components/AIplayground';
+import Test from './pages/Test';
+import Subscraption from './pages/Subscraption';
 Amplify.configure(awsExports);
 
 const components = {
@@ -275,6 +277,8 @@ export default function App() {
                 <Route path='/Profile/:displayOptions' element={<ProfilePage />} />
                 <Route path='/Profile/editProfile/:editUsername' element={<ProfilePage />} />
                 <Route path='aiplay' element={<AIplayground />} />
+                <Route path='/test' element={<Test />} />
+                <Route path='/subscription' element={<Subscraption />} />
               </Route>
 
             </Routes>
