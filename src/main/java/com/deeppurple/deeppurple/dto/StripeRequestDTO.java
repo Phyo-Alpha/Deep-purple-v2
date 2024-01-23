@@ -3,12 +3,12 @@ package com.deeppurple.deeppurple.dto;
 import com.stripe.model.Product;
 
 public class StripeRequestDTO {
-    Product[] items;
+    String subscriptionId;
     String customerName;
     String customerEmail;
 
-    public Product[] getItems() {
-        return items;
+    public String getSubscriptionId() {
+        return subscriptionId;
     }
 
     public String getCustomerName() {

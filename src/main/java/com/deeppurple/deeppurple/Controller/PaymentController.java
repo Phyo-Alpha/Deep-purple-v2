@@ -41,28 +41,28 @@ public class PaymentController {
                 .setSuccessUrl(clientBaseURL + "/success?session_id={CHECKOUT_SESSION_ID}")
                 .setCancelUrl(clientBaseURL + "/failure");
 
-        for (Product product : requestDTO.getItems()) {
-            paramsBuilder.addLineItem(
-                    SessionCreateParams.LineItem.builder()
-                            .setQuantity(1L)
-                            .setPriceData(
-                                    PriceData.builder()
-                                            .setProductData(
-                                                    PriceData.ProductData.builder()
-                                                            .putMetadata("app_id", product.getId())
-                                                            .setName(product.getName())
-                                                            .build())
-                                            .setCurrency(ProductDAO.getProduct(product.getId()).getDefaultPriceObject()
-                                                    .getCurrency())
-                                            .setUnitAmountDecimal(ProductDAO.getProduct(product.getId())
-                                                    .getDefaultPriceObject().getUnitAmountDecimal())
-                                            // For subscriptions, you need to provide the details on how often they
-                                            // would recur
-                                            .setRecurring(PriceData.Recurring.builder()
-                                                    .setInterval(PriceData.Recurring.Interval.MONTH).build())
-                                            .build())
-                            .build());
-        }
+        Product product = ProductDAO.getProduct(requestDTO.getSubscriptionId());
+
+        paramsBuilder.addLineItem(
+                SessionCreateParams.LineItem.builder()
+                        .setQuantity(1L)
+                        .setPriceData(
+                                PriceData.builder()
+                                        .setProductData(
+                                                PriceData.ProductData.builder()
+                                                        .putMetadata("app_id", product.getId())
+                                                        .setName(product.getName())
+                                                        .build())
+                                        .setCurrency(ProductDAO.getProduct(product.getId()).getDefaultPriceObject()
+                                                .getCurrency())
+                                        .setUnitAmountDecimal(ProductDAO.getProduct(product.getId())
+                                                .getDefaultPriceObject().getUnitAmountDecimal())
+                                        // For subscriptions, you need to provide the details on how often they
+                                        // would recur
+                                        .setRecurring(PriceData.Recurring.builder()
+                                                .setInterval(PriceData.Recurring.Interval.MONTH).build())
+                                        .build())
+                        .build());
 
         Session session = Session.create(paramsBuilder.build());
 

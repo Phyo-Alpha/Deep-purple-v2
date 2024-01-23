@@ -15,17 +15,15 @@ import { ArrowForwardIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import PropTypes from "prop-types";
 
 import { axiosInstance } from "../../api/axios/config";
-import { SubscriptionData } from "../../types";
-import { prices } from "../../data";
 
 interface PricingBoxProps { popular: boolean, name: string, price: number, info?: string, features?: string[] }
 
 const PricingBox = ({ popular, name, price, info = "", features = [] }: PricingBoxProps) => {
-  const createSubscription = async (items: SubscriptionData[], customerName: string, customerEmail: string) => {
+  const createSubscription = async (subscriptionId: string, customerName: string, customerEmail: string) => {
     try {
-      const products = items.map(item => ({ id: item.id, name: item.name }));
+
       const response = await axiosInstance.post('http://localhost:8080/subscriptions/new', {
-        items: products,
+        subscriptionId: subscriptionId,
         customerName,
         customerEmail,
       });
@@ -42,7 +40,7 @@ const PricingBox = ({ popular, name, price, info = "", features = [] }: PricingB
 
   async function addSubscription() {
     console.log('Adding subscription');
-    createSubscription(prices, 'John Doe', 'john.doe@example.com');
+    createSubscription(name, 'John Doe', 'john.doe@example.com');
   }
 
   return (
