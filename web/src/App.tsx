@@ -15,6 +15,8 @@ import { ProfileEdit } from './components/profile/ProfileEdit';
 import AIplayground from './components/AIplayground';
 import Test from './pages/Test';
 import Subscraption from './pages/Subscraption';
+import { UsernameContext } from './context/Usernamecontext';
+import { useState } from 'react';
 Amplify.configure(awsExports);
 
 const components = {
@@ -255,34 +257,37 @@ const formFields = {
 
 export default function App() {
   const theme = AuthStyle();
+  const [selectedUsername, setSelectedUsername] = useState('');
   return (
     <main className='flex-grow h-screen'>
       <ThemeProvider theme={theme}>
         <Authenticator formFields={formFields} components={components}>
-          <BrowserRouter>
+          <UsernameContext.Provider value={{ selectedUsername, setSelectedUsername }}>
+            <BrowserRouter>
 
-            <Routes>
+              <Routes>
 
               /* private routes */
-              <Route element={<RouteLayout />}>
-                <Route index element={<Home />} />
-                <Route path="/:dashboardname" element={<Home />} />
-                <Route path="/analytics" element={<AnalyticsPage />} />
-                <Route path="/analytics/:analyticsType" element={<AnalyticsPage />} />
-                <Route path="/analytics/negativeposts/:postId" element={<AnalyticsPage />} />
-                <Route path="/analytics/sentiment/:displayType" element={<AnalyticsPage />} />
-                <Route path="/report/:sub_page" element={<ReportsBoard />} />
-                <Route path='/inbox' element={<InboxPage />} />
-                <Route path='/Profile' element={<ProfilePage />} />
-                <Route path='/Profile/:displayOptions' element={<ProfilePage />} />
-                <Route path='/Profile/editProfile/:editUsername' element={<ProfilePage />} />
-                <Route path='aiplay' element={<AIplayground />} />
-                <Route path='/test' element={<Test />} />
-                <Route path='/subscription' element={<Subscraption />} />
-              </Route>
+                <Route element={<RouteLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="/:dashboardname" element={<Home />} />
+                  <Route path="/analytics" element={<AnalyticsPage />} />
+                  <Route path="/analytics/:analyticsType" element={<AnalyticsPage />} />
+                  <Route path="/analytics/negativeposts/:postId" element={<AnalyticsPage />} />
+                  <Route path="/analytics/sentiment/:displayType" element={<AnalyticsPage />} />
+                  <Route path="/report/:sub_page" element={<ReportsBoard />} />
+                  <Route path='/inbox' element={<InboxPage />} />
+                  <Route path='/Profile' element={<ProfilePage />} />
+                  <Route path='/Profile/:displayOptions' element={<ProfilePage />} />
+                  <Route path='/Profile/editProfile/:editUsername' element={<ProfilePage />} />
+                  <Route path='aiplay' element={<AIplayground />} />
+                  <Route path='/test' element={<Test />} />
+                  <Route path='/subscription' element={<Subscraption />} />
+                </Route>
 
-            </Routes>
-          </BrowserRouter>
+              </Routes>
+            </BrowserRouter>
+          </UsernameContext.Provider>
         </Authenticator>
       </ThemeProvider>
     </main>

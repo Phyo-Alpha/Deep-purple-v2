@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import AnalyticsBoardWelcome from "../components/analytics/AnalyticsBoardWelcome";
 import MetadataAnalysisBoard from "../components/analytics/MetadataAnalysisBoard";
 import NegativeSentimentBoard from "../components/analytics/NegativeSentimentBoard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NegativePostDetails from "../components/analytics/NegativePostDetails";
 import AnalyticsTopSidebar from "../components/analytics/AnalyticsTopSideBar";
 import SentimentIndividualPost from "../components/analytics/SentimentIndividualPost";
@@ -13,6 +13,8 @@ import { MyUserReplies, userFeedReplies } from "../types";
 import EmotionAnalysisBoard from "../components/analytics/emotionAnalysis";
 import EmptyAnalyticsPage from "../components/analytics/EmptyAnalyticsPage";
 import NegativeSentimentPostsTable from "../components/analytics/NegativeSentimentPostsTable";
+import { UsernameContext } from "../context/Usernamecontext";
+import UserAnalysisBoard from "../components/analytics/UserdataAnalysisContent";
 
 
 const AnalyticsPage = () => {
@@ -24,7 +26,7 @@ const AnalyticsPage = () => {
     const sentiment = ['positive', 'negative']
     const emotions = ['anger', 'fear', 'joy', 'love', 'sadness', 'surprise']
 
-    const [selectedUsername, setSelectedUsername] = useState('');
+    const { selectedUsername, setSelectedUsername } = useContext(UsernameContext);
     const [repliesData, setRepliesData] = useState<MyUserReplies[]>([]);
 
     const [displayPostDetail, setDisplayPostDetail] = useState(false);
@@ -84,9 +86,10 @@ const AnalyticsPage = () => {
         }
     }, [postId, displayType])
     return (
+
         <div className="flex flex-row min-h-screen">
             <AnalyticsBoardLeftBar />
-            <div className="flex-grow flex-col">
+            <div className="flex-grow flex-col pl-[250px]">
                 <div className="flex-grow flex-col items-center">
 
                     {selectedUsername === "" ? (
@@ -127,6 +130,8 @@ const AnalyticsPage = () => {
                                             return <NegativeSentimentPostsTable />;
                                         case 'emotion':
                                             return <EmotionAnalysisBoard username={selectedUsername} />;
+                                        case 'userdata':
+                                            return <UserAnalysisBoard username={selectedUsername} />;
                                         default:
                                             return <AnalyticsBoardWelcome />;
                                     }
@@ -140,6 +145,7 @@ const AnalyticsPage = () => {
                 </div>
             </div>
         </div>
+
     )
 }
 

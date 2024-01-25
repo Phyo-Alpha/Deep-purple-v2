@@ -7,13 +7,14 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { socialMediaAccount } from '../../types';
 import { getRepliesToThatAuthor, getSocialMediaAccounts } from '../../api/appwrite/api';
 import { handleFetchUserAttributes } from '../../context/AuthContext';
+import { UsernameContext } from '../../context/Usernamecontext';
 
 interface onUsernameChangeProps {
     onUsernameChange?: (value: string) => void;
 }
 
 export default function SwitchAccountDropDown({ onUsernameChange }: onUsernameChangeProps) {
-    const [selectedUsername, setSelectedUsername] = React.useState('');
+    const { selectedUsername, setSelectedUsername } = React.useContext(UsernameContext);
     const [socialMediaAccounts, setSocialMediaAccounts] = React.useState<socialMediaAccount[]>([]);
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -55,6 +56,7 @@ export default function SwitchAccountDropDown({ onUsernameChange }: onUsernameCh
     }, []);
 
     return (
+
         <FormControl sx={{ m: 1, minWidth: 180 }} size="small"
             className='bg-primary-500 rounded-lg'>
             <InputLabel id="demo-select-small-label">
@@ -77,5 +79,6 @@ export default function SwitchAccountDropDown({ onUsernameChange }: onUsernameCh
                 ))}
             </Select>
         </FormControl>
+
     );
 }

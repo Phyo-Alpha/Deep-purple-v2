@@ -50,13 +50,13 @@ export const analyticsBoardLinks = [
     },
     {
         imgURL: feedback,
-        route: "/analytics/negativeposts",
-        label: "Negative sentiment filter",
+        route: "/analytics/userdata",
+        label: "User data analysis",
     },
     {
         imgURL: feedback,
         route: "/analytics/negativeposts",
-        label: "Negative sentiment filter 2",
-    }
+        label: "Negative sentiment filter",
+    },
 
 ]

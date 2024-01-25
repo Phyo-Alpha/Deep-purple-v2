@@ -63,7 +63,7 @@ export default function ReportBoardContent({ comparison_reports }: ReportBoardCo
         fetchReports();
     }, [comparison_reports]);
     return (
-        <section className="my-10 flex flex-col items-center h-full">
+        <section className="my-10 flex flex-col items-center h-report-space overflow-y-scroll">
             {/* <div className="py-5">
                 <img src="/src/assets/icons/EmptyReportBoardIcon.svg" alt="emptyPage"
                     className="invert-white" />

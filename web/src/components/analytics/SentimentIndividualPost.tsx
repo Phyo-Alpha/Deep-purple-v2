@@ -52,9 +52,9 @@ export default function SentimentIndividualPost({ username }: SentimentIndividua
                     </IconButton>
                 </form>
             </section>
-            <div>
-                <SentimentIndividualPostTable sentimentTableData={sentimentTableData} />
-            </div>
+
+            <SentimentIndividualPostTable sentimentTableData={sentimentTableData} />
+
         </section>
     )
 }

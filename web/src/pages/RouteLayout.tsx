@@ -8,7 +8,7 @@ const RouteLayout = () => {
 
             <LeftSidebar />
 
-            <section className="flex-grow">
+            <section className="flex-grow pl-[80px]">
                 <Outlet />
             </section>
         </div>

@@ -3,12 +3,11 @@ import { sidebarLinks } from "../constants";
 import { MyNavLink } from '../types';
 import SignOutButton from './ui/SignOutButton';
 import logo from '../assets/images/logo.png';
-import { log } from 'console';
 
 
 const LeftSidebar = () => {
     return (
-        <nav className="py-5 flex flex-col justify-between max-w-[80px] min-w-[80px] bg-purple-1 ">
+        <nav className="py-5 flex flex-col justify-between max-w-[80px] min-w-[80px] h-screen bg-purple-1 fixed">
             <div className="flex flex-col gap-8 items-center">
                 <Link to="/" className="flex gap-3 items-center">
                     <img src={logo} alt="logo" width={50} height={36} />
