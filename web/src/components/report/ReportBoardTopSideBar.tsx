@@ -77,9 +77,6 @@ export default function ReportBoardTopSideBar({ title, handleFirstSelectReportFu
                         <ReportBoardTopBarSelectDropDown Menuitems={reportGroups} HandleSelectChangeFunction={HandleSecondSelectChangeFunction} />
                     </div>
                 </div>
-                <div>
-                    <p className='font-bold text-lg'>Export</p>
-                </div>
             </div>
         </section>
     )

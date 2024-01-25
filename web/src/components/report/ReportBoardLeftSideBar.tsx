@@ -40,7 +40,7 @@ export default function ReportBoardLeftSideBar() {
                     </NavLink>
                 </div>
             </div>
-            <div>
+            <div className="border-b-2">
                 <div className="py-3 flex flex-col items-center justify-center ">
                     <p className='text-lg font-bold pb-2'>Organic Reports</p>
                     <div className="flex flex-col gap-3 items-center">
@@ -63,9 +63,9 @@ export default function ReportBoardLeftSideBar() {
             <div>
                 <div className="py-3 flex flex-col items-center justify-center">
 
-                    <p className='text-xl font-bold'>Compare Reports</p>
 
-                    <div className="flex flex-col py-12">
+
+                    <div className="flex flex-col py-5">
                         <NavLink to="/report/all-report"
                             className="flex 
                                     items-center p-4"

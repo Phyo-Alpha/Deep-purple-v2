@@ -199,7 +199,7 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
 
                     </div>
                     <div className='flex flex-row justify-center bg-purple-3 border-t-2'>
-                        <NavLink to='/analytics'>
+                        <NavLink to='/analytics/sentiment'>
                             <Button>
                                 <BarChartIcon />
                                 <p className='text-xs'>View Insights</p>

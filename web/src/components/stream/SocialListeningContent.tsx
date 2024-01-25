@@ -59,7 +59,7 @@ export default function SocialListeningContent({ dashboardname, displayAddStream
     return (
 
         <section className="flex ">
-            <div className='flex-grow border-r-2 max-w-[600px]'>
+            <div className='flex-grow max-w-[600px]'>
                 {displayStream ? (
                     <Stream username={accountName} onValueReturn={handleStream} />
                 ) : (

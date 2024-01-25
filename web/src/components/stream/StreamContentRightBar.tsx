@@ -65,7 +65,7 @@ export default function StreamContentRightBar({ addStream, onToggleDisplayRightB
 
     }, [])
     return (
-        <section className="flex-grow flex-col">
+        <section className="flex-grow flex-col border-l-2">
             <div className="flex flex-row py-5 px-10 justify-between border-b-2">
                 <p className="font-bold text-xl">Add a Stream</p>
                 <Button variant="contained" style={{ backgroundColor: "#3A3361" }}
