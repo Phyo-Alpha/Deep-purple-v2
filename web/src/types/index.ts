@@ -174,3 +174,9 @@ export type SubscriptionData = {
     info?: string, 
     features?: string[]  
 }
+
+export type MyReports =  {
+    report_date : string,
+    report_by_name : string,
+    report_text : string,
+}

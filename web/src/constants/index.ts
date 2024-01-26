@@ -30,6 +30,11 @@ export const sidebarLinks = [
         route: "/subscription",
         label : "Subscription"
     },    
+    {
+        imgURL : inbox,
+        route : "/bugreports",
+        label : "Bug Reports",
+    }
 ]
 
 export const analyticsBoardLinks = [

@@ -631,3 +631,19 @@ export async function updateProfileByUsername(username? : string, profile? : MyU
         console.log(error);
     }
 }
+
+export async function getAllBugReports(){
+    try {
+        const reports = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.bugreportsCollectionId,
+        );
+
+        if (!reports) throw Error;
+
+        return reports;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}

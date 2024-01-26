@@ -17,6 +17,7 @@ import Test from './pages/Test';
 import Subscraption from './pages/Subscraption';
 import { UsernameContext } from './context/Usernamecontext';
 import { useState } from 'react';
+import BugReportPage from './pages/BugReportPage';
 Amplify.configure(awsExports);
 
 const components = {
@@ -283,6 +284,7 @@ export default function App() {
                   <Route path='aiplay' element={<AIplayground />} />
                   <Route path='/test' element={<Test />} />
                   <Route path='/subscription' element={<Subscraption />} />
+                  <Route path='/bugreports' element={<BugReportPage />} />
                 </Route>
 
               </Routes>
