@@ -40,3 +40,7 @@ Enlil_accessKeys.csv
 
 ### scraper ###
 ntscraper.py
+
+### Hugging Face ###
+Hugging Face AI/env
+Hugging Face AI/__pycache__
