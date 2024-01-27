@@ -82,7 +82,7 @@ public class AnalysisService {
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-        System.out.println("hello");
+        System.out.println();
         return response.getBody();
     }
 }
