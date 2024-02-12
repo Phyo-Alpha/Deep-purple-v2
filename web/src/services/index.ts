@@ -1,5 +1,7 @@
+import { ca } from "date-fns/locale";
 import { addReportChart, getPostsMadeByThatAccount, getRepliesToThatAuthor } from "../api/appwrite/api";
-import { MyEmotionData, MyReportChart, MySentimentTableData } from "../types";
+import { axiosInstance } from "../api/axios/config";
+import { CountrySentiment, MyEmotionData, MyReportChart, MySentimentTableData,userFeedReplies } from "../types";
 import * as d3 from 'd3';
 
 function getLastSevenDays () {
@@ -11,6 +13,15 @@ function getLastSevenDays () {
     }
     return result.reverse();
 };
+
+export async function analyzeTheReplies(replies : userFeedReplies[]){
+    try {
+        const response = await axiosInstance.post('/analyze/predictPostEmotionInBulk', replies)
+        console.log(response.data);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 export async function saveMetaDataReportToDatabase(accoutName : string) {
 
@@ -277,22 +288,40 @@ export async function getSentimentTableOfThatPost(postId: string) {
         const positiveCount = doc.sentiment === 'positive' ? 1 : 0;
         const overallSentiment = parseFloat(positiveCount / 1 * 100 + '');
         
-        const qualitativeSentiment = overallSentiment >= 80 ? 'very positive' :
+        
+        if (positiveCount === 0) {
+            const qualitativeSentiment = 'neutral';
+
+            return {
+                postId: doc.post_id,
+                platform: doc.platform,
+                postlink: "https://twitter.com/Ogo4200/status/" + doc.post_id, 
+                date: doc.date,
+                overall_sentiment: qualitativeSentiment,
+                negative_count: doc.sentiment === 'positive' ? 0 : 1,
+                positive_count: positiveCount,
+              };
+        } else {
+            const qualitativeSentiment = overallSentiment >= 80 ? 'very positive' :
                                 overallSentiment >= 60 ? 'positive' :
                                 overallSentiment >= 40 ? 'neutral' :
                                 overallSentiment >= 20 ? 'negative' :
                                                          'very negative';
+            return {
+            postId: doc.post_id,
+            platform: doc.platform,
+            postlink: "https://twitter.com/Ogo4200/status/" + doc.post_id, 
+            date: doc.date,
+            overall_sentiment: qualitativeSentiment,
+            negative_count: doc.sentiment === 'positive' ? 0 : 1,
+            positive_count: positiveCount,
+            };
+        }
+        
       
-        return {
-          postId: doc.post_id,
-          platform: doc.platform,
-          postlink: "https://twitter.com/Ogo4200/status/" + doc.post_id, 
-          date: doc.date,
-          overall_sentiment: qualitativeSentiment,
-          negative_count: doc.sentiment === 'positive' ? 0 : 1,
-          positive_count: positiveCount,
-        };
+        
     });
+    
 
     return sentimentTableData;
 
@@ -329,4 +358,34 @@ export async function getEmotionDataOfThatAccont(account_username: string){
     }
 
     return emotionData;
+}
+
+export async function getTheSentimentDistributionOfThatAccount(account_username: string){
+    if (!account_username) return;
+
+    const sentimentData = await getSentimentDataOfThatAccount(account_username);
+
+    if (sentimentData === undefined) return;
+
+    const country_code = [
+            "BN", "ID", "KH", "LA", "MM", "BU", "MY", "PH", "SG", "TH", "TL", "TP", "VN",
+            "AF", "BD", "BT", "IN", "IR", "LK", "MV", "NP", "PK",
+            "CN", "HK", "JP", "KP", "KR", "MN", "MO", "TW",
+            "TM", "TJ", "KG", "KZ", "UZ",
+            "AU", "NF", "NZ",
+            "GG", "JE", "AX", "DK", "EE", "FI", "FO", "GB", "IE", "IM", "IS", "LT", "LV", "NO", "SE", "SJ",
+            "AT", "BE", "CH", "DE", "DD", "FR", "FX", "LI", "LU", "MC", "NL",
+            "BG", "BY", "CZ", "HU", "MD", "PL", "RO", "RU", "SU", "SK", "UA",
+            "BM", "CA", "GL", "PM", "US", "MX", 
+            "AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "PE", "PY", "SR", "UY", "VE"
+        ]
+    
+    const data = country_code.map(country => {
+        const sentiment = Math.random() * sentimentData.positivePercentage * 100;
+        return [country, parseFloat(sentiment.toFixed(2))];
+    }) as CountrySentiment[];
+
+    data.unshift(['Country', 'Sentiment']);
+
+    return data;
 }

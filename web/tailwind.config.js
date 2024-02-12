@@ -20,6 +20,7 @@ export default {
       'light-2': '#EFEFEF',
       'light-3': '#7878A3',
       'light-4': '#5C5C7B',
+      'gray-1': '#F4F1EF',
       'purple-1': '#322952',
       'purple-2': '#3A3361',
       'purple-3': "#3b3160",
@@ -28,7 +29,6 @@ export default {
       'very-negative-red': '#FF0000',
       'negative-red': '#EA4E00',
       'neutral': '#C0C000',
-      'positive-green': '#00E396',
       'very-positive-green': '#008000',
     },
     screens: {

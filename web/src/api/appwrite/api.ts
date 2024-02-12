@@ -2,7 +2,6 @@ import { ID, Query } from "appwrite";
 
 import { appwriteConfig, databases } from "./config";
 import { MyReportChart, MyReportChartGroups, MySocialMediaFeed, MyUserProfile, MyUserReplies, userFeedReplies} from "../../types";
-import { get } from "http";
 
 export async function saveStreamDashboardToDB (dashboard : {
     useremail : string,
@@ -32,7 +31,6 @@ export async function getUserStreamDashboards (email? : string) {
             appwriteConfig.dashboardCollectionId,
             [Query.equal("useremail", email)]
         );
-
         if (!dashboard) throw Error;
 
         return dashboard;
@@ -646,4 +644,233 @@ export async function getAllBugReports(){
     catch (error) {
         console.log(error);
     }
+}
+
+export async function getClosedBugReports(){
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.bugreportsCollectionId,
+            [Query.equal("status", "closed")]
+        );
+
+        if (!documents) throw Error;
+
+        return documents;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateBugReport(bugId: string, report : any) {
+    try {
+        const newReport = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.bugreportsCollectionId,
+            bugId,
+            report
+        );
+
+        return newReport;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+
+export async function getAllBillings(){
+    try {
+        const reports = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.billingsCollectionId,
+        );
+
+        if (!reports) throw Error;
+
+        return reports;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+
+export async function getAllActivePlans(){
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.subscriptionPlanCollectionId,
+            [Query.equal("isActive", true)]
+        );
+
+        if (!documents) throw Error;
+
+        return documents;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+export async function getAllSuspendedPlans(){
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.subscriptionPlanCollectionId,
+            [Query.equal("isActive", false)]
+        );
+
+        if (!documents) throw Error;
+
+        return documents;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function addSubPlan(plan : any) {
+    try {
+        const newPlan = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.subscriptionPlanCollectionId,
+            ID.unique(),
+            plan
+        );
+
+        return newPlan;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateSubPlan(planId: string, plan : any) {
+    try {
+        const newPlan = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.subscriptionPlanCollectionId,
+            planId,
+            plan
+        );
+
+        return newPlan;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+export async function subspendSubPlan (subplanId : string) {
+    
+    try {
+        await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.subscriptionPlanCollectionId,
+            subplanId,
+            {
+                isActive: false
+            }
+        );
+
+        return { status : "Ok" };
+    } catch (error) { 
+        console.log(error);
+    }
+}
+
+export async function getAllActiveUsers(){
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userAccountCollectionId,
+            [Query.equal("isActive", true)]
+        );
+
+        if (!documents) throw Error;
+
+        return documents;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getAllSuspendedUsers(){
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userAccountCollectionId,
+            [Query.equal("isActive", false)]
+        );
+
+        if (!documents) throw Error;
+
+        return documents;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function subspendUser(userId : string) {
+    
+    try {
+        await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userAccountCollectionId,
+            userId,
+            {
+                isActive: false
+            }
+        );
+
+        return { status : "Ok" };
+    } catch (error) { 
+        console.log(error);
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function addUserAccount(user : any) {
+    try {
+        const newPlan = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userAccountCollectionId,
+            ID.unique(),
+            user
+        );
+
+        return newPlan;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateUserAccount(userId: string, user : any) {
+    try {
+        const newUserAccount = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userAccountCollectionId,
+            userId,
+            user
+        );
+
+        return newUserAccount;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
 }

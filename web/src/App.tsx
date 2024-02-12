@@ -8,16 +8,27 @@ import Home from './pages/StreamPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import ReportsBoard from './pages/ReportPage';
 import InboxPage from './pages/InboxPage';
-import { AuthStyle } from './context/AuthContext';
-import AccountManagementPage from './pages/ProfilePage';
+import { AuthStyle, handleFetchUserAttributes } from './context/AuthContext';
 import ProfilePage from './pages/ProfilePage';
-import { ProfileEdit } from './components/profile/ProfileEdit';
 import AIplayground from './components/AIplayground';
 import Test from './pages/Test';
 import Subscraption from './pages/Subscraption';
 import { UsernameContext } from './context/Usernamecontext';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BugReportPage from './pages/BugReportPage';
+import BillingInvoicesPage from './pages/BillingInvoices';
+import BillingInvoiceDetail from './pages/BillingInvoiceDetail';
+import CreateSubscriptionPlan from './pages/CreateSubscriptionPlan';
+import SubscriptionPlan from './pages/SubscriptionPlan';
+import UpdateSubscriptionPlan from './pages/UpdateSubscriptionPlan';
+import SuspendedSubscriptionPlan from './pages/SuspendedSubscriptionPlan';
+import UserAccount from './pages/UserAccount';
+import CreateUserAccount from './pages/CreateUserAccount';
+import UpdateUserAccount from './pages/UpdateUserAccount';
+import SuspendedUserAccount from './pages/SuspendedUserAccount';
+import BugReport from './pages/BugReport';
+import BugReportDetail from './pages/BugReportDetail';
+import ClosedBugReport from './pages/ClosedBugReport';
 Amplify.configure(awsExports);
 
 const components = {
@@ -253,12 +264,10 @@ const formFields = {
 };
 
 
-
-
-
 export default function App() {
   const theme = AuthStyle();
   const [selectedUsername, setSelectedUsername] = useState('');
+
   return (
     <main className='flex-grow h-screen'>
       <ThemeProvider theme={theme}>
@@ -285,6 +294,19 @@ export default function App() {
                   <Route path='/test' element={<Test />} />
                   <Route path='/subscription' element={<Subscraption />} />
                   <Route path='/bugreports' element={<BugReportPage />} />
+                  <Route path='/invoices' element={<BillingInvoicesPage />} />
+                  <Route path="/invoice/:id" element={<BillingInvoiceDetail />} />
+                  <Route path="/subscription_plan/" element={<SubscriptionPlan />} />
+                  <Route path="/subscription_plan/update/:planId" element={<UpdateSubscriptionPlan />} />
+                  <Route path="/subscription_plan/create" element={<CreateSubscriptionPlan />} />
+                  <Route path="/subscription_plan/suspended" element={<SuspendedSubscriptionPlan />} />
+                  <Route path="/user/" element={<UserAccount />} />
+                  <Route path="/user/create" element={<CreateUserAccount />} />
+                  <Route path="/user/edit/:userId" element={<UpdateUserAccount />} />
+                  <Route path="/user/suspended" element={<SuspendedUserAccount />} />
+                  <Route path="/bug_report/" element={<BugReport />} />
+                  <Route path="/bug_report/closed" element={<ClosedBugReport />} />
+                  <Route path="/bug_report/:bugId" element={<BugReportDetail />} />
                 </Route>
 
               </Routes>

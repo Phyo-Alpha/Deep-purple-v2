@@ -1,14 +1,14 @@
-import LogoutIcon from '@mui/icons-material/Logout';
+import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material';
-import { signOut } from 'aws-amplify/auth';
+import { addUser } from '../../context/AuthContext';
 
-export default function SignOutButton() {
+export default function AddUserButton() {
     return (
         <div onClick={() => {
-            signOut();
+            addUser();
         }}>
             <Button style={{ backgroundColor: "#877EFF", color: "#FFFFFF", width: "85px", height: "50px" }}>
-                <LogoutIcon />
+                <AddIcon />
             </Button>
         </div>
     )

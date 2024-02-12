@@ -37,23 +37,10 @@ export default function SentimentIndividualPost({ username }: SentimentIndividua
                 </NavLink>
 
             </div>
-            <section className="pb-2 border-b-2">
-                <form>
-                    <TextField
-                        id="search-bar"
-                        color="info"
-                        label="Search post"
-                        variant="outlined"
-                        placeholder="Search..."
-                        size="small"
-                    />
-                    <IconButton aria-label="search">
-                        <SearchIcon style={{ fill: "white" }} />
-                    </IconButton>
-                </form>
-            </section>
 
-            <SentimentIndividualPostTable sentimentTableData={sentimentTableData} />
+            <div className="mt-10">
+                <SentimentIndividualPostTable sentimentTableData={sentimentTableData} />
+            </div>
 
         </section>
     )

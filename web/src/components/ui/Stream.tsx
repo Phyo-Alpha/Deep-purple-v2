@@ -9,7 +9,7 @@ import { MySocialMediaFeed, MyStreamMetaData, MyUserReplies, userFeed, userFeedD
 import { Tweet } from 'react-tweet';
 import { axiosInstance as axios, axiosInstance } from '../../api/axios/config';
 import { getSocialMediaFeedById, getSocialMediaFeedsByPlatformAndUsername, saveSocialMediaFeed, saveSocialMediaFeedReply } from '../../api/appwrite/api';
-import { getMetaDataOfThatAccount } from '../../services';
+import { analyzeTheReplies, getMetaDataOfThatAccount } from '../../services';
 import { NavLink } from 'react-router-dom';
 
 interface StreamProps {
@@ -66,6 +66,7 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
     const emotions = ['anger', 'love', 'fear', 'joy', 'sadness', 'surprise']
 
     function saveRepliesToDB(replies: userFeedReplies[], replied_to: string, author_being_reply_to: string) {
+        const analysisData = analyzeTheReplies(replies);
         replies.map((reply) => {
             const randomSentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
             const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
@@ -147,7 +148,7 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
     return (
         <div>
             {userfeeds === null ? (
-                <div className='bg-purple-1 mx-3 h-160 rounded-3xl border-dashed border-2'>
+                <div className='bg-purple-1 mx-3 h-160 rounded-3xl border-dashed border-2 min-w-[500px]'>
                     <div className='flex flex-col gap-2 items-center justify-center h-160'>
                         <CircularProgress />
                     </div>

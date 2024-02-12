@@ -180,3 +180,5 @@ export type MyReports =  {
     report_by_name : string,
     report_text : string,
 }
+
+export type CountrySentiment = [string, number|string];

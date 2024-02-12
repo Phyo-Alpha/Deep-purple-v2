@@ -10,7 +10,7 @@ interface ReportLineChartProps {
 export default function ReportLineChart({ labels, values }: ReportLineChartProps) {
 
     const series = [{
-        name: 'series-1',
+        name: 'sentiment',
         data: values,
         color: '#00E396'
     }];
@@ -20,7 +20,12 @@ export default function ReportLineChart({ labels, values }: ReportLineChartProps
             id: 'basic-bar'
         },
         xaxis: {
-            categories: labels
+            categories: labels,
+            labels: {
+                style: {
+                    colors: '#000000', // replace with your desired color
+                },
+            },
         },
         markers: {
             size: 6,

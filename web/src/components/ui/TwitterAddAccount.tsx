@@ -33,10 +33,10 @@ export default function TwitterAddAccount({ closeTheLogInList }: TwitterAddAccou
                 <p>Twitter</p>
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Log in with twitter</DialogTitle>
+                <DialogTitle>Link Twitter Handle</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To add account enter the username and password
+                        To add account enter the twitter handle
                     </DialogContentText>
                     <TextField
                         autoFocus
@@ -48,17 +48,6 @@ export default function TwitterAddAccount({ closeTheLogInList }: TwitterAddAccou
                         variant="standard"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="password"
-                        label="password"
-                        type="Password"
-                        fullWidth
-                        variant="standard"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </DialogContent>
                 <DialogActions>

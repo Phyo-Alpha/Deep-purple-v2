@@ -11,6 +11,7 @@ export default function ReportDoughnut({ values, labels }: ReportDoughnutProps) 
     const series = values;
     const options: ApexOptions = {
         labels: labels,
+        colors: ['#28A745', '#DC3545'],
         plotOptions: {
             pie: {
                 startAngle: -135,

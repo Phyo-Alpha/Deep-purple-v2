@@ -26,7 +26,6 @@ export default function StreamTopSideBar({ onToggleDisplayRightBar }: StreamTopB
 
             <div className="flex flex-row justify-between">
                 <p className="text-2xl font-bold">Twitter: Edward</p>
-                <SignOutButton />
             </div>
             <div className="flex flex-row gap-5 items-center">
                 <Button variant="contained" style={{ backgroundColor: "#877EFF" }}

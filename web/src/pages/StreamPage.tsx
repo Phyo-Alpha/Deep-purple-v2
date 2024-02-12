@@ -6,6 +6,7 @@ import { getStreamFromDBUsingUseremailAndDashBoadName } from "../api/appwrite/ap
 import StreamTopSideBar from "../components/stream/StreamTopSideBar";
 import { handleFetchUserAttributes } from "../context/AuthContext";
 import EmptyStreamPage from "../components/stream/EmptyStreamPage";
+import * as React from "react";
 
 export default function Home() {
 

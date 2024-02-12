@@ -8,7 +8,7 @@ interface InboxContentProps {
 export default function InboxContent({ replies }: InboxContentProps) {
     return (
         <section>
-            <div className="flex flex-col gap-5 justify-center items-start">
+            <div className="flex flex-row flex-wrap gap-5 justify-center items-start">
                 {replies.map((reply, index) => (
                     <InboxFeedback key={index} reply={reply} />
                 ))}

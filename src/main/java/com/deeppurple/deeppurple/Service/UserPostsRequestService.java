@@ -10,7 +10,7 @@ public class UserPostsRequestService {
     public String getTweets(String username) {
         WebClient webClient = WebClient.create();// replace with the Twitter username
         System.out.println("Getting tweets for " + username);
-        String url = "http://localhost:5000/tweets/" + username;
+        String url = "http://127.0.0.1:8000/tweets/" + username;
 
         String response = webClient.get()
                 .uri(url)

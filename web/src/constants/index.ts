@@ -3,6 +3,14 @@ import report from "../assets/icons/report.svg";
 import feedback from "../assets/icons/feedback.png";
 import inbox from "../assets/icons/inbox.svg";
 import stream from "../assets/icons/stream.svg";
+import invoice from "../assets/icons/invoice.svg";
+import subscription from "../assets/icons/subscription.svg";
+import usermanagement from "../assets/icons/usermanagement.svg";
+import bugreport from "../assets/icons/bugReport.svg";
+import heart from "../assets/icons/heart.svg";
+import world from "../assets/icons/world.svg";
+import like from "../assets/icons/like.svg";
+
 
 export const sidebarLinks = [
     {
@@ -21,20 +29,37 @@ export const sidebarLinks = [
         label: "Report",
     },
     {
-        imgURL : inbox,
+        imgURL: inbox,
         route: "/inbox",
-        label : "Inbox"
+        label: "Inbox"
+    },
+    // {
+    //     imgURL: subscription,
+    //     route: "/subscription",
+    //     label: "Subscription"
+    // },
+    
+    {
+        imgURL: invoice,
+        route: "/invoices",
+        label: "Billing invoices",
     },
     {
-        imgURL : inbox,
-        route: "/subscription",
-        label : "Subscription"
-    },    
+        imgURL: usermanagement,
+        route: "/user/",
+        label: "User accounts",
+
+    },
     {
-        imgURL : inbox,
-        route : "/bugreports",
-        label : "Bug Reports",
-    }
+        imgURL: bugreport,
+        route: "/bug_report",
+        label: "Bug Reports",
+    },
+    {
+        imgURL : subscription,
+        route : "/subscription_plan/",
+        label : "Subcription plans",
+    },
 ]
 
 export const analyticsBoardLinks = [
@@ -44,24 +69,19 @@ export const analyticsBoardLinks = [
         label: "Sentiment analysis",
     },
     {
-        imgURL: feedback,
+        imgURL: heart,
         route: "/analytics/emotion",
         label: "Emotion Analysis",
     },
     {
-        imgURL: feedback,
+        imgURL: like,
         route: "/analytics/metadata",
         label: "Metadata analysis",
     },
     {
-        imgURL: feedback,
+        imgURL: world,
         route: "/analytics/userdata",
         label: "User data analysis",
-    },
-    {
-        imgURL: feedback,
-        route: "/analytics/negativeposts",
-        label: "Negative sentiment filter",
     },
 
 ]
