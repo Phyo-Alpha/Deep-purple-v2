@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addUserAccount } from '../api/appwrite/api';
 import { Link } from 'react-router-dom';
+import { createNewUser } from '../context/AuthContext';
 
 export default function CreateUserAccount() {
   const [userDetails, setuserDetails] = useState({
@@ -13,6 +14,7 @@ export default function CreateUserAccount() {
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setuserDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
@@ -21,6 +23,14 @@ export default function CreateUserAccount() {
     e.preventDefault();
     // Add logic to submit the form data
     console.log('Submitted:', userDetails);
+
+    const { name, email, password, account_type } = userDetails;
+    createNewUser({ username: name, password, email, account_type }).then(() => {
+      alert('User has been added to AWS cognito!');
+    }).catch((e) => {
+      console.log(e);
+    });
+
     addUserAccount(userDetails).then(() => {
       alert("User created!");
     });
@@ -29,14 +39,14 @@ export default function CreateUserAccount() {
   return (
     <section className="flex flex-row min-h-screen">
       <div className="flex w-full">
-      <div className="border-x-2 flex-0">
+        <div className="border-x-2 flex-0">
           <div className="border-b-2 p-5 h-[150px]">
             <h2 className="text-xl font-bold">User accounts</h2>
             <br />
           </div>
           <div className="p-5">
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/user/create`,
@@ -55,7 +65,7 @@ export default function CreateUserAccount() {
               </Link>
             </p>
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/user/suspended`,
@@ -90,7 +100,7 @@ export default function CreateUserAccount() {
                   name="name"
                   value={userDetails.name}
                   onChange={handleChange}
-                  className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+                  className="text-dark-1 border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
                   required
                 />
               </div>
@@ -103,12 +113,12 @@ export default function CreateUserAccount() {
                   Email
                 </label>
                 <input
-                type="email"
+                  type="email"
                   id="email"
                   name="email"
                   value={userDetails.email}
                   onChange={handleChange}
-                  className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
+                  className="text-dark-1 border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
                   required
                 />
               </div>
@@ -131,7 +141,7 @@ export default function CreateUserAccount() {
                 />
               </div>
 
-              
+
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -140,7 +150,7 @@ export default function CreateUserAccount() {
                   Account type
                 </label>
                 <select
-                  className="border p-1"
+                  className="border p-1 text-dark-1"
                   value={userDetails.account_type}
                   name="account_type"
                   onChange={handleChange}
@@ -148,10 +158,10 @@ export default function CreateUserAccount() {
                   <option value="CITS">Corporate IT Staff</option>
                   <option value="RMS">Relation Marketing Staff</option>
                 </select>
-                
+
               </div>
 
-             
+
               {/* Submit Button */}
               <div className="flex justify-end">
                 <button

@@ -855,8 +855,6 @@ export async function addUserAccount(user : any) {
         console.log(error);
     }
 
-    const {name, email, password} = user;
-
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -875,4 +873,21 @@ export async function updateUserAccount(userId: string, user : any) {
         console.log(error);
     }
 
+}
+
+export async function getAccountDetailsByUsername(username : string){
+    try {
+        const documents = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userAccountCollectionId,
+            [Query.equal("name", username)]
+        );
+
+        if (!documents) throw Error;
+
+        return documents;
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
