@@ -124,27 +124,3 @@ export async function addUser() {
     console.log(e);
   }
 }
-
-interface User {
-  username: string;
-  password: string;
-  email: string;
-  account_type: string;
-
-}
-
-export async function createNewUser(user : User) {
-  try {
-    await signUp({
-      username: user.username,
-      password: user.password,
-      options: {
-        userAttributes: {
-          email: user.email,
-        }
-      }
-    });
-  } catch (e) {
-    console.log(e);
-  }
-}

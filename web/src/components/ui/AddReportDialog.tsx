@@ -28,6 +28,7 @@ export default function AddReportDialog() {
         else if (value === 'Sentiment') {
             saveSentimentReportToDatabase(accountName);
         }
+
         setOpen(false);
     };
 

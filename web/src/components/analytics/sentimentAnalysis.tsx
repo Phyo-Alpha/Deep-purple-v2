@@ -34,7 +34,15 @@ export default function SentimentAnalyisBoard({ username }: SentimentAnalysisBoa
 
     return (
         <div className="flex flex-col gap-10 py-10 px-5">
+            <div className="pb-10 flex flex-row justify-between items-center">
+                <p className="font-bold text-5xl ">Last 7 days</p>
+                <NavLink to={"/analytics/sentiment/individualAnalysis"}>
+                    <Button variant="contained" style={{ backgroundColor: "#877EFF" }}>
+                        Individual Posts <ArrowForwardIcon />
+                    </Button>
+                </NavLink>
 
+            </div>
             <div className="grid grid-cols-8 gap-10">
                 <div className="bg-light-1 rounded-md col-span-4">
                     <div className="border-b-2">

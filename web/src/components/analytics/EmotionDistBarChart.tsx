@@ -44,7 +44,7 @@ export default function EmotionDistBarChart({ emotiondata }: EmotionDistBarChart
     }
     return (
 
-        <Chart options={options} series={series} width={'100%'} height={'280%'} type='bar' />
+        <Chart options={options} series={series} width={'100%'} height={'200%'} type='bar' />
 
     )
 }

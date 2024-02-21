@@ -119,7 +119,7 @@ const AnalyticsPage = () => {
                         <>
                             <AnalyticsTopSidebar title={analyticsType?.toUpperCase() || "ANALYTICS"}
                                 onUsernameChange={handleUsernameChange} />
-                            <div className="px-6 ">
+                            <div className="px-6 bg-purple-1">
                                 {(() => {
                                     switch (analyticsType) {
                                         case 'metadata':

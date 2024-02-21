@@ -68,6 +68,13 @@ export default function EmotionAnalysisBoard({ username }: EmotionAnalysisBoardP
 
                 </div>
             </div>
+
+
+            <div>
+                <div className="bg-light-1 rounded-md py-16 px-16">
+                    <EmotionStackedBar />
+                </div>
+            </div>
         </div>
 
 
