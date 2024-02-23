@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Chart from 'react-apexcharts';
+import React from "react";
 
 interface ReportLineChartProps {
     labels: string[];

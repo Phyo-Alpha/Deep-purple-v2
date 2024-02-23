@@ -1,5 +1,6 @@
 import { ApexOptions } from "apexcharts";
 import Chart from 'react-apexcharts';
+import React from "react";
 
 interface ReportDoughnutProps {
     values: number[];

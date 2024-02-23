@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import AddReportDialog from "../ui/AddReportDialog";
+import React from "react";
 
 
 export default function ReportBoardLeftSideBar() {

@@ -1,4 +1,5 @@
 import SignOutButton from "../ui/SignOutButton";
+import React from "react";
 
 interface ProfileTopBarProps {
     username: string;

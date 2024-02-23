@@ -855,8 +855,6 @@ export async function addUserAccount(user : any) {
         console.log(error);
     }
 
-    const {name, email, password} = user;
-
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

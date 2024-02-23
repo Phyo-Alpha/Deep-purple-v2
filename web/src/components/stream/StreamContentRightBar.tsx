@@ -10,6 +10,8 @@ import { getSocialMediaAccounts } from '../../api/appwrite/api';
 import { socialMediaAccount } from "../../types";
 import { handleFetchUserAttributes } from "../../context/AuthContext";
 
+import React from "react";
+
 interface StreamContentRightBarProps {
     onToggleDisplayRightBar: () => void,
     addStream: (username: string) => void;

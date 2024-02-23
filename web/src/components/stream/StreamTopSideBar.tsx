@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import SocialMediaPopUp from "../ui/SocialMediaPopup";
-import SignOutButton from "../ui/SignOutButton";
 import { axiosInstance } from "../../api/axios/config";
+import React from "react";
 
 interface StreamTopBarProps {
     onToggleDisplayRightBar: () => void;

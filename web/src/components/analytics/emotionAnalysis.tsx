@@ -13,6 +13,8 @@ import { MyEmotionData, MySentimentData } from "../../types";
 import Sentiment_Doughnut from "./Sentiment_Doughnut";
 import EmotionDistBarChart from "./EmotionDistBarChart";
 import EmotionStackedBar from "./EmotionStackedBar";
+import React from "react";
+
 
 Chart.register(CategoryScale);
 

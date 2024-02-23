@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
+
 function createData(
     postId: string,
     negative_scale: string,

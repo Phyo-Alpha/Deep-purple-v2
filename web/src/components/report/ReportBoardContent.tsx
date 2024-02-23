@@ -8,6 +8,7 @@ import ReportColumnChart from "./ReportColumnChart";
 import ReportStackerBar from "./ReportStackerBar";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Button } from "@mui/material";
+import React from "react";
 
 interface ReportBoardContentProps {
     comparison_reports: MyReportChart[];

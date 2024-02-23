@@ -10,6 +10,7 @@ import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { MySentimentTableData } from '../../types';
 
+
 interface SentimentTableData {
     sentimentTableData: MySentimentTableData[],
 }

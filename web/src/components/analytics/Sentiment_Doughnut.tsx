@@ -1,6 +1,8 @@
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { useEffect, useState } from 'react';
+import React from "react";
+
 
 interface Sentiment_DoughnutProps {
     positivePercentage: number;

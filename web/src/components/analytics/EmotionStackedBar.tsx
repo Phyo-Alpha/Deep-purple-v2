@@ -1,5 +1,7 @@
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
+import React from "react";
+
 
 export default function EmotionStackedBar() {
     const getLastSevenDays = () => {

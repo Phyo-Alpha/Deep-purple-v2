@@ -7,6 +7,7 @@ import { BarChart } from "./BarChart";
 import { axiosInstance } from "../../api/axios/config";
 import { TweetData } from "../../types";
 import { saveTweetData } from "../../context";
+import React from "react";
 
 Chart.register(CategoryScale);
 

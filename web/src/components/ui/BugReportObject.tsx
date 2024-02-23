@@ -1,13 +1,13 @@
 import { TwitterIcon } from "lucide-react"
-import { MyUserReplies } from "../../types"
+import { MyReports } from "../../types"
 import React from "react";
 
 
-interface InboxFeedbackProps {
-    reply: MyUserReplies
+interface MyReportProps {
+    reply: MyReports
 }
 
-export default function InboxFeedback({ reply }: InboxFeedbackProps) {
+export default function BugReportObject({ reply }: MyReportProps) {
     return (
         <div className="flex flex-col gap-3 bg-light-1 text-dark-1 w-full p-5 rounded-lg max-w-[500px]
         min-h-[200px]">
@@ -18,14 +18,14 @@ export default function InboxFeedback({ reply }: InboxFeedbackProps) {
                     </div>
                     <div>
                         <p>User</p>
-                        <p>@{reply.author}</p>
+                        <p>@{reply.report_by_name}</p>
                     </div>
                 </div>
 
             </div>
             <hr />
             <p>Message</p>
-            <p>{reply.reply_text}</p>
+            <p>{reply.report_text}</p>
         </div>
     )
 }

@@ -3,6 +3,8 @@ import { Tweet } from "react-tweet"
 import { MySentimentTableData } from "../../types";
 import { useEffect, useState } from "react";
 import { getSentimentTableOfThatPost } from "../../services";
+import React from "react";
+
 
 interface NegativePostDetailsProps {
     postId: string;

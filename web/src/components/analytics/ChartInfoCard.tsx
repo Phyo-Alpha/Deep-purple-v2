@@ -1,4 +1,6 @@
 import { Card, CardContent, Typography, Box } from '@mui/material';
+import React from "react";
+
 
 interface ChartInfoCardProps {
 

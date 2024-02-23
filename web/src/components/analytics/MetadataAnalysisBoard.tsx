@@ -4,6 +4,8 @@ import MetadataLineChart from "./MetadataLineChart";
 import { useEffect, useState } from "react";
 import { MyChartDataset, MyMetaData } from "../../types";
 import { getMetaDataOfThatAccount } from "../../services";
+import React from "react";
+
 
 Chart.register(CategoryScale);
 

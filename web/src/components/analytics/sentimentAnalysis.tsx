@@ -11,6 +11,8 @@ import { NavLink } from "react-router-dom";
 import { getSentimentDataOfThatAccount } from "../../services";
 import { MySentimentData } from "../../types";
 import Sentiment_Doughnut from "./Sentiment_Doughnut";
+import React from "react";
+
 
 Chart.register(CategoryScale);
 

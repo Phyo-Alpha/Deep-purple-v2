@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
 import { MyNavLink } from "../../types"
 import { analyticsBoardLinks } from "../../constants"
+import React from "react";
 
 export default function AnalyticsBoardLeftBar() {
 

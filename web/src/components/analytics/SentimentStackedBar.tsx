@@ -3,6 +3,7 @@ import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { MySentimentData } from '../../types';
 
+
 interface SentimentStackedBarProps {
     sentimentData: MySentimentData;
 }

@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function EmptyStreamPage() {
     return (
         <section className="my-10 flex flex-col items-center h-160 justify-center">

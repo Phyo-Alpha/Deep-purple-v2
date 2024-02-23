@@ -2,6 +2,8 @@ import NegativeSentimentPostsTable from "./NegativeSentimentPostsTable";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
+import React from "react";
+
 
 export default function NegativeSentimentBoard() {
 

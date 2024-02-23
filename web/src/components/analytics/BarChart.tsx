@@ -1,5 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import { MyChartData } from '../../types';
+import React from "react";
 
 interface BarChartProps {
     chartData: MyChartData;

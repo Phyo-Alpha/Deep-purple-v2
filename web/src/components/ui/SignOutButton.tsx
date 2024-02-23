@@ -1,6 +1,7 @@
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
 import { signOut } from 'aws-amplify/auth';
+import React from "react";
 
 export default function SignOutButton() {
     return (

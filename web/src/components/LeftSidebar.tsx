@@ -3,10 +3,9 @@ import { sidebarLinks } from "../constants";
 import { MyNavLink } from '../types';
 import SignOutButton from './ui/SignOutButton';
 import logo from '../assets/images/logo.png';
-import Add from '@mui/icons-material/Add';
-import AddUserButton from './ui/AddUserButton';
 import { useEffect, useState } from 'react';
 import { getUsername } from '../context/AuthContext';
+import React from "react";
 
 const LeftSidebar = () => {
 

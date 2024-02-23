@@ -2,6 +2,7 @@ import { Button, TextField } from "@mui/material"
 import { useEffect, useState } from "react";
 import { axiosInstance } from '../api/axios/config'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import React from "react";
 
 type sentimentdata = {
     label: string,

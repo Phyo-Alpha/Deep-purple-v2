@@ -1,4 +1,5 @@
 import { MyUserReplies } from "../../types"
+import React from "react";
 
 interface InboxFeedbackProps {
     reply: MyUserReplies

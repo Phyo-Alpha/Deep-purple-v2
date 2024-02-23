@@ -1,5 +1,7 @@
 import { MyReports } from "../../types";
-import InboxFeedback from "../ui/InboxFeedback";
+import BugReportObject from "../ui/BugReportObject";
+import React from "react";
+
 
 interface InboxContentProps {
     replies: MyReports[]
@@ -10,7 +12,7 @@ export default function BugReportContent({ replies }: InboxContentProps) {
         <section>
             <div className="flex flex-col gap-5 justify-center items-start">
                 {replies.map((reply, index) => (
-                    <InboxFeedback key={index} reply={reply} />
+                    <BugReportObject key={index} reply={reply} />
                 ))}
             </div>
         </section>

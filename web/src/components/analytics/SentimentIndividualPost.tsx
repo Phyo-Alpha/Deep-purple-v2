@@ -6,6 +6,8 @@ import SentimentIndividualPostTable from "./SentimentIndividualPostTable";
 import { useEffect, useState } from "react";
 import { getSentimentTableDataOfThatAccount } from "../../services";
 import { MySentimentTableData } from "../../types";
+import React from "react";
+
 
 interface SentimentIndividualPostProps {
     username: string,

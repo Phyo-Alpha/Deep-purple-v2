@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
+import React from "react";
 
 export default function ProfilePageLeftBar() {
     return (

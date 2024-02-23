@@ -2,6 +2,8 @@ import Chart from 'react-apexcharts';
 import { useEffect, useState } from "react";
 import { MyEmotionData } from "../../types";
 import { ApexOptions } from 'apexcharts';
+import React from "react";
+
 
 interface EmotionDistBarChartProps {
     emotiondata: MyEmotionData;

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import GaugeChart from 'react-gauge-chart'
+import React from "react";
+
 
 interface ChartData {
     positivePercentage: number | undefined;

@@ -5,6 +5,7 @@ import { MyReportChartGroups } from '../../types';
 import { useEffect, useState } from 'react';
 import { getUserReportsChartsGroup } from '../../api/appwrite/api';
 import SignOutButton from '../ui/SignOutButton';
+import React from "react";
 
 interface ReportBoardTopSideBarProps {
     title: string,

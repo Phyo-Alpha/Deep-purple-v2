@@ -11,6 +11,7 @@ import { axiosInstance as axios, axiosInstance } from '../../api/axios/config';
 import { getSocialMediaFeedById, getSocialMediaFeedsByPlatformAndUsername, saveSocialMediaFeed, saveSocialMediaFeedReply } from '../../api/appwrite/api';
 import { analyzeTheReplies, getMetaDataOfThatAccount } from '../../services';
 import { NavLink } from 'react-router-dom';
+import React from "react";
 
 interface StreamProps {
     username: string;

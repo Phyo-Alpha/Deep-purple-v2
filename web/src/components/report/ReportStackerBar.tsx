@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import { useEffect } from "react";
 import Chart from 'react-apexcharts';
+import React from "react";
 
 interface ReportStackedBarChartProps {
     labels: string[];

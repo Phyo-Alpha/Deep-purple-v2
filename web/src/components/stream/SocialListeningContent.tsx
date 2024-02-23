@@ -3,6 +3,7 @@ import Stream from '../ui/Stream';
 import StreamContentRightBar from './StreamContentRightBar';
 import { getStreamFromDBUsingUseremailAndDashBoadName, updateDashboardStream } from '../../api/appwrite/api';
 import { handleFetchUserAttributes } from '../../context/AuthContext';
+import React from "react";
 
 interface SocialListeningContentProps {
     dashboardname: string;
