@@ -1,16 +1,20 @@
 package com.deeppurple.deeppurple.Service;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class UserPostsRequestService {
 
+    @Value("${Twitter_API_URL}")
+    private String TWITTER_API_URL;
+
     public String getTweets(String username) {
         WebClient webClient = WebClient.create();// replace with the Twitter username
         System.out.println("Getting tweets for " + username);
-        String url = "http://127.0.0.1:8000/tweets/" + username;
+        String url = TWITTER_API_URL + "/tweets/" + username;
 
         String response = webClient.get()
                 .uri(url)
