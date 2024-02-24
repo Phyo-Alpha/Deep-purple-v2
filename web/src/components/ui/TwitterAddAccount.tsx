@@ -16,7 +16,6 @@ export default function TwitterAddAccount({ closeTheLogInList }: TwitterAddAccou
 
     const [open, setOpen] = React.useState(false);
     const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
 
     const handleClickOpen = () => {
         setOpen(true);

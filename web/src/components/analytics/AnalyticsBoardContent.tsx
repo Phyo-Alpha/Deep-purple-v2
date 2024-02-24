@@ -24,7 +24,7 @@ interface chartDataProps {
 
 export default function AnalyticsBoardContent() {
 
-    const [tweetSentiments, setTweetSentiments] = useState<TweetData[]>([]);
+    const [tweetSentiments] = useState<TweetData[]>([]);
 
     const [chartData, setChartData] = useState<chartDataProps>({
         labels: [],

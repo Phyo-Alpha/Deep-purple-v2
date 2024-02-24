@@ -5,6 +5,7 @@ import ReportBoardTopSideBar from "../components/report/ReportBoardTopSideBar"
 import { useEffect, useState } from "react";
 import { MyReportChart } from "../types";
 import { getReportChartsByAccountNameAndReportGroup } from "../api/appwrite/api";
+import React from "react";
 
 export default function ReportsBoard() {
 

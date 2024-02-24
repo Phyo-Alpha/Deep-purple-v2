@@ -10,33 +10,31 @@ type sentimentdata = {
 }
 
 
-const AIplayground = () => {
+const AIplayground2 = () => {
 
     const [text, setText] = useState('');
     const [analysisData, setAnalysisData] = useState<sentimentdata[]>([]);
 
-    async function getSentiment() {
-        const response = await axiosInstance.post('analysis/getSentiment', {
-            text: text
-        })
-        const sentiment = response.data.scored_labels[0].label;
-        const sentimentScore = response.data.scored_labels[0].score;
-        setAnalysisData(prevData => [...prevData, { label: sentiment, score: sentimentScore }]);
+    async function getSentimentAndEmotion() {
+        try {
+            const response = await axiosInstance.post('analysis/predictPostEmotionInBulk', [text]);
+            if (response.data[0]) {
+                // Add sentiment data
+                setAnalysisData([response.data[0].sentiment]);
 
-    }
+                // Add emotions data
+                if (response.data[0].emotions) {
+                    setAnalysisData(prevData => [...prevData, ...response.data[0].emotions]);
+                }
+            }
 
-    async function getEmotion() {
-        const response = await axiosInstance.post('analysis/getEmotion', {
-            text: text
-        })
-        const emotion = response.data.scored_labels;
-        setAnalysisData(prevData => [...prevData, ...emotion]);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function handleSubmit() {
-        setAnalysisData([]);
-        getSentiment();
-        getEmotion();
+        getSentimentAndEmotion();
     }
 
     useEffect(() => {
@@ -90,4 +88,4 @@ const AIplayground = () => {
     )
 }
 
-export default AIplayground
+export default AIplayground2

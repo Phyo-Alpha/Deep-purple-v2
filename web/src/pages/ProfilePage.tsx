@@ -7,6 +7,7 @@ import { CreateProfileForm } from "../components/profile/CreateProfileform";
 import ProfileTable from "../components/profile/ProfileTable";
 import { ProfileEdit } from "../components/profile/ProfileEdit";
 import { UserProfile } from "../components/profile/UserProfile";
+import React from "react";
 
 export default function ProfilePage() {
 
@@ -33,7 +34,7 @@ export default function ProfilePage() {
             </div>
             <div className="flex flex-col w-full">
                 <div className="border-b-2 ">
-                    <ProfileTopBar username={username} />
+                    <ProfileTopBar />
                 </div>
                 <div className="p-10">
                     {editUsername && <ProfileEdit ProfileUsername={editUsername} />}

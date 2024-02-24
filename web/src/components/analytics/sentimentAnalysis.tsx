@@ -1,9 +1,7 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
-import { tweets } from '../../data';
 import MyGaugheChart from "./gaugeChart";
-import ApexD from "./ApexChart_Doughnut";
 import SentimentStackedBar from "./SentimentStackedBar";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';

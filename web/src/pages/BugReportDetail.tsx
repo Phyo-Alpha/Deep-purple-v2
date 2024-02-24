@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
-  getAllActivePlans,
-  getAllBugReports,
-  subspendSubPlan,
   updateBugReport,
 } from '../api/appwrite/api';
 import { Link, useLocation } from 'react-router-dom';
@@ -22,14 +19,14 @@ export default function BugReportDetail() {
   });
 
   // Handle form input changes
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     console.log({ name, value })
     setReportDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     // Add logic to submit the form data
     console.log('Submitted:', reportDetails);
@@ -49,7 +46,7 @@ export default function BugReportDetail() {
           <div className="p-5">
             <h3>Reports</h3>
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/bug_report/`,
@@ -67,7 +64,7 @@ export default function BugReportDetail() {
                 Closed reports
               </Link>
             </p>
-            
+
           </div>
         </div>
         <div className="flex-1">

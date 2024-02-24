@@ -1,11 +1,7 @@
 import SignOutButton from "../ui/SignOutButton";
 import React from "react";
 
-interface ProfileTopBarProps {
-    username: string;
-}
-
-export default function ProfileTopBar({ username }: ProfileTopBarProps) {
+export default function ProfileTopBar() {
     return (
         <div className="py-9 mt-1 px-5 flex flex-row justify-between items-center">
             <div className="flex flex-col gap-2">

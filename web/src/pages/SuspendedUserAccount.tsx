@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllSuspendedUsers,  } from '../api/appwrite/api';
+import { getAllSuspendedUsers, } from '../api/appwrite/api';
 import { Link } from 'react-router-dom';
 
 export default function SuspendedUserAccount() {
@@ -27,8 +27,8 @@ export default function SuspendedUserAccount() {
     fetchUsers();
   }, []);
 
-  const handleActivateUser = (userId: string) => {
-    
+  const handleActivateUser = (_userId: string) => {
+
   };
 
   return (
@@ -41,7 +41,7 @@ export default function SuspendedUserAccount() {
           </div>
           <div className="p-5">
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/user/create`,
@@ -60,7 +60,7 @@ export default function SuspendedUserAccount() {
               </Link>
             </p>
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/user/suspended`,
@@ -127,8 +127,8 @@ export default function SuspendedUserAccount() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {user.account_type}
                   </td>
-                  
-                  
+
+
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link
                       to={{
@@ -141,13 +141,13 @@ export default function SuspendedUserAccount() {
                     </Link>
 
                     <button
-                        className="text-red-500 hover:underline"
-                        onClick={() => {
-                          handleActivateUser(user.id);
-                        }}
-                      >
-                        Reactivate
-                      </button>
+                      className="text-red-500 hover:underline"
+                      onClick={() => {
+                        handleActivateUser(user.id);
+                      }}
+                    >
+                      Reactivate
+                    </button>
                   </td>
                 </tr>
               ))}

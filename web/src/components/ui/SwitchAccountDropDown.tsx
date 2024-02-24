@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { socialMediaAccount } from '../../types';
-import { getRepliesToThatAuthor, getSocialMediaAccounts } from '../../api/appwrite/api';
+import { getSocialMediaAccounts } from '../../api/appwrite/api';
 import { handleFetchUserAttributes } from '../../context/AuthContext';
 import { UsernameContext } from '../../context/Usernamecontext';
 

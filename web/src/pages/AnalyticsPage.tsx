@@ -3,18 +3,17 @@ import AnalyticsBoardLeftBar from "../components/analytics/AnalyticsBoardLeftBar
 import { useParams } from "react-router-dom";
 import AnalyticsBoardWelcome from "../components/analytics/AnalyticsBoardWelcome";
 import MetadataAnalysisBoard from "../components/analytics/MetadataAnalysisBoard";
-import NegativeSentimentBoard from "../components/analytics/NegativeSentimentBoard";
 import { useContext, useEffect, useState } from "react";
 import NegativePostDetails from "../components/analytics/NegativePostDetails";
 import AnalyticsTopSidebar from "../components/analytics/AnalyticsTopSideBar";
 import SentimentIndividualPost from "../components/analytics/SentimentIndividualPost";
 import { getRepliesToThatAuthor, updateEmotion, updateSentiment } from "../api/appwrite/api";
-import { MyUserReplies, userFeedReplies } from "../types";
 import EmotionAnalysisBoard from "../components/analytics/emotionAnalysis";
 import EmptyAnalyticsPage from "../components/analytics/EmptyAnalyticsPage";
 import NegativeSentimentPostsTable from "../components/analytics/NegativeSentimentPostsTable";
 import { UsernameContext } from "../context/Usernamecontext";
 import UserAnalysisBoard from "../components/analytics/UserdataAnalysisContent";
+import React from "react";
 
 
 const AnalyticsPage = () => {
@@ -27,7 +26,6 @@ const AnalyticsPage = () => {
     const emotions = ['anger', 'fear', 'joy', 'love', 'sadness', 'surprise']
 
     const { selectedUsername, setSelectedUsername } = useContext(UsernameContext);
-    const [repliesData, setRepliesData] = useState<MyUserReplies[]>([]);
 
     const [displayPostDetail, setDisplayPostDetail] = useState(false);
     const [displaySentimentDetail, setDisplaySentimentDetail] = useState(false);

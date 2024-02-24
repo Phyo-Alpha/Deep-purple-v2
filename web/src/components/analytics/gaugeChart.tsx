@@ -11,9 +11,6 @@ export default function MyGaugheChart({ positivePercentage }: ChartData) {
 
     const [positivePercentageState, setPositivePercentageState] = useState<number | undefined>(positivePercentage);
 
-    const chartStyle = {
-        textColor: 'black',
-    }
     const colors = ["#008000", "#ADFF2F", "#FFFF00", "#FFA500", "#FF4500", "#FF0000"].reverse();
 
     useEffect(() => {

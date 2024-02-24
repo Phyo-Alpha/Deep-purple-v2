@@ -7,9 +7,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Button } from '@mui/material';
 import { MySocialMediaFeed, MyStreamMetaData, MyUserReplies, userFeed, userFeedData, userFeedReplies } from '../../types';
 import { Tweet } from 'react-tweet';
-import { axiosInstance as axios, axiosInstance } from '../../api/axios/config';
+import { axiosInstance as axios } from '../../api/axios/config';
 import { getSocialMediaFeedById, getSocialMediaFeedsByPlatformAndUsername, saveSocialMediaFeed, saveSocialMediaFeedReply } from '../../api/appwrite/api';
-import { analyzeTheReplies, getMetaDataOfThatAccount } from '../../services';
+import { getMetaDataOfThatAccount } from '../../services';
 import { NavLink } from 'react-router-dom';
 import React from "react";
 
@@ -67,7 +67,7 @@ export default function Stream({ username, onValueReturn }: StreamProps) {
     const emotions = ['anger', 'love', 'fear', 'joy', 'sadness', 'surprise']
 
     function saveRepliesToDB(replies: userFeedReplies[], replied_to: string, author_being_reply_to: string) {
-        const analysisData = analyzeTheReplies(replies);
+
         replies.map((reply) => {
             const randomSentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
             const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];

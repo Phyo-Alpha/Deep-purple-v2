@@ -4,6 +4,7 @@ import InboxLeftSideBar from "../components/inbox/InboxLeftSideBar";
 import InboxTopBar from "../components/inbox/InboxTopBar";
 import { MyUserReplies } from "../types";
 import { getRepliesToThatAuthor } from "../api/appwrite/api";
+import React from "react";
 
 export default function InboxPage() {
 

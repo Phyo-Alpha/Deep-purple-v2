@@ -1,7 +1,6 @@
-import { Button, IconButton, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import SearchIcon from "@mui/icons-material/Search";
 import SentimentIndividualPostTable from "./SentimentIndividualPostTable";
 import { useEffect, useState } from "react";
 import { getSentimentTableDataOfThatAccount } from "../../services";

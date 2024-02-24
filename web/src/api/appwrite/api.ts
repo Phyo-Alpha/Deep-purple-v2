@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, databases } from "./config";
-import { MyReportChart, MyReportChartGroups, MySocialMediaFeed, MyUserProfile, MyUserReplies, userFeedReplies} from "../../types";
+import { MyReportChart, MyReportChartGroups, MySocialMediaFeed, MyUserProfile, MyUserReplies} from "../../types";
 
 export async function saveStreamDashboardToDB (dashboard : {
     useremail : string,

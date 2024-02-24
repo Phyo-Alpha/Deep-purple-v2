@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getAllActivePlans, getAllBugReports, subspendSubPlan } from '../api/appwrite/api';
+import { getAllBugReports } from '../api/appwrite/api';
 import { Link } from 'react-router-dom';
 
 export default function BugReport() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [reports, setReports] = useState<any[]>([]);
-  const [status, setStatus] = useState(''); 
-  const [urgency, setUrgency] = useState(''); 
+  const [status, setStatus] = useState('');
+  const [urgency, setUrgency] = useState('');
   const [searchText, setSearchText] = useState('');
   async function fetchReports() {
     try {
@@ -16,9 +16,9 @@ export default function BugReport() {
         report_text: item.report_text,
         report_date: item.report_date,
         report_by_name: item.report_by_name,
-        category: item.category, 
-        urgency: item.category, 
-        status: item.status, 
+        category: item.category,
+        urgency: item.category,
+        status: item.status,
         actions: item.actions
       }));
 
@@ -46,7 +46,7 @@ export default function BugReport() {
     fetchReports();
   }, [status, urgency, searchText]);
 
-  
+
 
   return (
     <section className="flex flex-row min-h-screen">
@@ -59,7 +59,7 @@ export default function BugReport() {
           <div className="p-5">
             <h3>Reports</h3>
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/bug_report/`,
@@ -77,7 +77,7 @@ export default function BugReport() {
                 Closed reports
               </Link>
             </p>
-            
+
           </div>
         </div>
         <div className="flex-1">
@@ -85,9 +85,9 @@ export default function BugReport() {
             <h2 className="text-2xl font-bold p-5">Manage bug reports</h2>
             {/* Filter Section */}
             <div className="flex space-x-4 pb-4 px-5">
-            <div className="flex flex-col">
+              <div className="flex flex-col">
                 <label className="text-sm font-medium text-gray-500">
-                Urgency:
+                  Urgency:
                 </label>
                 <select
                   className="border p-1"
@@ -158,7 +158,7 @@ export default function BugReport() {
                       >
                         View
                       </Link>
-                      
+
                     </div>
                   </div>
                 </div>

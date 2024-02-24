@@ -27,7 +27,7 @@ const LeftSidebar = () => {
                     <img src={logo} alt="logo" width={50} height={36} />
                 </Link>
 
-                <ul className='flex flex-col gap-3'>
+                <ul className='flex flex-col'>
                     {currentUser === 'theoed' && sidebarLinks?.map((link: MyNavLink) => {
                         return (
                             <li key={link.label} className='rounded-full base-medium hover:bg-primary-500 transition'>
@@ -45,7 +45,7 @@ const LeftSidebar = () => {
                     })}
                 </ul>
 
-                {currentUser === 'phyo' && (
+                {currentUser === 'account1' && (
                     <ul className='flex flex-col gap-3'>
                         <li key={sidebarLinks[0].label} className='rounded-full base-medium hover:bg-primary-500 transition'>
                             <NavLink to={sidebarLinks[0].route}
@@ -87,7 +87,7 @@ const LeftSidebar = () => {
                     </ul>
                 )}
 
-                {currentUser === 'enlik' && (
+                {currentUser === 'account2' && (
                     <ul className='flex flex-col gap-3'>
                         <li key={sidebarLinks[5].label} className='rounded-full base-medium hover:bg-primary-500 transition'>
                             <NavLink to={sidebarLinks[5].route}
@@ -112,7 +112,7 @@ const LeftSidebar = () => {
                     </ul>
                 )}
 
-                {currentUser === 'cobratate' && (
+                {currentUser === 'account3' && (
                     <ul className='flex flex-col gap-3'>
                         <li key={sidebarLinks[6].label} className='rounded-full base-medium hover:bg-primary-500 transition'>
                             <NavLink to={sidebarLinks[6].route}

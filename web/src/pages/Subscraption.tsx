@@ -1,6 +1,6 @@
 import PricingBox from "../components/pricebox/PricingBox";
 import { prices } from "./../data";
-
+import React from "react";
 
 export default function Subscraption() {
 

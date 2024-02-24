@@ -60,6 +60,16 @@ export const sidebarLinks = [
         route : "/subscription_plan/",
         label : "Subcription plans",
     },
+    {
+        imgURL: bugreport,
+        route: "/aiplay",
+        label: "AI Playground",
+    },
+    {
+        imgURL: bugreport,
+        route: "/aiplay2",
+        label: "AI Playground with latest model",
+    },
 ]
 
 export const analyticsBoardLinks = [

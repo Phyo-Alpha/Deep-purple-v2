@@ -23,7 +23,7 @@ export default function StreamContentRightBar({ addStream, onToggleDisplayRightB
     const [socialMediaAccounts, setSocialMediaAccounts] = useState<socialMediaAccount[]>([]);
 
     const handleListItemClick = (
-        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
         index: number,
         account_username: string,
     ) => {

@@ -3,7 +3,7 @@ import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { getTheSentimentDistributionOfThatAccount } from "../../services";
-import { CountrySentiment, MyEmotionData } from "../../types";
+import { CountrySentiment } from "../../types";
 import { Chart as GoogleChart } from "react-google-charts";
 import React from "react";
 

@@ -12,13 +12,13 @@ export default function UpdateUserAccount() {
   });
 
   // Handle form input changes
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setuserDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     // Add logic to submit the form data
     console.log('Submitted:', userDetails);
@@ -30,14 +30,14 @@ export default function UpdateUserAccount() {
   return (
     <section className="flex flex-row min-h-screen">
       <div className="flex w-full">
-      <div className="border-x-2 flex-0">
+        <div className="border-x-2 flex-0">
           <div className="border-b-2 p-5 h-[150px]">
             <h2 className="text-xl font-bold">User accounts</h2>
             <br />
           </div>
           <div className="p-5">
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/user/create`,
@@ -56,7 +56,7 @@ export default function UpdateUserAccount() {
               </Link>
             </p>
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/user/suspended`,
@@ -104,7 +104,7 @@ export default function UpdateUserAccount() {
                   Email
                 </label>
                 <input
-                type="email"
+                  type="email"
                   id="email"
                   name="email"
                   value={userDetails.email}
@@ -114,8 +114,8 @@ export default function UpdateUserAccount() {
                 />
               </div>
 
-              
-              
+
+
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -132,10 +132,10 @@ export default function UpdateUserAccount() {
                   <option value="CITS">Corporate IT Staff</option>
                   <option value="RMS">Relation Marketing Staff</option>
                 </select>
-                
+
               </div>
 
-             
+
               {/* Submit Button */}
               <div className="flex justify-end">
                 <button

@@ -1,16 +1,9 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useState, useEffect } from "react";
-import { tweets } from '../../data';
-import MyGaugheChart from "./gaugeChart";
-import ApexD from "./ApexChart_Doughnut";
-import ApexChartStackedBar from "./SentimentStackedBar";
-import { Button } from "@mui/material";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { NavLink } from "react-router-dom";
-import { getEmotionDataOfThatAccont, getSentimentDataOfThatAccount } from "../../services";
-import { MyEmotionData, MySentimentData } from "../../types";
-import Sentiment_Doughnut from "./Sentiment_Doughnut";
+import { getEmotionDataOfThatAccont } from "../../services";
+import { MyEmotionData } from "../../types";
 import EmotionDistBarChart from "./EmotionDistBarChart";
 import EmotionStackedBar from "./EmotionStackedBar";
 import React from "react";

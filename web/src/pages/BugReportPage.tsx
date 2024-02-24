@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
-import { MyReports, MyUserReplies } from "../types";
-import { getAllBugReports, getRepliesToThatAuthor } from "../api/appwrite/api";
-import BugReportLeftSideBar from "../components/bugreports/BugReportLeftSideBar";
+import { MyReports } from "../types";
+import { getAllBugReports } from "../api/appwrite/api";
 import BugReportTopBar from "../components/bugreports/BugReportTopBar";
 import BugReportContent from "../components/bugreports/BugReportContent";
+import React from "react";
 
 export default function BugReportPage() {
 
-    const [accountName, setAccountName] = useState<string>("");
+    const [accountName] = useState<string>("");
     const [bugReports, setBugReports] = useState<MyReports[]>([]);
-
-    function handleUsernameChange(value: string) {
-        setAccountName(value);
-    }
 
     async function getReports() {
         const bugReports = await getAllBugReports();
@@ -43,7 +39,7 @@ export default function BugReportPage() {
 
             <div className="flex flex-col w-full">
                 <div className="border-b-2 ">
-                    <BugReportTopBar onUsernameChange={handleUsernameChange} />
+                    <BugReportTopBar />
                 </div>
                 <div className="m-5">
                     <BugReportContent replies={bugReports} />

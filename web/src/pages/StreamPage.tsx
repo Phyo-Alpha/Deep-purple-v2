@@ -12,7 +12,6 @@ export default function Home() {
 
 
     const [displayAddStreamBar, setDisplayAddStreamBar] = useState(true);
-    const [thisDashboardStream, setThisDashboardStream] = useState<string>('');
 
     function onToggleDisplayRightBar() {
         console.log("Toggle add stream : ", displayAddStreamBar);

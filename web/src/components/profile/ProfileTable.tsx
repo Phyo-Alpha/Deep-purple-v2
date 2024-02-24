@@ -41,7 +41,7 @@ export default function ProfileTable() {
 
     }
 
-    const closeAlert = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const closeAlert = (_event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }

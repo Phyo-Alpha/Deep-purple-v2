@@ -8,13 +8,13 @@ import Home from './pages/StreamPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import ReportsBoard from './pages/ReportPage';
 import InboxPage from './pages/InboxPage';
-import { AuthStyle, handleFetchUserAttributes } from './context/AuthContext';
+import { AuthStyle } from './context/AuthContext';
 import ProfilePage from './pages/ProfilePage';
 import AIplayground from './components/AIplayground';
 import Test from './pages/Test';
 import Subscraption from './pages/Subscraption';
 import { UsernameContext } from './context/Usernamecontext';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BugReportPage from './pages/BugReportPage';
 import BillingInvoicesPage from './pages/BillingInvoices';
 import BillingInvoiceDetail from './pages/BillingInvoiceDetail';
@@ -29,6 +29,7 @@ import SuspendedUserAccount from './pages/SuspendedUserAccount';
 import BugReport from './pages/BugReport';
 import BugReportDetail from './pages/BugReportDetail';
 import ClosedBugReport from './pages/ClosedBugReport';
+import AIplayground2 from './components/AIplayground2';
 Amplify.configure(awsExports);
 
 const components = {
@@ -290,7 +291,8 @@ export default function App() {
                   <Route path='/Profile' element={<ProfilePage />} />
                   <Route path='/Profile/:displayOptions' element={<ProfilePage />} />
                   <Route path='/Profile/editProfile/:editUsername' element={<ProfilePage />} />
-                  <Route path='aiplay' element={<AIplayground />} />
+                  <Route path='/aiplay' element={<AIplayground />} />
+                  <Route path='/aiplay2' element={<AIplayground2 />} />
                   <Route path='/test' element={<Test />} />
                   <Route path='/subscription' element={<Subscraption />} />
                   <Route path='/bugreports' element={<BugReportPage />} />

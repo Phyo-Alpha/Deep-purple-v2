@@ -8,8 +8,7 @@ import {
 } from '../../api/appwrite/api';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Button } from '@mui/material';
-import { socialMediaStream } from '../../types';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import * as React from 'react';
 
 export default function SocialListeningLeftBar() {
@@ -38,11 +37,6 @@ export default function SocialListeningLeftBar() {
 
       saveStreamDashboardToDB(dashboard);
 
-      const socialMediaStream: socialMediaStream = {
-        socialMedia: 'twitter',
-        socialmedia_username: '',
-        streamName: stream,
-      };
     }
   }
 

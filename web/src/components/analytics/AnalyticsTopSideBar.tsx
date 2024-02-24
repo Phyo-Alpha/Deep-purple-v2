@@ -1,4 +1,3 @@
-import SignOutButton from "../ui/SignOutButton";
 import SwitchAccountDropDown from "../ui/SwitchAccountDropDown";
 import React from "react";
 

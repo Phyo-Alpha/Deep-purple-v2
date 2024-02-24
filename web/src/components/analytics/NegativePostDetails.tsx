@@ -1,8 +1,5 @@
 import { Button } from "@aws-amplify/ui-react"
 import { Tweet } from "react-tweet"
-import { MySentimentTableData } from "../../types";
-import { useEffect, useState } from "react";
-import { getSentimentTableOfThatPost } from "../../services";
 import React from "react";
 
 
@@ -12,17 +9,7 @@ interface NegativePostDetailsProps {
 
 export default function NegativePostDetails({ postId }: NegativePostDetailsProps) {
 
-    const [postData, setPostData] = useState<MySentimentTableData>();
 
-    useEffect(() => {
-        const fetchPostData = async () => {
-            const data = await getSentimentTableOfThatPost(postId);
-            if (data === undefined) return;
-            setPostData(data[0]);
-            console.log(data[0]);
-        }
-        fetchPostData();
-    }, [postId]);
 
     return (
         <section className="py-10 px-5 mt-10 bg-purple-1 rounded-2xl">

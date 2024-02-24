@@ -1,23 +1,9 @@
 import { Button } from "@mui/material";
 import SocialMediaPopUp from "../ui/SocialMediaPopup";
-import { axiosInstance } from "../../api/axios/config";
 import React from "react";
 
 interface StreamTopBarProps {
     onToggleDisplayRightBar: () => void;
-}
-
-async function testSentiment() {
-    const text = "@JasonBornue I am so happy that I am going to the beach today! Me and my friends are going to have a great time!";
-
-    const sentiment = await axiosInstance.post('/analysis/getSentiment', {
-        text: text
-    }).then((response) => {
-        return response.data;
-    });
-
-    const label = sentiment.scored_labels[0].label;
-    console.log(label);
 }
 
 export default function StreamTopSideBar({ onToggleDisplayRightBar }: StreamTopBarProps) {

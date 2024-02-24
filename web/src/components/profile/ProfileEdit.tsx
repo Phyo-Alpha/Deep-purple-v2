@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, Button, Stack, Snackbar, Alert } from '@mui/material';
 import { MyUserProfile } from '../../types';
-import { getProfileByUsername, saveProfile, updateProfileByUsername } from '../../api/appwrite/api';
+import { getProfileByUsername, updateProfileByUsername } from '../../api/appwrite/api';
 
 interface ProfileEditProps {
     ProfileUsername: string
@@ -55,7 +55,7 @@ export function ProfileEdit({ ProfileUsername }: ProfileEditProps) {
             window.location.reload();
         }, 2000);
     }
-    const closeAlert = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const closeAlert = (_event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }

@@ -13,13 +13,13 @@ export default function CreateSubscriptionPlan() {
   });
 
   // Handle form input changes
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setPlanDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     // Add logic to submit the form data
     console.log('Submitted:', planDetails);
@@ -38,7 +38,7 @@ export default function CreateSubscriptionPlan() {
           </div>
           <div className="p-5">
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/subscription_plan/create`,
@@ -57,7 +57,7 @@ export default function CreateSubscriptionPlan() {
               </Link>
             </p>
             <p>
-              
+
               <Link
                 to={{
                   pathname: `/subscription_plan/suspended`,
@@ -112,7 +112,7 @@ export default function CreateSubscriptionPlan() {
                   value={planDetails.description}
                   onChange={handleChange}
                   className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
-                  rows="4"
+                  rows={4}
                   required
                 />
               </div>
@@ -188,7 +188,7 @@ export default function CreateSubscriptionPlan() {
                   value={planDetails.features}
                   onChange={handleChange}
                   className="border rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
-                  rows="4"
+                  rows={4}
                   required
                 />
               </div>

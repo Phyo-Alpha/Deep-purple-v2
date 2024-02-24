@@ -30,7 +30,7 @@ export function CreateProfileForm() {
             window.location.reload();
         }, 2000);
     }
-    const closeAlert = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const closeAlert = (_event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }

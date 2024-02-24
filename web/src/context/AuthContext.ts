@@ -1,5 +1,4 @@
-import { fetchUserAttributes, signOut, getCurrentUser, updateUserAttributes, signUp, 
-  signIn, type ConfirmSignUpInput, confirmSignUp  } from 'aws-amplify/auth';
+import { fetchUserAttributes, signOut, getCurrentUser,signUp} from 'aws-amplify/auth';
 
 import {
   Theme,
@@ -22,23 +21,6 @@ export async function getUsername() {
     const userAttributes = await getCurrentUser();
     const username = await userAttributes.username;
     return username;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function handleUpdateEmailAndNameAttributes(
-  updatedEmail: string,
-  updatedName: string
-) {
-  try {
-    const attributes = await updateUserAttributes({
-      userAttributes: {
-        email: updatedEmail,
-        name: updatedName
-      }
-    });
-    // handle next steps
   } catch (error) {
     console.log(error);
   }

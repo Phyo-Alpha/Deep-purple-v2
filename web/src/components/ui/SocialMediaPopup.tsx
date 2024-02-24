@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Dialog, DialogContent, List, ListItem, ListItemIcon, ListItemText } from '@mui/material/';
+import { Button, Dialog, DialogContent, List, ListItem, ListItemIcon } from '@mui/material/';
 import TwitterAddAccount from './TwitterAddAccount';
 import { saveSocialMediaAccounts } from '../../api/appwrite/api';
 import { handleFetchUserAttributes } from '../../context/AuthContext';

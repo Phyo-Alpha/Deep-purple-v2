@@ -1,4 +1,3 @@
-import { ca } from "date-fns/locale";
 import { addReportChart, getPostsMadeByThatAccount, getRepliesToThatAuthor } from "../api/appwrite/api";
 import { axiosInstance } from "../api/axios/config";
 import { CountrySentiment, MyEmotionData, MyReportChart, MySentimentTableData,userFeedReplies } from "../types";
